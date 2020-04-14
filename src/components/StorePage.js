@@ -34,9 +34,9 @@ export default class StorePage extends Component {
     }
 
     passToCart=(item,amount)=>{
-        let temp:[amount,item]
-        console.log(this.state.temp);
-        
+        let temp=[amount , item]
+        this.props.oneItemToCart(temp)
+        console.log(temp);
     }
     
     render() {
