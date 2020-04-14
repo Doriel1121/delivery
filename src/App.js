@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Toolbar from './components/Toolbar.js';
 import './App.css';
 import {BrowserRouter as Router , Route , Switch} from 'react-router-dom';
+import StorePage from './components/StorePage.js';
 
 
 export default class App extends Component {
@@ -9,18 +11,13 @@ export default class App extends Component {
     return (
       <div>
         <Router>
+        <Toolbar/>
           <Switch>
-            <Route exact path = "/">
-              
+
+            <Route exact path = "/store">
+            <StorePage/>
             </Route>
 
-            <Route exact path = "/manager">
-
-            </Route>
-
-            <Route exact path = "client">
-            
-            </Route>
           </Switch>
         </Router>
         
