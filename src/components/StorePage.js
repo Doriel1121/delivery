@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Item from './Item';
-import Container from '@material-ui/core/Container';
 
 
 
@@ -29,8 +28,15 @@ export default class StorePage extends Component {
              {id:"15", name:"בננות", price:"10", picture: <img className="imgsize" src="bananas.jpg"/>},
              {id:"16", name:"בננות", price:"10", picture: <img className="imgsize" src="bananas.jpg"/>},
              {id:"17", name:"בננות", price:"10", picture: <img className="imgsize" src="bananas.jpg"/>},
-             {id:"18", name:"בננות", price:"10", picture: <img className="imgsize" src="bananas.jpg"/>},]
+             {id:"18", name:"בננות", price:"10", picture: <img className="imgsize" src="bananas.jpg"/>},],
+             temp:[]
         }
+    }
+
+    passToCart=(item,amount)=>{
+        let temp:[amount,item]
+        console.log(this.state.temp);
+        
     }
     
     render() {
@@ -38,9 +44,9 @@ export default class StorePage extends Component {
             <div className="storediv">
                 <h2 className="title">הכל מהכל ובעיקר מהכל </h2>
                  <Grid container spacing={12}>
-                {this.state.allItems.map((element)=>{
-                     return  <Grid item xs={4}>
-                     <Item item={element}/>
+                {this.state.allItems.map((element,key)=>{
+                     return  <Grid key={element.id} item xs={4}>
+                     <Item toCart={this.passToCart} item={element}/>
                      </Grid>
                 })}
                 </Grid>
