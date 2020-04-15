@@ -4,6 +4,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 export default class Cart extends Component {
@@ -13,20 +14,29 @@ export default class Cart extends Component {
     
         this.state = {
              item:props.addedItem,
-             allCart:[]
+             allCart:props.allItemsOnCart,
+             totalPrice:"",
+             newCart:[]
         }
     }
 
-    componentDidMount=()=>{
-        this.setState({allCart:[...this.state.allCart,this.props.addedItem]})
-    }
+    // componentDidMount=()=>{
+    //    this.props.allItemsOnCart.map((element)=>{
+    //        var current =  (element.tempAmount*element.tempItem.price)
+    //        var sum=0
+    //         sum = sum + current
+    //        return <div>
+    //            {this.setState({totalPrice:sum})}
+    //        </div>
+    //    })
+    // }
 
-    deleteItem=()=>{
-
+    deleteItem=(id)=>{
+        this.props.delete(id)
     }
     
     render() {
-        console.log(this.state.allCart);
+        console.log(this.state.totalPrice);
         
         return (
             <div className="cartDiv">
@@ -34,39 +44,42 @@ export default class Cart extends Component {
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                מוצר
+                                <span style={{fontWeight:600}}>מוצר</span>
                             </TableCell>
                             <TableCell>
-                                כמות
+                            <span style={{fontWeight:600}}>כמות</span>
                             </TableCell>
                             <TableCell>
-                                מחיר
+                            <span style={{fontWeight:600}}>מחיר</span>
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         
-                            {this.state.allCart.map((element)=>{
-                                {var total =this.props.itemAmount*element.price
-                                var allPrices=allPrices+total}
-                                return <TableRow>
+                            {this.props.allItemsOnCart.map((element, key)=>{
+                                var total = element.tempAmount*element.tempItem.price
+                                
+                                return <TableRow key={element.tempItem.id}>
                                     <TableCell>
-                                        {element.name}
+                                        {element.tempItem.name}
                                  </TableCell>
                                  <TableCell>
-                                     {this.props.itemAmount}
+                                     {element.tempAmount}
                                  </TableCell>
                                  <TableCell>
                                      {total}
                                  </TableCell>
                                  <TableCell>
-                                     <button onClick={this.deleteItem}>X</button>
+                                     <DeleteForeverIcon onClick={()=>this.deleteItem(element.tempItem.id)}>DeleteForever</DeleteForeverIcon>
                                  </TableCell>
                                 </TableRow>
                             })}
-                            <TableRow>
-                                סה"כ: {}
-                            </TableRow>
+                            
+                               <TableRow>
+                                {this.props.sum} :סה"כ
+                                </TableRow>
+                              
+                            
                         
                     </TableBody>
                 </TableContainer>

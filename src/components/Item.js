@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default class Item extends Component {
     constructor(props) {
@@ -33,14 +36,12 @@ export default class Item extends Component {
                     {this.props.item.name}
                 </span><br/>
                 :מחיר לקילו <br/> {this.props.item.price} ש"ח  <br/>
-                <Button onClick={this.amoutOf}
-                 variant="contained"
-                  color="primary">+</Button>
+                <AddCircleIcon  onClick={this.amoutOf}>add_circle</AddCircleIcon>
         </div>
 
         }else{ return <div>
             <span className="edit"> כמות:</span><br/>
-            <input onChange={this.updateAmount}
+            <input style={{width:90}} onChange={this.updateAmount}
              type="string"
               placeholder="כמה קילו"/> <br/>
             <Button onClick={this.amoutOf} 
