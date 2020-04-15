@@ -5,17 +5,25 @@
   margin-top:0;
   opacity:0.8;
   letter-spacing: -1px;
-
+text-decoration: none;
   border-radius: 10px ;
+  color: white;
+  transform: translateY(30%);
+}
+
+.linkintoolbar{
+  text-decoration: none;
 }
 .toolbarbackground{
+  position: fixed;
   background-color: blue;
   padding-top: 2px;
   padding-bottom: 2px;
 }
 .imgstyle{
-  width: 2rem;
+  width: 1.5rem;
   margin-left: 10px;
+  transform: translateY(30%);
 }
 
 .name{
@@ -23,16 +31,16 @@
 }
 
 .imgsize{
-  width: 7rem;
+  width: 6rem;
   border-radius: 10px;
 }
 .storediv{
   margin-top: 50px;
 }
 .eachItem{
-  text-align: right;
-  margin-left: 5px;
-  margin-right: 5px;
+  text-align: center;
+  padding-bottom: 5px;
+  margin-top: 10px;
 }
 .title{
   letter-spacing: -2px;
@@ -43,4 +51,12 @@
 }
 .edit{
   font-weight: 600;
+}
+
+.cartDiv{
+  margin-top: 50px;
+}
+
+.itemBrake{
+  border-bottom: 1px solid black;
 }

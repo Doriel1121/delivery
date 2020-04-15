@@ -28,16 +28,23 @@ export default class Item extends Component {
     showMe=()=>{        
         if (!this.state.status) {
             return  <div className="eachItem">
-            {this.props.item.picture}<br/>
-                <span className="itemnamestyle">{this.props.item.name}</span><br/>
+                {this.props.item.picture}<br/>
+                <span className="itemnamestyle">
+                    {this.props.item.name}
+                </span><br/>
                 :מחיר לקילו <br/> {this.props.item.price} ש"ח  <br/>
-                <Button onClick={this.amoutOf} variant="contained" color="primary">+</Button>
+                <Button onClick={this.amoutOf}
+                 variant="contained"
+                  color="primary">+</Button>
         </div>
 
         }else{ return <div>
             <span className="edit"> כמות:</span><br/>
-            <input onChange={this.updateAmount} type="string" placeholder="כמה קילו"/> <br/>
-            <Button onClick={this.amoutOf} variant="outlined" color="primary">+</Button>
+            <input onChange={this.updateAmount}
+             type="string"
+              placeholder="כמה קילו"/> <br/>
+            <Button onClick={this.amoutOf} 
+            variant="outlined" color="primary">הוסף לעגלה</Button>
             </div>
         }
     }

@@ -11,29 +11,28 @@ export default class App extends Component {
     super(props)
   
     this.state = {
-       tempItem:""
+       tempItem:"",
+       tempAmount:""
     }
   }
 
-  updateCart=(temp)=>{
-    this.setState({tempItem:temp})
-    console.log(this.state.tempItem);
-    
+  updateCart=(tempI, tempA)=>{
+    this.setState({tempItem:tempI , tempAmount:tempA})    
   }
   
 
-  render() {
+  render() {        
     return (
       <div>
         <Router>
         <Toolbar/>
           <Switch>
 
-            <Route exact path = "/store">
+            <Route exact path = "/">
             <StorePage oneItemToCart={this.updateCart}/>
             </Route>
-            <Route>
-            <Cart addedItem={this.state.tempItem}/>
+            <Route exact path ="/cart">
+            <Cart itemAmount={this.state.tempAmount} addedItem={this.state.tempItem}/>
             </Route>
 
           </Switch>
