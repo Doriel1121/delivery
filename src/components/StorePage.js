@@ -11,7 +11,7 @@ export default class StorePage extends Component {
         super(props)
     
         this.state = {
-             allItems:[{id:"2", name:"לימונים", price:"5.9", picture:<img alt="pic" className="imgsize" src="lemons.jpg" alt="pic"/>},
+             allItems:[{id:"2", name:"לימונים", price:"5.9", picture:<img alt="pic" className="imgsize" src="lemons.jpg"/>},
              {id:"3", name:"תפוזים", price:"4.9", picture: <img alt="pic" className="imgsize" src="oranges.jpg"/>},
              {id:"4", name:"עגבניות", price:"7.9", picture: <img alt="pic" className="imgsize" src="tomatos.jpg"/>},
              {id:"5", name:"מלפפון", price:"6.5", picture: <img alt="pic" className="imgsize" src="cuecumber.jpg"/>},
