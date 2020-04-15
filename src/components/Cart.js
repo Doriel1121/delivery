@@ -5,6 +5,10 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Table from '@material-ui/core/Table';
+import Button from '@material-ui/core/Button';
+
+
 
 
 export default class Cart extends Component {
@@ -20,27 +24,27 @@ export default class Cart extends Component {
         }
     }
 
-    // componentDidMount=()=>{
-    //    this.props.allItemsOnCart.map((element)=>{
-    //        var current =  (element.tempAmount*element.tempItem.price)
-    //        var sum=0
-    //         sum = sum + current
-    //        return <div>
-    //            {this.setState({totalPrice:sum})}
-    //        </div>
-    //    })
-    // }
-
     deleteItem=(id)=>{
         this.props.delete(id)
+    }
+
+    funcToSum=(cart)=>{
+        console.log(cart);
+        var sum=0
+        var size= cart.length
+        for(let i = 0 ; i < size; i++){
+         sum= sum + cart[i].tempItem.price * cart[i].tempAmount
+        } 
+        console.log(sum);
+        return sum
     }
     
     render() {
         console.log(this.state.totalPrice);
-        
-        return (
-            <div className="cartDiv">
-                <TableContainer>
+      let sumup=  this.funcToSum(this.props.allItemsOnCart)
+
+        return (<div>
+                <Table className="cartDiv">
                     <TableHead>
                         <TableRow>
                             <TableCell>
@@ -76,16 +80,16 @@ export default class Cart extends Component {
                             })}
                             
                                <TableRow>
-                                {this.props.sum} :סה"כ
-                                </TableRow>
-                              
-                            
-                        
+                                   <TableCell>
+                                 {sumup} :סה"כ
+                               </TableCell>
+                                </TableRow>    
                     </TableBody>
-                </TableContainer>
-
-              
-            </div>
+                </Table>
+              <input type="text" placeholder="שם מלא"/><br/><br/>
+              <input type="number" placeholder="מספר טלפון"/><br/><br/>
+              <Button>בצע הזמנה</Button>
+            </div>  
         )
     }
 }

@@ -43,20 +43,10 @@ export default class App extends Component {
 
   }
 
-  funcToSum=()=>{
-    var all = this.state.allCart
-    var sum=0
-    var size= this.state.allCart.length
-    for(let i = 0 ; i < size; i++){
-     sum= sum + all.tempItem.price[i] * all.tempAmount[i]
-    }    
-    console.log(sum);
-    
-    this.setState({sumOfAllCart:sum})
-  }
+ 
   
 
-  render() {  
+  render() { 
     return (
       <div>
         <Router>

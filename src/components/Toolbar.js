@@ -12,7 +12,7 @@ export default class Toolbar extends Component {
         return (
             <div  className="toolbarbackground" >
                     <AppBar>
-                    <Grid container spacing={12}>
+                    <Grid container spacing={3}>
                         <Grid item xs><Link to ="/cart"><img className="imgstyle" src="https://img.icons8.com/pastel-glyph/64/000000/shopping-cart--v2.png"/></Link>
                         </Grid>
                         <Grid className="name" item xs={8}><Link className="linkintoolbar" to ="/"><h4 className="toolbarStyle" >  פירות וירקות</h4></Link>

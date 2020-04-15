@@ -66,7 +66,7 @@ export default class StorePage extends Component {
             <div className="storediv">
                 <h2 className="title">השוק שלי </h2>
                 <Container maxWidth="sm">
-                 <Grid  container spacing={12}>
+                 <Grid  container spacing={3}>
                 {this.state.allItems.map((element,key)=>{
                      return  <Grid className="itemBrake" key={element.id} item xs={4}>
                      <Item toCart={this.passToCart} item={element}/>
