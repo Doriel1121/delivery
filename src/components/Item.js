@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default class Item extends Component {

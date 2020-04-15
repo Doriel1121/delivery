@@ -33,7 +33,7 @@ export default class App extends Component {
       if (id === product.tempItem.id) {
           return<div>
               {newCartItems=all.filter((item)=>{
-                 return item != product
+                 return item !== product
               })}
               {this.setState({allCart:newCartItems})}
               </div>
