@@ -1,39 +1,29 @@
 import React, { Component } from 'react'
+import Order from './Order.js';
 
 export default class ManagerPage extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             
+             AllOrders:[]
         }
     }
     
     render() {
+        console.log(this.props.cart);
+        
         return (
-            <div style={{marginTop:80}}>
-                {/* {this.props.cart.map((element, key)=>{
-                  return  <div key={element.Cart.tempItem.id} id="accordion">
-                    <div className="card">
-                        <div className="card-header" id="headingOne">
-                        <h5 className="mb-0">
-                            <button className="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            {element.Cart.tempItem.name}
-                            </button>
-                        </h5>
-                        </div>
+            <div style={{marginTop:60}}>
+                {this.props.cart.map((element, key)=>{
+                    return <Order order={element}/>
+                })}
+                         
 
-                        <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div className="card-body">
-                                3 עגבניות 
-                        </div>
-                        </div>
-                    </div>
-
-                </div>
-                })} */}
           </div>
   
         )
     }
 }
+
+

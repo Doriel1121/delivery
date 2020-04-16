@@ -55,13 +55,13 @@ export default class Cart extends Component {
         let cart=this.state.allCart
         let name= this.state.Name
         let number= this.state.Number
-        let Order = {Cart:cart,Name: name,Number: number}
+        let Order = {Cart:cart,Name: name,Number: number,orderPrice:this.state.totalPrice}
         Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
             console.log(res);
             console.log(Order);
             
         })
-        this.props.allOrder(Order)
+        this.props.allOrders(Order)
 
     }
     

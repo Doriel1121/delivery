@@ -17,7 +17,7 @@ export default class Client extends Component {
        allCart:[],
        totalPrice:0,
        sumOfAllCart:"",
-       ClientOrder:[]
+       ClientsOrders:[]
     }
   }
 
@@ -44,11 +44,10 @@ export default class Client extends Component {
   }
 
   updateOrder=(o)=>{
-  this.setState({ClientOrder:o})
-  }
-
- 
+  this.setState({ClientsOrders:[...this.state.ClientsOrders,o]})
+  console.log(o);
   
+  }
 
   render() { 
     return (
@@ -61,11 +60,11 @@ export default class Client extends Component {
             <StorePage oneItemToCart={this.updateCart}/>
             </Route>
             <Route exact path ="/cart">
-            <Cart allOrder={this.updateOrder} sum={this.state.sumOfAllCart} delete={this.deleteItem} allItemsOnCart={this.state.allCart} itemAmount={this.state.tempAmount} addedItem={this.state.tempItem}/>
+            <Cart allOrders={this.updateOrder} sum={this.state.sumOfAllCart} delete={this.deleteItem} allItemsOnCart={this.state.allCart} itemAmount={this.state.tempAmount} addedItem={this.state.tempItem}/>
             </Route>
 
             <Route exact path ="/manager">
-                <ManagerPage cart={this.state.ClientOrder}/>
+                <ManagerPage cart={this.state.ClientsOrders}/>
             </Route>
 
           </Switch>
