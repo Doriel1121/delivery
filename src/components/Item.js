@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
 
 export default class Item extends Component {
     constructor(props) {
@@ -28,14 +31,21 @@ export default class Item extends Component {
     }
     showMe=()=>{        
         if (!this.state.status) {
-            return  <div className="eachItem">
-                {this.props.item.picture}<br/>
-                <span className="itemnamestyle">
+            
+            return <Card  className="eachItem">
+                        <CardMedia>
+                        {this.props.item.picture}<br/>
+                        </CardMedia>
+                        <CardContent>
+                        <span className="itemnamestyle">
                     {this.props.item.name}
-                </span><br/>
+                </span>
+                <br/>
                 :מחיר לקילו <br/> {this.props.item.price} ש"ח  <br/>
                 <AddCircleIcon  onClick={this.amoutOf}>add_circle</AddCircleIcon>
-        </div>
+                        </CardContent>
+                        </Card>
+              
 
         }else{ return <div>
             <span className="edit"> כמות:</span><br/>
