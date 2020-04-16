@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Toolbar from './components/Toolbar.js';
 import './App.css';
-import {BrowserRouter as Router , Route , Switch} from 'react-router-dom';
+import {HashRouter as Router , Route , Switch} from 'react-router-dom';
 import StorePage from './components/StorePage.js';
 import Cart from './components/Cart.js';
 

@@ -59,7 +59,6 @@ export default class StorePage extends Component {
         let tempItem=item
         let temp=[{amountofItem:amount} , {itemDetails:item}]
         this.props.oneItemToCart(tempItem,tempAmount)
-        console.log(temp);
     }
     
     render() {

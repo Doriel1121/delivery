@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import TextField from '@material-ui/core/TextField';
 
+
 export default class Item extends Component {
     constructor(props) {
         super(props)
@@ -50,11 +51,10 @@ export default class Item extends Component {
             </div>;
             cardA = (
                 <React.Fragment>
-                <Button size="small" color="primary">
+                <Button onClick={this.amoutOf} size="small" color="primary">
                 חזור
                 </Button>
-                <Button size="small" onClick={this.amoutOf} color="primary">
-                הוסף
+                <Button size="small" onClick={this.amoutOf} color="primary">הוסף
                 </Button></React.Fragment>);
         }
 

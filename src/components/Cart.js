@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import Axios from 'axios';
 
 
@@ -54,31 +55,30 @@ export default class Cart extends Component {
         let name= this.state.Name
         let number= this.state.Number
         let Order = {Cart:cart,Name: name,Number: number}
-        console.log(Order);
         Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
             console.log(res);
-            
         })
         
     }
     
     render() {
-        console.log(this.state.totalPrice);
       let sumup=  this.funcToSum(this.props.allItemsOnCart)
 
         return (<div>
                 <Table className="cartDiv">
                     <TableHead>
                         <TableRow>
-                            <TableCell>
-                                <span style={{fontWeight:600}}>מוצר</span>
-                            </TableCell>
-                            <TableCell>
-                            <span style={{fontWeight:600}}>כמות</span>
-                            </TableCell>
-                            <TableCell>
+                        <TableCell></TableCell>
+                            <TableCell  style={{textAlign:"center"}}>
                             <span style={{fontWeight:600}}>מחיר</span>
                             </TableCell>
+                            <TableCell style={{textAlign:"center"}}>
+                            <span style={{fontWeight:600}}>כמות</span>
+                            </TableCell>
+                            <TableCell  style={{textAlign:"center"}}>
+                            <span style={{fontWeight:600}}>מוצר</span>
+                            </TableCell>
+                            
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -87,31 +87,39 @@ export default class Cart extends Component {
                                 var total = element.tempAmount*element.tempItem.price
                                 
                                 return <TableRow key={element.tempItem.id}>
-                                    <TableCell>
-                                        {element.tempItem.name}
+                                    <TableCell  style={{textAlign:"center"}}>
+                                    <DeleteForeverIcon onClick={()=>this.deleteItem(element.tempItem.id)}>DeleteForever</DeleteForeverIcon>
+                                 </TableCell>
+                                 <TableCell  style={{textAlign:"center"}}>
+                                 {total.toFixed(2)} 
+                                 </TableCell>
+                                 <TableCell  style={{textAlign:"center"}}>
+                                 {element.tempAmount}
                                  </TableCell>
                                  <TableCell>
-                                     {element.tempAmount}
-                                 </TableCell>
-                                 <TableCell>
-                                     {total.toFixed(2)}
-                                 </TableCell>
-                                 <TableCell>
-                                     <DeleteForeverIcon onClick={()=>this.deleteItem(element.tempItem.id)}>DeleteForever</DeleteForeverIcon>
+                                 <span style={{fontWeight:"bolder"}}>{element.tempItem.name}</span>
+                                 
+
                                  </TableCell>
                                 </TableRow>
                             })}
                             
                                <TableRow>
                                    <TableCell>
+                               </TableCell>
+
+                                   <TableCell  style={{textAlign:"center"}}>
                                  {sumup.toFixed(2)} :סה"כ
                                </TableCell>
+                               <TableCell></TableCell>
                                 </TableRow>    
                     </TableBody>
                 </Table>
-              <input onChange={this.updateName} type="text" placeholder="שם מלא"/><br/><br/>
-              <input onChange={this.updateNumber} type="number" placeholder="מספר טלפון"/><br/><br/>
-              <Button onClick={this.saveOrder}>בצע הזמנה</Button>
+                <div style={{textAlign:"center"}}>
+                <TextField style={{textAlign:"center"}}  onChange={this.updateName} type="text"  id="standard-basic" label="שם מלא" /><br/><br/>
+                <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/><br/>
+              <Button  variant="contained" color="primary" onClick={this.saveOrder}>בצע הזמנה</Button>
+              </div>
             </div>  
         )
     }
