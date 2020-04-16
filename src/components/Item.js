@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import TextField from '@material-ui/core/TextField';
 
 export default class Item extends Component {
     constructor(props) {
@@ -29,33 +30,48 @@ export default class Item extends Component {
             this.props.toCart(this.state.item, this.state.amount)
         }
     }
-    showMe=()=>{        
+    showMe=()=>{
+        let cardC = '';   
+        let cardA = '';  
         if (!this.state.status) {
-            
-            return <Card  className="eachItem">
-                        <CardMedia>
-                        {this.props.item.picture}<br/>
-                        </CardMedia>
-                        <CardContent>
-                        <span className="itemnamestyle">
-                    {this.props.item.name}
-                </span>
-                <br/>
-                :מחיר לקילו <br/> {this.props.item.price} ש"ח  <br/>
-                <AddCircleIcon  onClick={this.amoutOf}>add_circle</AddCircleIcon>
-                        </CardContent>
-                        </Card>
-              
-
-        }else{ return <div>
-            <span className="edit"> כמות:</span><br/>
-            <input style={{width:90}} onChange={this.updateAmount}
-             type="string"
-              placeholder="כמה קילו"/> <br/>
-            <Button onClick={this.amoutOf} 
-            variant="outlined" color="primary">הוסף לעגלה</Button>
-            </div>
+            cardC = (<React.Fragment>
+                מחיר לקילו 
+                <br/> {this.props.item.price} 
+                <br/>  ש"ח
+                </React.Fragment>); 
+            cardA = (
+                <Button size="small" onClick={this.amoutOf} color="primary">
+                הוסף לעגלה
+                </Button>);
+        }else {
+            cardC = <div>
+            <span className="edit">כמות</span><br/>
+              <TextField type="number" id="standard-basic" label="קילו" onChange={this.updateAmount}/>
+            </div>;
+            cardA = (
+                <React.Fragment>
+                <Button size="small" color="primary">
+                חזור
+                </Button>
+                <Button size="small" onClick={this.amoutOf} color="primary">
+                הוסף
+                </Button></React.Fragment>);
         }
+
+        return <Card  className="eachItem">
+                    <CardMedia image={this.props.item.picture} style={{'height': '100px'}}>
+                    </CardMedia>
+                    <CardContent style={{'textAlign': 'right'}}>
+                    <span className="itemnamestyle" style={{'fontFamily': 'Arial', 'fontWeight': '700', 'fontSize': '20px'}}>
+                        {this.props.item.name}
+                    </span>
+                    <br/>
+                    {cardC}
+                    </CardContent>
+                    <CardActions>
+                        {cardA}
+                    </CardActions>
+                    </Card>
     }
     
     render() {
