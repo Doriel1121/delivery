@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
+import Axios from 'axios';
 
 
 
@@ -36,6 +37,29 @@ export default class Cart extends Component {
         } 
         console.log(sum);
         return sum
+    }
+
+    updateName=(n)=>{
+        let name= n.target.value
+        this.setState({Name:name})
+    }
+
+    updateNumber=(PN)=>{
+        let number= PN.target.value
+        this.setState({Number:number})
+    }
+
+    saveOrder=()=>{
+        let cart=this.state.allCart
+        let name= this.state.Name
+        let number= this.state.Number
+        let Order = {Cart:cart,Name: name,Number: number}
+        console.log(Order);
+        Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
+            console.log(res);
+            
+        })
+        
     }
     
     render() {
@@ -70,7 +94,7 @@ export default class Cart extends Component {
                                      {element.tempAmount}
                                  </TableCell>
                                  <TableCell>
-                                     {total}
+                                     {total.toFixed(2)}
                                  </TableCell>
                                  <TableCell>
                                      <DeleteForeverIcon onClick={()=>this.deleteItem(element.tempItem.id)}>DeleteForever</DeleteForeverIcon>
@@ -80,14 +104,14 @@ export default class Cart extends Component {
                             
                                <TableRow>
                                    <TableCell>
-                                 {sumup} :סה"כ
+                                 {sumup.toFixed(2)} :סה"כ
                                </TableCell>
                                 </TableRow>    
                     </TableBody>
                 </Table>
-              <input type="text" placeholder="שם מלא"/><br/><br/>
-              <input type="number" placeholder="מספר טלפון"/><br/><br/>
-              <Button>בצע הזמנה</Button>
+              <input onChange={this.updateName} type="text" placeholder="שם מלא"/><br/><br/>
+              <input onChange={this.updateNumber} type="number" placeholder="מספר טלפון"/><br/><br/>
+              <Button onClick={this.saveOrder}>בצע הזמנה</Button>
             </div>  
         )
     }
