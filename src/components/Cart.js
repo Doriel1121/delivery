@@ -7,6 +7,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import {Link} from 'react-router-dom';
 import Axios from 'axios';
 
 
@@ -57,8 +58,11 @@ export default class Cart extends Component {
         let Order = {Cart:cart,Name: name,Number: number}
         Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
             console.log(res);
+            console.log(Order);
+            
         })
-        
+        this.props.allOrder(Order)
+
     }
     
     render() {
@@ -118,7 +122,7 @@ export default class Cart extends Component {
                 <div style={{textAlign:"center"}}>
                 <TextField style={{textAlign:"center"}}  onChange={this.updateName} type="text"  id="standard-basic" label="שם מלא" /><br/><br/>
                 <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/><br/>
-              <Button  variant="contained" color="primary" onClick={this.saveOrder}>בצע הזמנה</Button>
+              <Button  variant="contained" color="primary" onClick={this.saveOrder}><Link style={{textDecoration:"none", color:"white"}} to ="/manager">בצע הזמנה</Link></Button>
               </div>
             </div>  
         )

@@ -1,11 +1,15 @@
 .App {
   text-align: center;
 }
-.toolbarStyle{
+.AllApp{
+background-color: rgb(211, 207, 207);
+background-size: cover;
+}
+.toolbrStyle{
   margin-top:0;
   opacity:0.8;
   letter-spacing: 0px;
-  font-size: 20px;
+  font-size: 25px;
 text-decoration: none;
   /* border-radius: 10px ; */
   font-weight: bolder;
@@ -17,7 +21,7 @@ text-decoration: none;
 .linkintoolbar{
   text-decoration: none;
 }
-.toolbarbackground{
+.toolbr{
   position: fixed;
   background-color: blue;
   padding-top: 2px;
@@ -32,7 +36,7 @@ text-decoration: none;
 
 .name{
   text-align:center;
-  transform: translateY(15%);
+  transform: translateY(20%);
 }
 
 .imgsize{
