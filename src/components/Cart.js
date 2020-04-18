@@ -121,7 +121,7 @@ export default class Cart extends Component {
                 <div style={{textAlign:"center"}}>
                 <TextField style={{textAlign:"center"}}  onChange={this.updateName} type="text"  id="standard-basic" label="שם מלא" /><br/><br/>
                 <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/><br/>
-              <Button  variant="contained" color="primary" onClick={this.saveOrder}>בצע הזמנה</Button>
+              <Button  variant="contained" color="primary" onClick={()=>this.saveOrder}>בצע הזמנה</Button>
               </div>
             </div>  
         )

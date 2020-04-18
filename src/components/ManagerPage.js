@@ -9,19 +9,22 @@ export default class ManagerPage extends Component {
         super(props)
     
         this.state = {
-             AllOrders:[]
+             AllOrders:[],
+             whallrequest:[]
         }
     }
 
 
     componentDidMount=()=>{ 
+        let allorders
         let orders=""
         {Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders")
         .then(res=>{
-           orders=res.data.map((element)=>{
-                orders=JSON.parse(element.OrderData)
-                console.log(orders);
-                return this.setState({AllOrders:[...this.state.AllOrders, orders]})
+           res.data.map((element)=>{
+               orders=element
+                allorders=JSON.parse(element.OrderData)
+                console.log(allorders);
+                return this.setState({AllOrders:[...this.state.AllOrders, orders],whallrequest:allorders })
            })
         })}
         
@@ -34,7 +37,7 @@ export default class ManagerPage extends Component {
         return (
             <div style={{marginTop:60}}>
                 {this.state.AllOrders.map((element, key)=>{
-                    return <Order order={element}/>
+                    return <Order idorder={this.state.whallrequest} order={element}/>
                 })}
 
           </div>

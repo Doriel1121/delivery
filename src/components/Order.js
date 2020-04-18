@@ -9,7 +9,7 @@ export default class Order extends Component {
     closeOrder=(id)=>{
         Axios.post("https://murmuring-hamlet-58919.herokuapp.com/closeOrder",id)
         .then(res=>{
-            console.log(res);
+            console.log(id);
             
         })
     }
@@ -30,13 +30,12 @@ export default class Order extends Component {
 
                         <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div className="card-body">
-                              
+                            
                             {this.props.order.Cart.map((element, key)=>{
                                 return <div style={{textAlign:"right"}} key = {element.tempItem.id}>{element.tempItem.name} - kg {element.tempAmount}
-
                                 </div>
                             })} 
-                              <Button onClick={this.closeOrder(this.props.order.Id)} variant="contained" color="primary">סגור הזמנה</Button>
+                              <Button onClick={()=>this.closeOrder(this.props.idorder.Id)} variant="contained" color="primary">סגור הזמנה</Button>
 
                         </div>
                         </div>
