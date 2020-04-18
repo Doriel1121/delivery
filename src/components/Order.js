@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Button from '@material-ui/core/Button';
 
 
 export default class Order extends Component {
     render() {
+
         return (
-            <div>
+            
                 
                 <div  className="accordion" id="accordionExample">
                     <div className="card">
@@ -21,15 +21,13 @@ export default class Order extends Component {
                         <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div className="card-body">
                             {this.props.order.Cart.map((element, key)=>{
-                                return <div style={{textAlign:"right"}} key = {element.tempItem.id}>{element.tempItem.name} - kg{element.tempAmount}</div>
+                                return <div style={{textAlign:"right"}} key = {element.tempItem.id}>{element.tempItem.name} - kg {element.tempAmount}</div>
                             })} 
-                            {/* <div style={{textAlign:"left"}}><Button variant="contained" color="primary">בוצע</Button></div> */}
                         </div>
                         </div>
                     </div>
                 </div>
                 
-            </div>
         )
     }
 }
