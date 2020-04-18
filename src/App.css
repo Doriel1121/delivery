@@ -76,3 +76,7 @@ text-decoration: none;
   transform: translateY(60%);
   margin-left: 10px;
 }
+
+.expansionColor{
+  background-color: rgb(241, 238, 238);
+}

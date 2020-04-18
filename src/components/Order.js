@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import Axios from 'axios';
 import Button from '@material-ui/core/Button';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 
 export default class Order extends Component {
 
     closeOrder=(id)=>{
-        Axios.post("https://murmuring-hamlet-58919.herokuapp.com/closeOrder",id)
+        let Idenity = {id:id}
+        Axios.post("https://murmuring-hamlet-58919.herokuapp.com/closeOrder",Idenity)
         .then(res=>{
             console.log(id);
             
@@ -16,31 +22,29 @@ export default class Order extends Component {
     render() {
 
         return (
-            
+            <div>
+            <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography >{this.props.order.Name}</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails  className={"expansionColor"}>
+          <div>
+          {this.props.order.Cart.map((element, key)=>{
+            return <div  key = {element.tempItem.id}>{element.tempItem.name} - kg {element.tempAmount}
+            </div>
+        })} 
+        
+            <Button onClick={()=>this.closeOrder(this.props.order.id)} variant="contained" color="primary">סגור הזמנה</Button>
+          </div>
+        </ExpansionPanelDetails>
+        </ExpansionPanel>
+        </div>
                 
-                <div  className="accordion" id="accordionExample">
-                    <div className="card">
-                        <div style={{textAlign:"right"}} className="card-header" id="headingOne">
-                        <h2 className="mb-0">
-                            <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            {this.props.order.Name}
-                            </button>
-                        </h2>
-                        </div>
-
-                        <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div className="card-body">
-                            
-                            {this.props.order.Cart.map((element, key)=>{
-                                return <div style={{textAlign:"right"}} key = {element.tempItem.id}>{element.tempItem.name} - kg {element.tempAmount}
-                                </div>
-                            })} 
-                              <Button onClick={()=>this.closeOrder(this.props.idorder.Id)} variant="contained" color="primary">סגור הזמנה</Button>
-
-                        </div>
-                        </div>
-                    </div>
-                </div>
+                
                 
         )
     }

@@ -41,7 +41,7 @@ export default class Item extends Component {
                 <br/>  ש"ח
                 </React.Fragment>); 
             cardA = (
-                <Button size="small" onClick={this.amoutOf} color="primary">
+                <Button size="small" onClick={()=>this.amoutOf} color="primary">
                 הוסף לעגלה
                 </Button>);
         }else {
@@ -51,10 +51,10 @@ export default class Item extends Component {
             </div>;
             cardA = (
                 <React.Fragment>
-                <Button onClick={this.amoutOf} size="small" color="primary">
+                <Button onClick={()=>this.amoutOf} size="small" color="primary">
                 חזור
                 </Button>
-                <Button size="small" onClick={this.amoutOf} color="primary">הוסף
+                <Button size="small" onClick={()=>this.amoutOf} color="primary">הוסף
                 </Button></React.Fragment>);
         }
 

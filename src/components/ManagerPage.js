@@ -16,16 +16,21 @@ export default class ManagerPage extends Component {
 
 
     componentDidMount=()=>{ 
-        let allorders
-        let orders=""
+        let allorders=[]
+        let id={}
+        console.log(allorders);
         {Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders")
         .then(res=>{
-           res.data.map((element)=>{
-               orders=element
-                allorders=JSON.parse(element.OrderData)
-                console.log(allorders);
-                return this.setState({AllOrders:[...this.state.AllOrders, orders],whallrequest:allorders })
-           })
+          for(let i = 0; i < res.data.length; i++){
+              let element=res.data[i]
+              let order=JSON.parse(element.OrderData)
+              order.id=element.Id
+              allorders.push(order)
+              console.log(res);
+              
+          }
+            this.setState({AllOrders:allorders })
+
         })}
         
     }
@@ -37,7 +42,7 @@ export default class ManagerPage extends Component {
         return (
             <div style={{marginTop:60}}>
                 {this.state.AllOrders.map((element, key)=>{
-                    return <Order idorder={this.state.whallrequest} order={element}/>
+                    return <Order key={element.id} order={element}/>
                 })}
 
           </div>
