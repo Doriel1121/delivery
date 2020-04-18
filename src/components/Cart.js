@@ -60,9 +60,8 @@ export default class Cart extends Component {
             console.log(res);
             console.log(Order);
             alert('הזמנה בוצעה בהצלחה')
+            this.props.allOrders([])
         })
-        this.props.allOrders(Order)
-
     }
     
     render() {

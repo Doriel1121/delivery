@@ -14,8 +14,7 @@ export default class ManagerPage extends Component {
     }
 
 
-    componentDidMount=()=>{
-        
+    componentDidMount=()=>{ 
         let orders=""
         {Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders")
         .then(res=>{

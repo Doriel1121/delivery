@@ -44,9 +44,8 @@ export default class Client extends Component {
   }
 
   updateOrder=(o)=>{
-  this.setState({ClientsOrders:[...this.state.ClientsOrders,o]})
+  this.setState({allCart:o})
   console.log(o);
-  
   }
 
   render() { 
