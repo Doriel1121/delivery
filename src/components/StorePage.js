@@ -62,6 +62,8 @@ export default class StorePage extends Component {
     }
     
     render() {
+        {document.body.style.backgroundColor = "rgb(211, 207, 207)"
+    }
         return (
             <div className="storediv">
 

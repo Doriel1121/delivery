@@ -25,9 +25,8 @@ export default class ManagerPage extends Component {
               let element=res.data[i]
               let order=JSON.parse(element.OrderData)
               order.id=element.Id
-              allorders.push(order)
+              allorders.unshift(order)
               console.log(res);
-              
           }
             this.setState({AllOrders:allorders })
 
@@ -38,7 +37,8 @@ export default class ManagerPage extends Component {
  
     
     render() {
-       
+     { document.body.style.backgroundColor = "rgb(211, 207, 207)"}
+
         return (
             <div style={{marginTop:60}}>
                 {this.state.AllOrders.map((element, key)=>{

@@ -2,7 +2,7 @@
   text-align: center;
 }
 .AllApp{
-background-color: rgb(211, 207, 207);
+/* background-color: rgb(211, 207, 207); */
 background-size: 100%;
 }
 .toolbrStyle{
@@ -94,4 +94,11 @@ text-decoration: none;
 .footer{
   text-align: center;
   border-top: 1px dotted grey;
+}
+
+.PanelStyle{
+  border-bottom: 5px dotted grey;
+}
+Cart{
+  background-color: grey;
 }

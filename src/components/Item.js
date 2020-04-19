@@ -26,6 +26,7 @@ export default class Item extends Component {
     amoutDetect=()=>{
         if (this.state.amount > 0 && this.state.amount <= 100) {
             this.setState({status:false})
+            this.props.toCart(this.state.item, this.state.amount)
         }else{
             document.getElementById("message").innerHTML="הכנס כמות בין 0-100"
         }

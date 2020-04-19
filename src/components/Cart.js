@@ -28,6 +28,7 @@ export default class Cart extends Component {
         }
     }
 
+
     deleteItem=(id)=>{
         this.props.delete(id)
     }
@@ -78,6 +79,8 @@ export default class Cart extends Component {
     }
     
     render() {
+        document.body.style.backgroundColor = "rgb(211, 207, 207)"
+
       let sumup=  this.funcToSum(this.props.allItemsOnCart)
 
         return (<div>

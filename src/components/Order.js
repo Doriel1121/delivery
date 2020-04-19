@@ -18,6 +18,7 @@ import TextField from '@material-ui/core/TextField';
 
 export default class Order extends Component {
 
+
     closeOrder=(id)=>{
         let Idenity = {id:id}
         Axios.post("https://murmuring-hamlet-58919.herokuapp.com/closeOrder",Idenity)
@@ -39,6 +40,7 @@ export default class Order extends Component {
     }
 
     render() {
+        
         let sumup=  this.funcToSum(this.props.order.Cart)
         return (
             <div>
@@ -47,6 +49,7 @@ export default class Order extends Component {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
+          
         >
           <Typography >{this.props.order.Name}</Typography>
         </ExpansionPanelSummary>
