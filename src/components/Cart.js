@@ -22,7 +22,9 @@ export default class Cart extends Component {
              item:props.addedItem,
              allCart:props.allItemsOnCart,
              totalPrice:"",
-             newCart:[]
+             newCart:[],
+             Name:"",
+             Number:""
         }
     }
 
@@ -52,6 +54,8 @@ export default class Cart extends Component {
     }
 
     saveOrder=()=>{
+        let phonenumber=this.state.Number
+        let stringnum=phonenumber.toString()
         let cart=this.state.allCart
         let name= this.state.Name
         let number= this.state.Number
@@ -59,8 +63,17 @@ export default class Cart extends Component {
         Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
             console.log(res);
             console.log(Order);
-            alert('הזמנה בוצעה בהצלחה')
-            this.props.allOrders([])
+            if (stringnum[0]==="0" && stringnum[1] && stringnum.length===10 && this.state.Name!=="") {
+                alert('הזמנה בוצעה בהצלחה')
+                this.props.allOrders([])
+                
+            }else{
+                document.getElementById("error").innerHTML="הכנס מספר בן 10 ספרות המתחיל ב -05"
+            }
+        
+            
+        }).catch(erroe=>{
+            alert("משהו השתבש נסה מאוחר יותר ")
         })
     }
     
@@ -120,8 +133,9 @@ export default class Cart extends Component {
                 </Table>
                 <div style={{textAlign:"center"}}>
                 <TextField style={{textAlign:"center"}}  onChange={this.updateName} type="text"  id="standard-basic" label="שם מלא" /><br/><br/>
-                <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/><br/>
-              <Button  variant="contained" color="primary" onClick={()=>this.saveOrder}>בצע הזמנה</Button>
+                <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/>
+                <p id="error"></p><br/>
+              <Button  variant="contained" color="primary" onClick={this.saveOrder}>בצע הזמנה</Button>
               </div>
             </div>  
         )

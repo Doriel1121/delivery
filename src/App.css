@@ -80,3 +80,18 @@ text-decoration: none;
 .expansionColor{
   background-color: rgb(241, 238, 238);
 }
+
+#message{
+  color:red;
+  font-size: 10px;
+}
+
+#error{
+  color:red;
+  font-size: 10px;
+}
+
+.footer{
+  text-align: center;
+  border-top: 1px dotted grey;
+}

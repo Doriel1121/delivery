@@ -76,6 +76,7 @@ export default class StorePage extends Component {
                 })}
                 </Grid>
                 </Container>
+                <div className="footer">Doriel&Omer</div>
             </div>
         )
     }

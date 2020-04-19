@@ -23,6 +23,14 @@ export default class Item extends Component {
         this.setState({amount:amo})
     }
 
+    amoutDetect=()=>{
+        if (this.state.amount > 0 && this.state.amount <= 100) {
+            this.setState({status:false})
+        }else{
+            document.getElementById("message").innerHTML="הכנס כמות בין 0-100"
+        }
+    }
+
     amoutOf=()=>{
         if (!this.state.status) {
             this.setState({status:true})
@@ -41,21 +49,23 @@ export default class Item extends Component {
                 <br/>  ש"ח
                 </React.Fragment>); 
             cardA = (
-                <Button size="small" onClick={()=>this.amoutOf} color="primary">
+                <Button size="small" onClick={this.amoutOf} color="primary">
                 הוסף לעגלה
                 </Button>);
         }else {
             cardC = <div>
             <span className="edit">כמות</span><br/>
-              <TextField type="number" id="standard-basic" label="קילו" onChange={this.updateAmount}/>
+              <TextField type="number" id="standard-basic" label="קילו" onChange={this.updateAmount}/><br/>
+              <p id="message"></p>
             </div>;
             cardA = (
                 <React.Fragment>
-                <Button onClick={()=>this.amoutOf} size="small" color="primary">
+                <Button onClick={this.amoutOf} size="small" color="primary">
                 חזור
                 </Button>
-                <Button size="small" onClick={()=>this.amoutOf} color="primary">הוסף
-                </Button></React.Fragment>);
+                <Button size="small" onClick={()=>this.amoutDetect()} color="primary">הוסף
+                </Button>
+                </React.Fragment>);
         }
 
         return <Card  className="eachItem">
