@@ -28,6 +28,12 @@ text-decoration: none;
   padding-bottom: 2px;
   z-index: 1;
 }
+
+.toolbarRefresh{
+  transform: translateY(25%);
+  cursor: pointer;
+}
+
 .imgstyle{
   width: 1.5rem;
   margin-left: 10px;
@@ -97,8 +103,11 @@ text-decoration: none;
 }
 
 .PanelStyle{
-  border-bottom: 5px dotted grey;
+  border-bottom: 1px dotted grey;
 }
-Cart{
-  background-color: grey;
+
+.btn:disabled{ 
+cursor: none;
+background-color: grey;
 }
+

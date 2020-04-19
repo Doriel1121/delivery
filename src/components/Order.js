@@ -15,7 +15,6 @@ import Table from '@material-ui/core/Table';
 import TextField from '@material-ui/core/TextField';
 
 
-
 export default class Order extends Component {
 
 
@@ -24,35 +23,34 @@ export default class Order extends Component {
         Axios.post("https://murmuring-hamlet-58919.herokuapp.com/closeOrder",Idenity)
         .then(res=>{
             console.log(id);
-            
+            this.props.deletedOrder(id)
         })
     }
 
     funcToSum=(orders)=>{
-        console.log(orders);
         var sum=0
         var size= orders.length
         for(let i = 0 ; i < size; i++){
          sum= sum + orders[i].tempItem.price * orders[i].tempAmount
         } 
-        console.log(sum);
         return sum
     }
 
     render() {
-        
+
         let sumup=  this.funcToSum(this.props.order.Cart)
         return (
             <div>
             <ExpansionPanel>
+                <div className="PanelStyle">
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
           
         >
-          <Typography >{this.props.order.Name}</Typography>
-        </ExpansionPanelSummary>
+          <Typography >{this.props.order.Name} - {this.props.order.Number}</Typography>
+        </ExpansionPanelSummary></div>
         <ExpansionPanelDetails  className={"expansionColor"}>
           <div>
           <Table >

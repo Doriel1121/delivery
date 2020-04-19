@@ -23,7 +23,7 @@ export default class Cart extends Component {
              allCart:props.allItemsOnCart,
              totalPrice:"",
              newCart:[],
-             Name:"",
+             Name:undefined,
              Number:""
         }
     }
@@ -34,13 +34,11 @@ export default class Cart extends Component {
     }
 
     funcToSum=(cart)=>{
-        console.log(cart);
         var sum=0
         var size= cart.length
         for(let i = 0 ; i < size; i++){
          sum= sum + cart[i].tempItem.price * cart[i].tempAmount
         } 
-        console.log(sum);
         return sum
     }
 
@@ -61,21 +59,21 @@ export default class Cart extends Component {
         let name= this.state.Name
         let number= this.state.Number
         let Order = {Cart:cart,Name: name,Number: number}
+        if (stringnum[0]==="0" && stringnum[1]==="5" && stringnum.length===10 && this.state.Name!==undefined) {
+            this.refs.btn.setAttribute("disabled", "disabled");
         Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
             console.log(res);
             console.log(Order);
-            if (stringnum[0]==="0" && stringnum[1] && stringnum.length===10 && this.state.Name!=="") {
                 alert('הזמנה בוצעה בהצלחה')
                 this.props.allOrders([])
-                
-            }else{
-                document.getElementById("error").innerHTML="הכנס מספר בן 10 ספרות המתחיל ב -05"
-            }
-        
-            
+                    
         }).catch(erroe=>{
             alert("משהו השתבש נסה מאוחר יותר ")
         })
+    }else{
+        document.getElementById("error").innerHTML=
+       "הכנס מספר בן 10 ספרות המתחיל ב 05 & אל תשאיר שדה ריק "
+    }
     }
     
     render() {
@@ -138,7 +136,7 @@ export default class Cart extends Component {
                 <TextField style={{textAlign:"center"}}  onChange={this.updateName} type="text"  id="standard-basic" label="שם מלא" /><br/><br/>
                 <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/>
                 <p id="error"></p><br/>
-              <Button  variant="contained" color="primary" onClick={this.saveOrder}>בצע הזמנה</Button>
+              <Button ref="btn"  variant="contained" color="primary" onClick={this.saveOrder}>בצע הזמנה</Button>
               </div>
             </div>  
         )

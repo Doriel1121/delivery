@@ -45,7 +45,6 @@ export default class Client extends Component {
 
   updateOrder=(o)=>{
   this.setState({allCart:o})
-  console.log(o);
   }
 
   render() { 
