@@ -4,6 +4,7 @@ import {HashRouter as Router , Route , Switch} from 'react-router-dom';
 import StorePage from './StorePage.js';
 import Cart from './Cart.js';
 import ManagerPage from './ManagerPage.js';
+import LoadingPage from './LoadingPage.js';
 
 
 
@@ -51,10 +52,12 @@ export default class Client extends Component {
     return (
       <div>
         <Router>
-        <Toolbar/>
+        
           <Switch>
-
             <Route exact path = "/">
+              <LoadingPage/>
+            </Route>
+            <Route exact path = "/store">
             <StorePage oneItemToCart={this.updateCart}/>
             </Route>
             <Route exact path ="/cart">

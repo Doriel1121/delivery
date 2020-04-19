@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {Link, Redirect} from 'react-router-dom';
 import Axios from 'axios';
+import Toolbar from './Toolbar.js'
 
 
 
@@ -82,6 +83,7 @@ export default class Cart extends Component {
       let sumup=  this.funcToSum(this.props.allItemsOnCart)
 
         return (<div>
+            <Toolbar/>
                 <Table className="cartDiv">
                     <TableHead>
                         <TableRow>

@@ -108,6 +108,16 @@ text-decoration: none;
 
 .btn:disabled{ 
 cursor: none;
-background-color: grey;
 }
+
+.LoadinglogoStyle{
+  width:15rem;
+}
+
+.Load{
+  text-align: center;
+  transform: translateY(60%);
+  /* transform: translateX(10%); */
+}
+
 

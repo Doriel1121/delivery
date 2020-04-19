@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Item from './Item';
+import Toolbar from './Toolbar.js';
 
 
 
@@ -66,7 +67,7 @@ export default class StorePage extends Component {
     }
         return (
             <div className="storediv">
-
+                <Toolbar/>
                 <Container maxWidth="sm">
                  <Grid  container spacing={3}>
                 {this.state.allItems.map((element,key)=>{

@@ -19,8 +19,7 @@ export default class ManagerPage extends Component {
         this.setState({state:this.state})
     }
 
-
-    componentDidMount=()=>{ 
+    someFunc=()=>{
         let allorders=[]
         let id={}
         {Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders")
@@ -33,14 +32,16 @@ export default class ManagerPage extends Component {
               console.log(allorders);
           }
             this.setState({AllOrders:allorders })
-
         })}
-        
+    }
+
+
+    componentDidMount=()=>{ 
+        this.someFunc()
     }
 
     deleteOrder=(id)=>{
         console.log(id);
-        
         let alltheorders=this.state.AllOrders
         let newOrdersArray
         this.state.AllOrders.map((element)=>{
@@ -57,11 +58,9 @@ export default class ManagerPage extends Component {
     
     render() {
      { document.body.style.backgroundColor = "rgb(211, 207, 207)"}
-
         return (
             <div style={{marginTop:60}}>
-                <Toolbar refresh={"refreshButton"}/>
-                <CachedIcon onClick={()=>this.componentDidMount()}></CachedIcon>
+                <Toolbar reOpen={this.someFunc} refresh={"refreshButton"}/>
                 {this.state.AllOrders.map((element, key)=>{
                     return <Order deletedOrder={this.deleteOrder} key={element.id} order={element}/>
                 })}

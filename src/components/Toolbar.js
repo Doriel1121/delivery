@@ -13,18 +13,18 @@ import CachedIcon from '@material-ui/icons/Cached';
 export default class Toolbar extends Component {
 
     refreshPage=()=>{
-        this.forceUpdate();
+    this.props.reOpen()
     }
     
-    render() {
+    render() { 
         if (this.props.refresh==="refreshButton") {
             return (
                 <div  className="toolbr" >
                         <AppBar style={{color:"white", height:60}}>
                         <Grid container spacing={3}>
-                            <Grid item xs><Link to ="/cart"><ShoppingCartIcon className="shoppingCartIcon">ShoppingCart</ShoppingCartIcon></Link>
+                            <Grid item xs><Link to ="/cart"></Link>
                             </Grid>
-                            <Grid className="name" item xs={8}><Link className="linkintoolbar" to ="/"><h4 className="toolbrStyle" >  השוק שלי</h4></Link>
+                            <Grid className="name" item xs={8}><Link className="linkintoolbar" to ="/store"><h4 className="toolbrStyle" >  השוק שלי</h4></Link>
                             </Grid>
                             <Grid className="toolbarRefresh" item xs><CachedIcon onClick={()=>this.refreshPage()}></CachedIcon></Grid>
                             </Grid>
@@ -37,7 +37,7 @@ export default class Toolbar extends Component {
                     <Grid container spacing={3}>
                         <Grid item xs><Link to ="/cart"><ShoppingCartIcon className="shoppingCartIcon">ShoppingCart</ShoppingCartIcon></Link>
                         </Grid>
-                        <Grid className="name" item xs={8}><Link className="linkintoolbar" to ="/"><h4 className="toolbrStyle" >  השוק שלי</h4></Link>
+                        <Grid className="name" item xs={8}><Link className="linkintoolbar" to ="/store"><h4 className="toolbrStyle" >  השוק שלי</h4></Link>
                         </Grid>
                         <Grid className="toolbarRefresh" item xs></Grid>
                         </Grid>
