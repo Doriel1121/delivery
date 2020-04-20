@@ -55,6 +55,13 @@ export default class StorePage extends Component {
         }
     }
 
+    // componentDidMount=()=>{
+    //     let storeItems=this.state.allItems
+    //     Axios.post("",storeItems).then(res=>{
+    //         return 
+    //     })
+    // }
+
     passToCart=(item,amount)=>{
         let tempAmount=amount
         let tempItem=item
