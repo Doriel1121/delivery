@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Toolbar from './Toolbar.js';
 import TextField from '@material-ui/core/TextField';
+import NewItem from './NewItem.js';
 
 
 
@@ -23,7 +24,10 @@ export default class EditStorePage extends Component {
     
         this.state = {
              allItems:[],
-             status:false,
+             
+             updatedPrice:"",
+             updatedName:"",
+             updatedItem:""
         }
     }
 
@@ -38,104 +42,20 @@ export default class EditStorePage extends Component {
         
     }
 
-    updatePrice=()=>{
+    
 
-    }
-
-    deleteItem=()=>{
-        
-    }
-
-    editItem=()=>{
-        if (!this.state.status) {
-            this.setState({status:true})
-        }else{
-            this.setState({status:false})
-        }
-    }
-
-    showMe=()=>{
-        if (!this.state.status) {
-            return (
-                <div>
-                    <div style={{zIndex:1}}><Toolbar/></div>
-                        <div style={{marginTop:55}}>
-                            {this.state.allItems.map((element)=>{
-                                return        <ExpansionPanel>
-                                <div className="PanelStyle">
-                        <ExpansionPanelSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="panel1a-content"
-                          id="panel1a-header"
-                        >
-                          <Typography >{element.Name} - {element.Price} ש"ח</Typography>
-                        </ExpansionPanelSummary></div>
-                        <ExpansionPanelDetails  className={"expansionColor"}>
-                         <Button onClick={()=>this.editItem(element.Id)} variant="contained" color="primary">ערוך</Button>
-                         <Button onClick={()=>this.deleteItem()} variant="contained" color="primary">מחק</Button>
-                        </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        
-                            })}
-                     </div>
-                </div>
-            ) 
-        }
-
-        else{
-            return (
-                <div>
-                    <div style={{zIndex:1}}><Toolbar/></div>
-                        <div style={{marginTop:55}}>
-                            {this.state.allItems.map((element)=>{
-                                return        <ExpansionPanel>
-                                <div className="PanelStyle">
-                        <ExpansionPanelSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="panel1a-content"
-                          id="panel1a-header"
-                        >
-                          <Typography >{element.Name} - {<TextField style={{width:100}} id="standard-basic" onChange={this.updatePrice()} label="מחיר" />}</Typography>
-                        </ExpansionPanelSummary></div>
-                        <ExpansionPanelDetails  className={"expansionColor"}>
-                         <Button onClick={()=>this.saveChanges(element.Id)} variant="contained" color="primary">שמור</Button>
-                         <Button onClick={()=>this.editItem()} variant="contained" color="primary">חזור</Button>
-                        </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        
-                            })}
-                     </div>
-                </div>
-            )
-        }
-    }
     
     render() {
         {document.body.style.backgroundColor = "rgb(211, 207, 207)"}
 
         return (
-            <div>
-                {/* <div style={{zIndex:1}}><Toolbar/></div>
-                    <div style={{marginTop:55}}>
-                        {this.state.allItems.map((element)=>{
-                            return        <ExpansionPanel>
-                            <div className="PanelStyle">
-                    <ExpansionPanelSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography >{element.Name} - {element.Price} ש"ח</Typography>
-                    </ExpansionPanelSummary></div>
-                    <ExpansionPanelDetails  className={"expansionColor"}>
-                     <Button onClick={()=>this.editItem(element.Id)} variant="contained" color="primary">ערוך</Button>
-                     <Button variant="contained" color="primary">מחק</Button>
-                    </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                    
-                        })}
-                 </div> */}
-                 {this.showMe()}
+            <div >
+                <div style={{zIndex:1, marginBottom:53}}><Toolbar/></div>
+                {this.state.allItems.map((element)=>{
+                    return <NewItem allItems={this.state.allItems}  item={element}/>
+                })}
+                
+                 {/* {this.showMe()} */}
             </div>
         )
     }
