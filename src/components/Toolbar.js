@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import CachedIcon from '@material-ui/icons/Cached';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 
@@ -15,6 +16,10 @@ export default class Toolbar extends Component {
     refreshPage=()=>{
     this.props.reOpen()
     }
+
+    changeShow=()=>{
+        this.props.edit()
+    }
     
     render() { 
         if (this.props.refresh==="refreshButton") {
@@ -22,9 +27,9 @@ export default class Toolbar extends Component {
                 <div  className="toolbr" >
                         <AppBar style={{color:"white", height:60}}>
                         <Grid container spacing={3}>
-                            <Grid item xs><Link to ="/cart"></Link>
+                            <Grid item xs><Link to ="/edit"><EditIcon onClick={()=>this.changeShow()} className="editIcon">Edit</EditIcon></Link>
                             </Grid>
-                            <Grid className="name" item xs={8}><Link className="linkintoolbar" to ="/store"><h4 className="toolbrStyle" >  השוק שלי</h4></Link>
+                            <Grid className="name" item xs={8}><h4 className="toolbrStyle" >  השוק שלי</h4>
                             </Grid>
                             <Grid className="toolbarRefresh" item xs><CachedIcon onClick={()=>this.refreshPage()}></CachedIcon></Grid>
                             </Grid>

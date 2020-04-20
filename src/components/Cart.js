@@ -38,7 +38,7 @@ export default class Cart extends Component {
         var sum=0
         var size= cart.length
         for(let i = 0 ; i < size; i++){
-         sum= sum + cart[i].tempItem.price * cart[i].tempAmount
+         sum= sum + cart[i].tempItem.Price * cart[i].tempAmount
         } 
         return sum
     }
@@ -53,15 +53,18 @@ export default class Cart extends Component {
         this.setState({Number:number})
     }
 
-    saveOrder=()=>{
+    saveOrder=(sum)=>{
+        this.refs.btn.setAttribute("disabled", "disabled");
         let phonenumber=this.state.Number
         let stringnum=phonenumber.toString()
         let cart=this.state.allCart
         let name= this.state.Name
         let number= this.state.Number
         let Order = {Cart:cart,Name: name,Number: number}
+        if (sum>= 50) {
+            
+        
         if (stringnum[0]==="0" && stringnum[1]==="5" && stringnum.length===10 && this.state.Name!==undefined) {
-            this.refs.btn.setAttribute("disabled", "disabled");
         Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
             console.log(res);
             console.log(Order);
@@ -75,6 +78,7 @@ export default class Cart extends Component {
         document.getElementById("error").innerHTML=
        "הכנס מספר בן 10 ספרות המתחיל ב 05 & אל תשאיר שדה ריק "
     }
+    }else{alert("מינימום הזמנה של 50 שח")}
     }
     
     render() {
@@ -103,11 +107,11 @@ export default class Cart extends Component {
                     <TableBody>
                         
                             {this.props.allItemsOnCart.map((element, key)=>{
-                                var total = element.tempAmount*element.tempItem.price
+                                var total = element.tempAmount*element.tempItem.Price
                                 
-                                return <TableRow key={element.tempItem.id}>
+                                return <TableRow key={element.tempItem.Id}>
                                     <TableCell  style={{textAlign:"center"}}>
-                                    <DeleteForeverIcon onClick={()=>this.deleteItem(element.tempItem.id)}>DeleteForever</DeleteForeverIcon>
+                                    <DeleteForeverIcon onClick={()=>this.deleteItem(element.tempItem.Id)}>DeleteForever</DeleteForeverIcon>
                                  </TableCell>
                                  <TableCell  style={{textAlign:"center"}}>
                                  {total.toFixed(2)} 
@@ -116,7 +120,7 @@ export default class Cart extends Component {
                                  {element.tempAmount}
                                  </TableCell>
                                  <TableCell>
-                                 <span style={{fontWeight:"bolder"}}>{element.tempItem.name}</span>
+                                 <span style={{fontWeight:"bolder"}}>{element.tempItem.Name}</span>
                                  
 
                                  </TableCell>
@@ -138,7 +142,7 @@ export default class Cart extends Component {
                 <TextField style={{textAlign:"center"}}  onChange={this.updateName} type="text"  id="standard-basic" label="שם מלא" /><br/><br/>
                 <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/>
                 <p id="error"></p><br/>
-              <Button ref="btn"  variant="contained" color="primary" onClick={this.saveOrder}>בצע הזמנה</Button>
+              <Button ref="btn"  variant="contained" color="primary" onClick={()=>this.saveOrder(sumup)}>בצע הזמנה</Button>
               </div>
             </div>  
         )

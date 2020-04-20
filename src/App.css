@@ -34,6 +34,13 @@ text-decoration: none;
   cursor: pointer;
 }
 
+.editIcon{
+cursor: pointer;
+color: white;
+margin-left: 10px;
+transform: translateY(50%);
+}
+
 .imgstyle{
   width: 1.5rem;
   margin-left: 10px;
@@ -85,6 +92,7 @@ text-decoration: none;
 
 .expansionColor{
   background-color: rgb(241, 238, 238);
+  text-align: right;
 }
 
 #message{
@@ -118,6 +126,12 @@ cursor: none;
   text-align: center;
   transform: translateY(60%);
   /* transform: translateX(10%); */
+}
+
+.waitingSign{
+  z-index: 2;
+  transform: translateY(100%);
+  text-align: center;
 }
 
 

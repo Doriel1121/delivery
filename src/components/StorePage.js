@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Item from './Item';
 import Toolbar from './Toolbar.js';
+import Axios from 'axios';
+
 
 
 
@@ -51,16 +53,21 @@ export default class StorePage extends Component {
             {id:"36", name:"גזר מגורד", price:"12", picture: "gezer-megorad.png"},
             {id:"37", name:"חסה אייסברג", price:"15", picture: "hasa.jpg"},
             {id:"38", name:"לקט(חסה,כרוב אדום, גזר)", price:"15", picture: "leket.jpg"},],
-             temp:[]
+             evrythingFServer:[]
         }
     }
 
-    // componentDidMount=()=>{
-    //     let storeItems=this.state.allItems
-    //     Axios.post("",storeItems).then(res=>{
-    //         return 
-    //     })
-    // }
+    componentDidMount=()=>{
+        let storeItems
+        Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(res=>{
+            console.log(res);
+            storeItems=res.data
+            console.log(storeItems);
+            this.setState({allItems:storeItems})
+        })
+        
+    }
+    
 
     passToCart=(item,amount)=>{
         let tempAmount=amount
@@ -77,8 +84,8 @@ export default class StorePage extends Component {
                 <Toolbar/>
                 <Container maxWidth="sm">
                  <Grid  container spacing={3}>
-                {this.state.allItems.map((element,key)=>{
-                     return  <Grid className="itemBrake" key={element.id} item xs={6}>
+                {this.state.allItems.map((element,key)=>{                    
+                     return  <Grid className="itemBrake" key={element.Id} item xs={6}>
                      <Item toCart={this.passToCart} item={element}/>
                      </Grid>
                     

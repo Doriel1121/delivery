@@ -22,6 +22,8 @@ export default class Order extends Component {
         let Idenity = {id:id}
         Axios.post("https://murmuring-hamlet-58919.herokuapp.com/closeOrder",Idenity)
         .then(res=>{
+          console.log(res);
+          
             console.log(id);
             this.props.deletedOrder(id)
         })
@@ -31,7 +33,7 @@ export default class Order extends Component {
         var sum=0
         var size= orders.length
         for(let i = 0 ; i < size; i++){
-         sum= sum + orders[i].tempItem.price * orders[i].tempAmount
+         sum= sum + orders[i].tempItem.Price * orders[i].tempAmount
         } 
         return sum
     }
@@ -47,20 +49,19 @@ export default class Order extends Component {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
-          
         >
           <Typography >{this.props.order.Name} - {this.props.order.Number}</Typography>
         </ExpansionPanelSummary></div>
         <ExpansionPanelDetails  className={"expansionColor"}>
-          <div>
-          <Table >
+          <div >
+          <Table>
                    
-                    <TableBody>
+                    <TableBody style={{textAlign:"right"}}>
           {this.props.order.Cart.map((element, key)=>{
-              var total = element.tempAmount*element.tempItem.price
+              var total = element.tempAmount*element.tempItem.Price
 
              
-                        return      <TableRow  key={element.tempItem.id}>
+                        return      <TableRow  key={element.tempItem.Id}>
                                 
                                  <TableCell  style={{textAlign:"center"}}>
                                  {total.toFixed(2)} 
@@ -69,9 +70,7 @@ export default class Order extends Component {
                                  {element.tempAmount}
                                  </TableCell>
                                  <TableCell>
-                                 <span style={{fontWeight:"bolder"}}>{element.tempItem.name}</span>
-                                 
-
+                                 <span style={{fontWeight:"bolder"}}>{element.tempItem.Name}</span>
                                  </TableCell>
                                 </TableRow>
                     
@@ -88,7 +87,7 @@ export default class Order extends Component {
                     </TableBody>
                 </Table>
         
-            <Button  onClick={()=>this.closeOrder(this.props.order.id)} variant="contained" color="primary">סגור הזמנה</Button>
+            <div style={{textAlign:"left"}}><Button  onClick={()=>this.closeOrder(this.props.order.id)} variant="contained" color="primary">סגור הזמנה</Button></div>
           </div>
         </ExpansionPanelDetails>
         </ExpansionPanel>

@@ -5,6 +5,7 @@ import StorePage from './StorePage.js';
 import Cart from './Cart.js';
 import ManagerPage from './ManagerPage.js';
 import LoadingPage from './LoadingPage.js';
+import EditStorePage from './EditStorePage.js';
 
 
 
@@ -66,6 +67,10 @@ export default class Client extends Component {
 
             <Route exact path ="/manager">
                 <ManagerPage cart={this.state.ClientsOrders}/>
+            </Route>
+
+            <Route exact path="/edit">
+              <EditStorePage/>
             </Route>
 
           </Switch>

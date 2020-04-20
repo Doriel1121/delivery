@@ -46,7 +46,7 @@ export default class Item extends Component {
         if (!this.state.status) {
             cardC = (<React.Fragment>
                 מחיר לקילו 
-                <br/> {this.props.item.price} 
+                <br/> {this.props.item.Price} 
                 <br/>  ש"ח
                 </React.Fragment>); 
             cardA = (
@@ -70,11 +70,11 @@ export default class Item extends Component {
         }
 
         return <Card  className="eachItem">
-                    <CardMedia image={this.props.item.picture} style={{'height': '100px'}}>
+                    <CardMedia image={this.props.item.Image} style={{'height': '100px'}}>
                     </CardMedia>
                     <CardContent style={{'textAlign': 'right'}}>
                     <span className="itemnamestyle" style={{'fontFamily': 'Arial', 'fontWeight': '700', 'fontSize': '20px'}}>
-                        {this.props.item.name}
+                        {this.props.item.Name}
                     </span>
                     <br/>
                     {cardC}

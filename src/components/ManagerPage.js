@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import Order from './Order.js';
 import Axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import CachedIcon from '@material-ui/icons/Cached';
 import Toolbar from './Toolbar.js';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 
 export default class ManagerPage extends Component {
@@ -54,20 +56,41 @@ export default class ManagerPage extends Component {
         })
     }
 
+    editState=()=>{
+        
+    }
+
  
     
     render() {
      { document.body.style.backgroundColor = "rgb(211, 207, 207)"}
+     if (this.state.AllOrders!=="") {
         return (
             <div style={{marginTop:60}}>
-                <Toolbar reOpen={this.someFunc} refresh={"refreshButton"}/>
+                <Toolbar edit={this.editState} reOpen={this.someFunc} refresh={"refreshButton"}/>
                 {this.state.AllOrders.map((element, key)=>{
-                    return <Order deletedOrder={this.deleteOrder} key={element.id} order={element}/>
+                    return <Order deletedOrder={this.deleteOrder} key={element.Id} order={element}/>
                 })}
 
           </div>
   
-        )
+        )  
+     }else{
+         return <div>
+             <div ><Toolbar reOpen={this.someFunc}/></div><br/>
+            <div className="waitingSign" ><CircularProgress /></div>
+            </div>
+     }
+        // return (
+        //     <div style={{marginTop:60}}>
+        //         <Toolbar reOpen={this.someFunc} refresh={"refreshButton"}/>
+        //         {this.state.AllOrders.map((element, key)=>{
+        //             return <Order deletedOrder={this.deleteOrder} key={element.Id} order={element}/>
+        //         })}
+
+        //   </div>
+  
+        // )
     }
 }
 
