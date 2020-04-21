@@ -18,6 +18,8 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import {Link} from 'react-router-dom';
+
 
 
 
@@ -31,11 +33,46 @@ export default class EditStorePage extends Component {
              status:false,
              updatedPrice:"",
              updatedName:"",
-             updatedItem:""
+             updatedItem:"",
+             newPrice:"",
+             newImage:"",
+             newName:""
         }
     }
 
-    componentDidMount=()=>{
+    updatePrice=(p)=>{
+        let price=p.target.value
+        this.setState({newPrice:price})
+    }
+
+    updateName=(n)=>{
+        let name= n.target.value
+        this.setState({newName:name})
+    }
+
+    updateImage=(img)=>{
+        let image=img.target.value
+        this.setState({newImage:image})
+    }
+
+    sendToServerNewItem=()=>{
+        let newname= this.state.newName
+        let newprice= this.state.newPrice
+        let newimage=this.state.newImage
+        let newItem= {Name:newname,Price:newprice, Image:newimage}
+        if (this.state.newName!=="" && this.state.newPrice!=="" && this.state.newImage!=="") {
+            Axios.post("https://murmuring-hamlet-58919.herokuapp.com/addItem", newItem).then(res=>{
+                return console.log(res);
+                
+            })
+        }
+        
+        
+       
+        
+    }
+
+    someFunc=()=>{
         let storeItems
         Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(res=>{
             console.log(res);
@@ -43,6 +80,10 @@ export default class EditStorePage extends Component {
             console.log(storeItems);
             this.setState({allItems:storeItems})
         })
+    }
+
+    componentDidMount=()=>{
+        this.someFunc()
         
     }
 
@@ -55,15 +96,27 @@ export default class EditStorePage extends Component {
         }
     }
 
-    
+    deleteItemFromList=(id)=>{
+        let ItemsList=this.state.allItems
+        let newList
+        this.state.allItems.map((element)=>{
+            if (element.Id === id) {
+                newList=ItemsList.filter((item)=>{
+                   return item!== element
+                })
+                console.log(newList);
+                this.setState({allItems:newList})
+            }
+        })
 
+    }
     
     render() {
         {document.body.style.backgroundColor = "rgb(211, 207, 207)"}
         let cardC = '';   
         let cardA = ''; 
         {cardC = <div>
-              <TextField type="number" id="standard-basic"  label="מחיר לקילו" onChange={this.updateAmount}/><br/>
+              <TextField type="number" id="standard-basic"  label="מחיר לקילו" onChange={this.updatePrice}/><br/>
               <p id="message"></p>
             </div>}
             {cardA = (
@@ -71,15 +124,15 @@ export default class EditStorePage extends Component {
                 <Button onClick={this.amoutOf} size="small" color="primary">
                 חזור
                 </Button>
-                <Button size="small" onClick={()=>this.amoutDetect()} color="primary">הוסף
+                <Button size="small" onClick={()=>this.sendToServerNewItem()} color="primary">הוסף
                 </Button>
                 </React.Fragment>)}
         if (!this.state.status) {    
         return (
             <div >
-                <div style={{zIndex:1, marginBottom:62}}><Toolbar Add={this.addItem} edit={"editbutton"}/></div>
-                {this.state.allItems.map((element)=>{
-                    return <NewItem allItems={this.state.allItems}  item={element}/>
+                <div style={{zIndex:1, marginBottom:62}}><Toolbar reOpen={this.someFunc} Add={this.addItem} edit={"editbutton"}/></div>
+                {this.state.allItems.map((element, key )=>{
+                    return <NewItem delete={this.deleteItemFromList} key ={element.Id}  item={element}/>
                 })}
                 
             </div>
@@ -90,11 +143,11 @@ export default class EditStorePage extends Component {
 
          <Card  className="eachItem">
                     <CardMedia image="" style={{'height': '100px'}}>
-                    <TextField type="string" id="standard-basic"  label="תמונה" onChange={this.updateAmount}/><br/>
+                    <TextField type="string" id="standard-basic"  label="תמונה" onChange={this.updateImage}/><br/>
                     </CardMedia>
                     <CardContent style={{'textAlign': 'right'}}>
                     <span className="itemnamestyle" style={{'fontFamily': 'Arial', 'fontWeight': '700', 'fontSize': '20px'}}>
-                    {<TextField style={{width:100}} id="standard-basic"  onChange={this.updateImage} label="שם" />}
+                    {<TextField style={{width:100}} id="standard-basic"  onChange={this.updateName} label="שם" />}
 
                     </span>
                     <br/>

@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Toolbar from './Toolbar.js';
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 export default class NewItem extends Component {
 
@@ -45,10 +47,13 @@ export default class NewItem extends Component {
     }
 
     deleteItem=()=>{
-    //     let id= this.props.item.Id
-    //   Axios.post("",id).then(res=>{
-    //       return console.log(res);    
-    //   })
+        let id= {Id:this.props.item.Id}
+      Axios.post("https://murmuring-hamlet-58919.herokuapp.com/deleteItem",id).then(res=>{
+           console.log(res);  
+          if (res.status === 200 && res.statusText === "ok") {
+            this.props.delete(this.props.item.Id)
+          }  
+      })
     }
 
     saveChanges=()=>{
@@ -100,8 +105,15 @@ export default class NewItem extends Component {
                           <Typography >{this.props.item.Name} - {this.props.item.Price} ש"ח</Typography>
                         </ExpansionPanelSummary></div>
                         <ExpansionPanelDetails  className={"expansionColor"}>
+                        <Container maxWidth="sm">
+                        <Grid container spacing={3}>
                          <Button onClick={()=>this.editItem(this.props.item.Id)} variant="contained" color="primary">ערוך</Button>
+                         </Grid>
+                         <Grid container spacing={3}>
                          <Button onClick={()=>this.deleteItem()} variant="contained" color="primary">מחק</Button>
+                         </Grid>
+                         <Grid container spacing={3}></Grid>
+                         </Container>
                         </ExpansionPanelDetails>
                         </ExpansionPanel>
                             
@@ -129,7 +141,8 @@ export default class NewItem extends Component {
                           </Typography>
                         </ExpansionPanelSummary></div>
                         <ExpansionPanelDetails  className={"expansionColor"}>
-                         <Button onClick={()=>this.saveChanges()} variant="contained" color="primary">שמור</Button>
+
+                         <Button onClick={()=>this.saveChanges()}  variant="contained" color="primary">שמור</Button>
                          <Button onClick={()=>this.editItem()} variant="contained" color="primary">חזור</Button>
                         </ExpansionPanelDetails>
                         </ExpansionPanel>
