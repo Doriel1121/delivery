@@ -62,14 +62,10 @@ export default class EditStorePage extends Component {
         let newItem= {Name:newname,Price:newprice, Image:newimage}
         if (this.state.newName!=="" && this.state.newPrice!=="" && this.state.newImage!=="") {
             Axios.post("https://murmuring-hamlet-58919.herokuapp.com/addItem", newItem).then(res=>{
-                return console.log(res);
+                return this.addItem()
                 
             })
-        }
-        
-        
-       
-        
+        }  
     }
 
     someFunc=()=>{
@@ -121,7 +117,7 @@ export default class EditStorePage extends Component {
             </div>}
             {cardA = (
                 <React.Fragment>
-                <Button onClick={this.amoutOf} size="small" color="primary">
+                <Button onClick={this.addItem} size="small" color="primary">
                 חזור
                 </Button>
                 <Button size="small" onClick={()=>this.sendToServerNewItem()} color="primary">הוסף

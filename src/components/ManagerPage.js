@@ -42,6 +42,10 @@ export default class ManagerPage extends Component {
         this.someFunc()
     }
 
+    moveToEdit=()=>{
+      return  <Redirect to ="/edit"/>
+    }
+
     deleteOrder=(id)=>{
         console.log(id);
         let alltheorders=this.state.AllOrders
@@ -61,7 +65,7 @@ export default class ManagerPage extends Component {
      if (this.state.AllOrders!=="") {
         return (
             <div style={{marginTop:62}}>
-                <Toolbar  reOpen={this.someFunc} refresh={"refreshButton"}/>
+                <Toolbar edit={this.moveToEdit}  reOpen={this.someFunc} refresh={"refreshButton"}/>
                 {this.state.AllOrders.map((element, key)=>{
                     return <Order deletedOrder={this.deleteOrder} key={element.Id} order={element}/>
                 })}
@@ -71,7 +75,7 @@ export default class ManagerPage extends Component {
         )  
      }else{
          return <div>
-             <div ><Toolbar reOpen={this.someFunc}/></div><br/>
+             <div ><Toolbar  reOpen={this.someFunc}/></div><br/>
             <div className="waitingSign" ><CircularProgress /></div>
             </div>
      }
