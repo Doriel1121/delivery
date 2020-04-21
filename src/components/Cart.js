@@ -9,9 +9,26 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Axios from 'axios';
 import Toolbar from './Toolbar.js'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-
+const styles = {
+    prog: {
+        'position': 'absolute',
+        'top': '0px',
+        'height': '100%',
+        'width': '100%',
+        'display': 'flex',
+        'justifyContent': 'center',
+        'alignContent': 'center',
+        'flexDrection': 'column',
+        'backgroundColor': 'rgb(0,0,0, 0.5)'
+    },
+    circBar: {
+        'position': 'absolute',
+        'top': '400px'
+    }
+};
 
 export default class Cart extends Component {
 
@@ -24,7 +41,8 @@ export default class Cart extends Component {
              totalPrice:"",
              newCart:[],
              Name:undefined,
-             Number:""
+             Number:"",
+             progressBar: false
         }
     }
 
@@ -62,17 +80,20 @@ export default class Cart extends Component {
         let Order = {Cart:cart,Name: name,Number: number}
         if (sum>= 50) {
             
-        
         if (stringnum[0]==="0" && stringnum[1]==="5" && stringnum.length===10 && this.state.Name!==undefined) {
-        Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
+        
+            this.setState({progressBar: true}, () => {
+            Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order",Order).then(res=>{
             console.log(res);
             console.log(Order);
                 alert('הזמנה בוצעה בהצלחה')
                 this.props.allOrders([])
+                this.setState({progressBar: false});
                     
         }).catch(erroe=>{
             alert("משהו השתבש נסה מאוחר יותר ")
-        })
+            this.setState({progressBar: false});
+        })});
     }else{
         document.getElementById("error").innerHTML=
        "הכנס מספר בן 10 ספרות המתחיל ב 05 & אל תשאיר שדה ריק "
@@ -142,6 +163,9 @@ export default class Cart extends Component {
                 <TextField style={{textAlign:"center"}} onChange={this.updateNumber} type="number"  id="standard-basic" label="מספר טלפון" /><br/>
                 <p id="error"></p><br/>
               <Button ref="btn"  variant="contained" color="primary" onClick={()=>this.saveOrder(sumup)}>בצע הזמנה</Button>
+              {this.state.progressBar ? <div style={styles.prog}>
+                  <CircularProgress style={styles.circBar} size={68}/>
+              </div> : <br />}
               </div>
             </div>  
         )

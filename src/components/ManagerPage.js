@@ -60,6 +60,7 @@ export default class ManagerPage extends Component {
     
     render() {
      { document.body.style.backgroundColor = "rgb(211, 207, 207)"}
+     
      if (this.state.AllOrders!=="") {
         return (
             <div style={{marginTop:62}}>

@@ -68,7 +68,7 @@ export default class Item extends Component {
                 </React.Fragment>);
         }
 
-        return <Card  className="eachItem">
+        return <Card  className="eachItem" style={{'height': '69vmin'}}>
                     <CardMedia image={this.props.item.Image} style={{'height': '100px'}}>
                     </CardMedia>
                     <CardContent style={{'textAlign': 'right'}}>

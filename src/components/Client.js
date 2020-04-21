@@ -66,11 +66,6 @@ export default class Client extends Component {
             <Route exact path ="/cart">
             <Cart allOrders={this.updateOrder} sum={this.state.sumOfAllCart} delete={this.deleteItem} allItemsOnCart={this.state.allCart} itemAmount={this.state.tempAmount} addedItem={this.state.tempItem}/>
             </Route>
-
-            <Route exact path ="/manager">
-                <ManagerPage cart={this.state.ClientsOrders}/>
-            </Route>
-
             <Route exact path="/edit">
               <EditStorePage/>
             </Route>
