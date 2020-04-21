@@ -70,7 +70,6 @@ export default class StorePage extends Component {
     passToCart=(item,amount)=>{
         let tempAmount=amount
         let tempItem=item
-        let temp=[{amountofItem:amount} , {itemDetails:item}]
         this.props.oneItemToCart(tempItem,tempAmount)
     }
     
