@@ -30,13 +30,15 @@ export default class Client extends Component {
 
   deleteItem=(id)=>{
     this.state.allCart.map((product)=>{
-      var all = this.state.allCart
-      var newCartItems
-      if (id === product.tempItem.id) {
+      console.log(product);
+      let all = this.state.allCart
+      let newCartItems
+      if (id === product.tempItem.Id) {
           return<div>
               {newCartItems=all.filter((item)=>{
                  return item !== product
               })}
+              {}
               {this.setState({allCart:newCartItems})}
               </div>
       }

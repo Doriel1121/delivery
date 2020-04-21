@@ -135,7 +135,7 @@ export default class EditStorePage extends Component {
         )
     }else{
         return <div className="AddStyleCard"> 
-        <Toolbar/>
+        <Toolbar addState={"backTo"}/>
 
          <Card  className="eachItem">
                     <CardMedia image="" style={{'height': '100px'}}>

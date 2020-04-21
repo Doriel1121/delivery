@@ -23,7 +23,6 @@ export default class ManagerPage extends Component {
 
     someFunc=()=>{
         let allorders=[]
-        let id={}
         {Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders")
         .then(res=>{
           for(let i = 0; i < res.data.length; i++){
@@ -31,7 +30,6 @@ export default class ManagerPage extends Component {
               let order=JSON.parse(element.OrderData)
               order.id=element.Id
               allorders.unshift(order)
-              console.log(allorders);
           }
             this.setState({AllOrders:allorders })
         })}
@@ -66,7 +64,7 @@ export default class ManagerPage extends Component {
         return (
             <div style={{marginTop:62}}>
                 <Toolbar edit={this.moveToEdit}  reOpen={this.someFunc} refresh={"refreshButton"}/>
-                {this.state.AllOrders.map((element, key)=>{
+                {this.state.AllOrders.map((element)=>{
                     return <Order deletedOrder={this.deleteOrder} key={element.Id} order={element}/>
                 })}
 

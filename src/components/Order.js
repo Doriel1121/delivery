@@ -50,7 +50,7 @@ export default class Order extends Component {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography  >{this.props.order.Name} - {this.props.order.Number}</Typography>
+          <Typography  ><span style={{fontWeight:"bolder"}}>{this.props.order.Name}</span><br/> <span className="numberStyleofOrder"> {this.props.order.Number}</span></Typography>
         </ExpansionPanelSummary></div>
         <ExpansionPanelDetails  className={"expansionColor"}>
           <div >

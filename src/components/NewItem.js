@@ -102,18 +102,18 @@ export default class NewItem extends Component {
                           aria-controls="panel1a-content"
                           id="panel1a-header"
                         >
-                          <Typography >{this.props.item.Name} - {this.props.item.Price} ש"ח</Typography>
+                          <Typography ><span style={{fontWeight:600}}>{this.props.item.Name}</span><br/> <span style={{opacity:0.6}}>{this.props.item.Price} ש"ח</span></Typography>
                         </ExpansionPanelSummary></div>
                         <ExpansionPanelDetails  className={"expansionColor"}>
-                        <Container maxWidth="sm">
-                        <Grid container spacing={3}>
+                        < Grid container spacing ={3}>
+                        <Grid item xs={3}>
                          <Button onClick={()=>this.editItem(this.props.item.Id)} variant="contained" color="primary">ערוך</Button>
                          </Grid>
-                         <Grid container spacing={3}>
+                         <Grid  item xs={3}>
                          <Button onClick={()=>this.deleteItem()} variant="contained" color="primary">מחק</Button>
                          </Grid>
-                         <Grid container spacing={3}></Grid>
-                         </Container>
+                         <Grid  item xs></Grid>
+                         </ Grid>
                         </ExpansionPanelDetails>
                         </ExpansionPanel>
                             
@@ -141,9 +141,15 @@ export default class NewItem extends Component {
                           </Typography>
                         </ExpansionPanelSummary></div>
                         <ExpansionPanelDetails  className={"expansionColor"}>
-
+                        < Grid container spacing ={3}>
+                        <Grid item xs={3}>
                          <Button onClick={()=>this.saveChanges()}  variant="contained" color="primary">שמור</Button>
-                         <Button onClick={()=>this.editItem()} variant="contained" color="primary">חזור</Button>
+                         </Grid>
+                         <Grid item xs={3}><Button onClick={()=>this.editItem()} variant="contained" color="primary">חזור</Button>
+                         </Grid>
+                         <Grid item xs={3}></Grid>
+                         </Grid>
+                         
                         </ExpansionPanelDetails>
                         </ExpansionPanel>
                         

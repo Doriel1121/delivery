@@ -60,9 +60,7 @@ export default class StorePage extends Component {
     componentDidMount=()=>{
         let storeItems
         Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(res=>{
-            console.log(res);
             storeItems=res.data
-            console.log(storeItems);
             this.setState({allItems:storeItems})
         })
         
@@ -81,11 +79,11 @@ export default class StorePage extends Component {
     }
         return (
             <div className="storediv">
-                <Toolbar/>
+                <Toolbar />
                 <Container maxWidth="sm">
                  <Grid  container spacing={3}>
                 {this.state.allItems.map((element,key)=>{                    
-                     return  <Grid className="itemBrake" key={element.Id} item xs={6}>
+                     return  <Grid className="itemBrake" key={element.Id}  item xs={6}>
                      <Item toCart={this.passToCart} item={element}/>
                      </Grid>
                     
@@ -93,7 +91,8 @@ export default class StorePage extends Component {
                 })}
                 </Grid>
                 </Container>
-                <div className="footer">Doriel&Omer</div>
+                
+                <div className="footer"><img className="footerLogoStyle" src="footer-logo_transparent.jpeg" alt="pic"/></div>
             </div>
         )
     }

@@ -7,7 +7,6 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import {Link, Redirect} from 'react-router-dom';
 import Axios from 'axios';
 import Toolbar from './Toolbar.js'
 
@@ -107,8 +106,8 @@ export default class Cart extends Component {
                     <TableBody>
                         
                             {this.props.allItemsOnCart.map((element, key)=>{
-                                var total = element.tempAmount*element.tempItem.Price
-                                
+                                let total = element.tempAmount*element.tempItem.Price
+                                let amount = parseFloat(element.tempAmount)
                                 return <TableRow key={element.tempItem.Id}>
                                     <TableCell  style={{textAlign:"center"}}>
                                     <DeleteForeverIcon onClick={()=>this.deleteItem(element.tempItem.Id)}>DeleteForever</DeleteForeverIcon>
@@ -117,7 +116,7 @@ export default class Cart extends Component {
                                  {total.toFixed(2)} 
                                  </TableCell>
                                  <TableCell  style={{textAlign:"center"}}>
-                                 {element.tempAmount}
+                                 {amount.toFixed(2)}
                                  </TableCell>
                                  <TableCell>
                                  <span style={{fontWeight:"bolder"}}>{element.tempItem.Name}</span>

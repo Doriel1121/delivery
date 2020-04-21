@@ -37,7 +37,6 @@ export default class Item extends Component {
             this.setState({status:true})
         }else{
             this.setState({status:false})
-            this.props.toCart(this.state.item, this.state.amount)
         }
     }
     showMe=()=>{
@@ -56,7 +55,7 @@ export default class Item extends Component {
         }else {
             cardC = <div>
             <span className="edit">כמות</span><br/>
-              <TextField type="number" id="standard-basic" label="קילו" onChange={this.updateAmount}/><br/>
+              <TextField style={{paddingTop:0}} type="number" id="standard-basic" label="קילו" onChange={this.updateAmount}/><br/>
               <p id="message"></p>
             </div>;
             cardA = (

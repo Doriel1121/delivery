@@ -58,12 +58,12 @@ transform: translateY(50%);
   border-radius: 10px;
 }
 .storediv{
-  margin-top: 50px;
+  margin-top: 75px;
 }
 .eachItem{
   text-align: center;
   padding-bottom: 5px;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 .title{
   letter-spacing: -2px;
@@ -80,10 +80,11 @@ transform: translateY(50%);
   margin-top: 50px;
   text-align: center;
 }
-
-.itemBrake{
-  border-bottom: 0.5px dotted rgb(158, 158, 158);
+#standard-basic{
+  padding-top: 0px;
 }
+
+
 .shoppingCartIcon{
   color: white;
   transform: translateY(60%);
@@ -92,7 +93,8 @@ transform: translateY(50%);
 
 .expansionColor{
   background-color: rgb(241, 238, 238);
-  text-align: right;
+  text-align: center;
+  display: block;
 }
 
 #message{
@@ -106,8 +108,14 @@ transform: translateY(50%);
 }
 
 .footer{
+  opacity: 0.7;
+  font-weight: 700;
   text-align: center;
-  border-top: 1px dotted grey;
+  /* border-top: 1px dotted white; */
+  padding-top: 40px;
+  padding-bottom: 10px;
+  font-style: oblique;
+  letter-spacing: 2px;
 }
 
 .PanelStyle{
@@ -143,4 +151,13 @@ cursor: none;
   /* text-align: center; */
   width:100%;
   margin-top: 62px;
+}
+
+.numberStyleofOrder{
+  font-size: 12px;
+  color: grey;
+}
+
+.footerLogoStyle{
+  width:120px;
 }
