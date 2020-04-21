@@ -134,4 +134,13 @@ cursor: none;
   text-align: center;
 }
 
+.addIcon{
+  transform: translateY(60%);
+  margin-left: 5px;
+}
 
+.AddStyleCard{
+  /* text-align: center; */
+  width:100%;
+  margin-top: 62px;
+}

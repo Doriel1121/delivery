@@ -50,7 +50,7 @@ export default class Order extends Component {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography >{this.props.order.Name} - {this.props.order.Number}</Typography>
+          <Typography  >{this.props.order.Name} - {this.props.order.Number}</Typography>
         </ExpansionPanelSummary></div>
         <ExpansionPanelDetails  className={"expansionColor"}>
           <div >
@@ -61,7 +61,7 @@ export default class Order extends Component {
               var total = element.tempAmount*element.tempItem.Price
 
              
-                        return      <TableRow  key={element.tempItem.Id}>
+                        return      <TableRow   key={element.tempItem.Id}>
                                 
                                  <TableCell  style={{textAlign:"center"}}>
                                  {total.toFixed(2)} 

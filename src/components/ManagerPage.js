@@ -55,19 +55,13 @@ export default class ManagerPage extends Component {
             }
         })
     }
-
-    editState=()=>{
-        
-    }
-
- 
     
     render() {
      { document.body.style.backgroundColor = "rgb(211, 207, 207)"}
      if (this.state.AllOrders!=="") {
         return (
-            <div style={{marginTop:60}}>
-                <Toolbar edit={this.editState} reOpen={this.someFunc} refresh={"refreshButton"}/>
+            <div style={{marginTop:62}}>
+                <Toolbar  reOpen={this.someFunc} refresh={"refreshButton"}/>
                 {this.state.AllOrders.map((element, key)=>{
                     return <Order deletedOrder={this.deleteOrder} key={element.Id} order={element}/>
                 })}
@@ -81,16 +75,7 @@ export default class ManagerPage extends Component {
             <div className="waitingSign" ><CircularProgress /></div>
             </div>
      }
-        // return (
-        //     <div style={{marginTop:60}}>
-        //         <Toolbar reOpen={this.someFunc} refresh={"refreshButton"}/>
-        //         {this.state.AllOrders.map((element, key)=>{
-        //             return <Order deletedOrder={this.deleteOrder} key={element.Id} order={element}/>
-        //         })}
-
-        //   </div>
-  
-        // )
+   
     }
 }
 

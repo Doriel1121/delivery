@@ -23,7 +23,8 @@ export default class NewItem extends Component {
             status:false,
             updatedPrice:"",
              updatedName:"",
-             updatedItem:""
+             updatedItem:"",
+             updatedImg:""
         }
     }
     
@@ -33,37 +34,44 @@ export default class NewItem extends Component {
         this.setState({updatedPrice: price})
     }
 
+    updateImage=(pic)=>{
+        let img=pic.target.value
+        this.setState({updatedImg:img})
+    }
+
     updateName=(n)=>{
         let itemName=n.target.value
         this.setState({updatedName:itemName})
     }
 
-    deleteItem=(id)=>{
-        let currentList=this.state.allItems
-        let newList=[]
-        this.state.allItems.map((element)=>{
-            if (element.Id===id) {
-                return newList=currentList.filte((item)=>{
-                 return       item!==element
-              })  
-            }
-             
-        })
+    deleteItem=()=>{
+    //     let id= this.props.item.Id
+    //   Axios.post("",id).then(res=>{
+    //       return console.log(res);    
+    //   })
     }
 
     saveChanges=()=>{
         let currentList=this.props.item
         let newName=this.state.updatedName
         let newPrice=this.state.updatedPrice
-        currentList.Name=newName
-        currentList.Price=newPrice
+        let newImg=this.state.updatedImg
+        if (newName!=="") {
+            currentList.Name=newName
+        }
+        if (newPrice!=="") {
+            currentList.Price=newPrice
+        }
+        if (newImg!=="") {
+            currentList.Image=newImg
+        }
         this.setState({updatedItem:currentList})
-        let itemAndId={Id:this.props.item.Id, Item:currentList} 
-        // Axios.post("https://murmuring-hamlet-58919.herokuapp.com/updateItem",itemAndId).then(res=>{
-        console.log(itemAndId);
-        console.log(this.state.currentList);
+        let itemAndId={Id:this.props.item.Id, Item:currentList,Img:this.state.updatedImg} 
+        Axios.post("https://murmuring-hamlet-58919.herokuapp.com/updateItem",itemAndId).then(res=>{
+            console.log(res);
+            console.log(itemAndId);
 
-            // }) 
+            }) 
              
            
     }
@@ -115,8 +123,10 @@ export default class NewItem extends Component {
                           aria-controls="panel1a-content"
                           id="panel1a-header"
                         >
-                          <Typography >{<TextField style={{width:100}} value={this.props.item.Name} id="standard-basic" onChange={this.updateName} label="שם מוצר" />} - 
-                          {<TextField style={{width:100}} id="standard-basic" value={this.props.item.Price} onChange={this.updatePrice} label="מחיר" />}</Typography>
+                          <Typography >{<TextField style={{width:100, marginRight:5}} defaultValue={this.props.item.Name} id="standard-basic" onChange={this.updateName} label="שם מוצר" />}  
+                          {<TextField style={{width:100}} id="standard-basic" defaultValue={this.props.item.Price} onChange={this.updatePrice} label="מחיר" />}
+                          {<TextField style={{width:100}} id="standard-basic" defaultValue={this.props.item.Image} onChange={this.updateImage} label="תמונה" />}
+                          </Typography>
                         </ExpansionPanelSummary></div>
                         <ExpansionPanelDetails  className={"expansionColor"}>
                          <Button onClick={()=>this.saveChanges()} variant="contained" color="primary">שמור</Button>
