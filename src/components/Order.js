@@ -54,7 +54,7 @@ export default class Order extends Component {
               </Typography>
             </ExpansionPanelSummary>
           </div>
-          <ExpansionPanelDetails className={"expansionColor"}>
+          <ExpansionPanelDetails className={"expansionColor"} style={{'display': 'block', 'textAlign': 'center'}}>
             <div>
               <Table>
                 <TableBody style={{ textAlign: "right" }}>
