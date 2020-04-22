@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import StorePage from "./StorePage.js";
 import Cart from "./Cart.js";
 import LoadingPage from "./LoadingPage.js";
-import EditStorePage from "./EditStorePage.js";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 export default class Client extends Component {
@@ -69,9 +68,7 @@ export default class Client extends Component {
                 addedItem={this.state.tempItem}
               />
             </Route>
-            <Route exact path="/edit">
-              <EditStorePage />
-            </Route>
+           
           </Switch>
         </Router>
       </div>

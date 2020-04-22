@@ -78,8 +78,7 @@ export default class ManagerPage extends Component {
 //                   })
 //                   orders=neworderList
 //               }
-//           }
-          
+//           }        
 //       }
 //   }
 
@@ -110,6 +109,7 @@ export default class ManagerPage extends Component {
         <div>
           <div>
             <Toolbar reOpen={this.someFunc} />
+            <h3>אין הזמנות פתוחות </h3>
           </div>
           <br />
           <div className="waitingSign">

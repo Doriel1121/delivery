@@ -11,16 +11,13 @@ export default class StorePage extends Component {
 
     this.state = {
       allItems: [],
-      evrythingFServer: [],
     };
   }
 
   componentDidMount = () => {
-    let storeItems;
     Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
       (res) => {
-        storeItems = res.data;
-        this.setState({ allItems: storeItems });
+        this.setState({ allItems: res.data });
       }
     );
   };
