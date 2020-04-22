@@ -60,12 +60,11 @@ export default class EditStorePage extends Component {
 
   storeItemsOnServer = () => {
     console.log("hi");
-    
-    let storeItems;
-    Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
+        Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
       (res) => {
-        storeItems = res.data;
-        this.setState({ allItems: storeItems });
+        console.log(res.data);
+        
+        this.setState({ allItems: res.data });
       }
     );
   };
@@ -84,16 +83,20 @@ export default class EditStorePage extends Component {
 
   deleteItemFromList = (id) => {
     let ItemsList = this.state.allItems;
+    console.log(id);
+    console.log(ItemsList);
     let newList;
-    this.state.allItems.map((element) => {
-      if (element.Id === id) {
-        newList = ItemsList.filter((item) => {
-          return item !== element;
-        });
-        console.log(newList);
+    newList= ItemsList.filter((item) => {
+      return item.Id!==id
+    })
+    // this.state.allItems.map((element) => {
+    //   if (element.Id === id) {
+    //     newList = ItemsList.filter((item) => {
+    //       return item !== element;
+    //     });
         this.setState({ allItems: newList });
-      }
-    });
+    //   }
+    // });
   };
 
   render() {
@@ -114,7 +117,6 @@ export default class EditStorePage extends Component {
                 delete={this.deleteItemFromList}
                 key={element.Id}
                 item={element}
-                Rerender={()=>this.storeItemsOnServer()}
               />
             );
           })}

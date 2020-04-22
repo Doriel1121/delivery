@@ -17,6 +17,8 @@ export default class StorePage extends Component {
   componentDidMount = () => {
     Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
       (res) => {
+        console.log(res);
+        
         this.setState({ allItems: res.data });
       }
     );

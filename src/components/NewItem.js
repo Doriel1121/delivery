@@ -42,10 +42,9 @@ export default class NewItem extends Component {
     Axios.post(
       "https://murmuring-hamlet-58919.herokuapp.com/deleteItem",
       id
-    ).then((res) => {
-      if (res.status === 200 && res.statusText === "ok") {
+    ).then((res) => {      
+      if (res.status === 200 && res.data === "done") {        
         this.props.delete(this.props.item.Id);
-        this.Rerender()
       }
     });
   };
