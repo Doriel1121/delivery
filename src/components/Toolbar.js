@@ -30,6 +30,7 @@ export default class Toolbar extends Component {
               <Grid item xs>
                 <Link to="/edit">
                   <EditIcon
+                    style={{marginLeft:20}}
                     onClick={() => this.changeShow()}
                     className="editIcon"
                   >
@@ -41,7 +42,7 @@ export default class Toolbar extends Component {
                 <h4 className="toolbrStyle"> השוק שלי</h4>
               </Grid>
               <Grid className="toolbarRefresh" item xs>
-                <CachedIcon style={{marginRight:8}}  onClick={() => this.refreshPage()}></CachedIcon>
+                <CachedIcon style={{marginRight:25}}  onClick={() => this.refreshPage()}></CachedIcon>
               </Grid>
             </Grid>
           </AppBar>

@@ -26,7 +26,7 @@ export default class ManagerPage extends Component {
           for (let i = 0; i < res.data.length; i++) {
             let element = res.data[i];
             let order = JSON.parse(element.OrderData);
-            order.id = element.Id;
+            order.Id = element.Id;
             allorders.unshift(order);
           }
           this.setState({ AllOrders: allorders });
@@ -44,12 +44,15 @@ export default class ManagerPage extends Component {
   };
 
   deleteOrder = (id) => {
+    console.log("OMER")
+    console.log(id)
     console.log(this.state.AllOrders);
     let alltheorders = this.state.AllOrders;
     let newOrdersArray;
     newOrdersArray=alltheorders.filter((item) => {
      return  item.Id !==id
     })
+    console.log(newOrdersArray);
       this.setState({ AllOrders: newOrdersArray });
   };
 

@@ -90,7 +90,7 @@ export default class Order extends Component {
 
               <div style={{ textAlign: "left" }}>
                 <Button
-                  onClick={() => this.closeOrder(this.props.order.id)}
+                  onClick={() => this.closeOrder(this.props.order.Id)}
                   variant="contained"
                   color="primary"
                 >
