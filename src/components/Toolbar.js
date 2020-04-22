@@ -41,7 +41,7 @@ export default class Toolbar extends Component {
                 <h4 className="toolbrStyle"> השוק שלי</h4>
               </Grid>
               <Grid className="toolbarRefresh" item xs>
-                <CachedIcon onClick={() => this.refreshPage()}></CachedIcon>
+                <CachedIcon style={{marginRight:8}}  onClick={() => this.refreshPage()}></CachedIcon>
               </Grid>
             </Grid>
           </AppBar>

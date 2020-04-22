@@ -47,14 +47,10 @@ export default class ManagerPage extends Component {
     console.log(this.state.AllOrders);
     let alltheorders = this.state.AllOrders;
     let newOrdersArray;
-    this.state.AllOrders.map((element) => {
-      if (element.id === id) {
-        return (newOrdersArray = alltheorders.filter((item) => {
-          return item !== element;
-        }));
-      }
+    newOrdersArray=alltheorders.filter((item) => {
+     return  item.Id !==id
+    })
       this.setState({ AllOrders: newOrdersArray });
-    });
   };
 
 //   sumEachItemAmount=()=>{
