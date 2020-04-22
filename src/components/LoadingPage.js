@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 
 
@@ -9,7 +9,6 @@ export default class LoadingPage extends Component {
     
         this.state = {
              direct:false,
-
         }
     }
     
@@ -28,7 +27,6 @@ export default class LoadingPage extends Component {
         return (
             <div className="Load">
                <img className="LoadinglogoStyle" src="logo_transparent.png" alt="pic"/>
-                {/* <img className="Logo" src="stocklogo.png" alt="dollar"/> */}
             </div>
         )
     }

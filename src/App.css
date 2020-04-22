@@ -32,6 +32,13 @@ text-decoration: none;
 .toolbarRefresh{
   transform: translateY(25%);
   cursor: pointer;
+  text-align: right;
+  margin-right: 5px;
+}
+.toolbarRefreshOnAdd{
+  transform: translateY(25%);
+  cursor: pointer;
+  text-align: center;
 }
 
 .editIcon{
@@ -108,14 +115,10 @@ transform: translateY(50%);
 }
 
 .footer{
-  opacity: 0.7;
-  font-weight: 700;
+  opacity: 0.8;
   text-align: center;
-  /* border-top: 1px dotted white; */
   padding-top: 40px;
-  padding-bottom: 10px;
-  font-style: oblique;
-  letter-spacing: 2px;
+  /* padding-bottom: 10px; */
 }
 
 .PanelStyle{
@@ -144,20 +147,29 @@ cursor: none;
 
 .addIcon{
   transform: translateY(60%);
-  margin-left: 5px;
 }
 
 .AddStyleCard{
-  /* text-align: center; */
-  width:100%;
+  text-align: center;
   margin-top: 62px;
+  background-color: white;
 }
 
 .numberStyleofOrder{
   font-size: 12px;
   color: grey;
+  opacity: 0.9;
 }
 
 .footerLogoStyle{
   width:120px;
+}
+
+.backIcon{
+  color: white;
+  transform: translateY(60%);
+  padding-left:0px;
+  margin-left: 5px;
+  margin-right: 8px;
+
 }
