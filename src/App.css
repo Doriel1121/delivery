@@ -23,7 +23,6 @@ text-decoration: none;
 }
 .toolbr{
   position: fixed;
-  background-color: blue;
   padding-top: 2px;
   padding-bottom: 2px;
   z-index: 1;

@@ -7,6 +7,8 @@ import CachedIcon from "@material-ui/icons/Cached";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 export default class Toolbar extends Component {
   refreshPage = () => {
@@ -51,18 +53,16 @@ export default class Toolbar extends Component {
     } else if (this.props.edit === "editbutton") {
       return (
         <div className="toolbr">
+        
+      <Fab color="primary" onClick={() => this.activateAddIcon()} aria-label="add" style={{'position': 'fixed', 'bottom': '20px', 'left': '20px'}}>
+        <AddIcon />
+      </Fab>
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
               <Grid item xs={3}>
                 <Link to="/manager">
                   <ArrowBackIcon className="backIcon">ArrowBack</ArrowBackIcon>
                 </Link>
-                <AddCircleIcon
-                  onClick={() => this.activateAddIcon()}
-                  className="addIcon"
-                >
-                  AddCircle
-                </AddCircleIcon>
               </Grid>
               <Grid className="name" item xs={6}>
                 <h4 className="toolbrStyle"> השוק שלי</h4>

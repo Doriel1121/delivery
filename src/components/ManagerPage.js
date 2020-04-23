@@ -56,31 +56,6 @@ export default class ManagerPage extends Component {
       this.setState({ AllOrders: newOrdersArray });
   };
 
-//   sumEachItemAmount=()=>{
-//       let orders=this.state.AllOrders.Cart
-//       let total=0
-//       let counter=0
-//       for (let i = 0; i < orders.length; i++) {
-//           let element = orders[i];
-//           for (let j = i+1; j < orders.length; j++) {
-//               let product = orders[j];
-//               if (element.tempItem.Id===product.tempItem.Id) {
-//                   let teporaryEachAmount= element.tempItem.Price*element.tempAmount
-//                   if (counter===0) {
-//                     total = total+ element.tempItem.Price*element.tempAmount+product.tempItem.Price*product.tempAmount
-//                     counter+1
-//                   }else{
-//                     total= total+product.tempItem.Price*product.tempAmount
-//                   }
-//                   let neworderList=orders.filter((item)=>{
-//                     item!== product
-//                   })
-//                   orders=neworderList
-//               }
-//           }        
-//       }
-//   }
-
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     if (this.state.AllOrders !== "") {
