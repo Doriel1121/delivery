@@ -27,7 +27,7 @@ export default class Toolbar extends Component {
         <div className="toolbr">
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
-              <Grid item xs>
+              <Grid item xs={2}>
                 <Link to="/edit">
                   <EditIcon
                     style={{marginLeft:20}}
@@ -38,10 +38,10 @@ export default class Toolbar extends Component {
                   </EditIcon>
                 </Link>
               </Grid>
-              <Grid className="name" item xs={8}>
+              <Grid className="name" item sm xs={8}>
                 <h4 className="toolbrStyle"> השוק שלי</h4>
               </Grid>
-              <Grid className="toolbarRefresh" item xs>
+              <Grid className="toolbarRefresh" item xs={2}>
                 <CachedIcon style={{marginRight:25}}  onClick={() => this.refreshPage()}></CachedIcon>
               </Grid>
             </Grid>

@@ -83,20 +83,11 @@ export default class EditStorePage extends Component {
 
   deleteItemFromList = (id) => {
     let ItemsList = this.state.allItems;
-    console.log(id);
-    console.log(ItemsList);
     let newList;
     newList= ItemsList.filter((item) => {
       return item.Id!==id
     })
-    // this.state.allItems.map((element) => {
-    //   if (element.Id === id) {
-    //     newList = ItemsList.filter((item) => {
-    //       return item !== element;
-    //     });
         this.setState({ allItems: newList });
-    //   }
-    // });
   };
 
   render() {

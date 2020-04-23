@@ -83,7 +83,6 @@ export default class ManagerPage extends Component {
 
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
-    // let sumEachItemAmount=this.sumEachItemAmount()
     if (this.state.AllOrders !== "") {
       return (
         <div style={{ marginTop: 62 }}>
@@ -106,9 +105,8 @@ export default class ManagerPage extends Component {
     } else {
       return (
         <div>
-          <div>
+          <div >
             <Toolbar reOpen={this.someFunc} />
-            <h3>אין הזמנות פתוחות </h3>
           </div>
           <br />
           <div className="waitingSign">
