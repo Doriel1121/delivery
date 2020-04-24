@@ -29,67 +29,43 @@ const styles = {
   },
 };
 
-export default class Cart extends Component {
+export default class CartPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      item: props.addedItem,
-      allCart: props.allItemsOnCart,
-      totalPrice: "",
-      newCart: [],
-      Name: undefined,
+      Name: "",
       Number: "",
       progressBar: false,
     };
   }
 
-  deleteItem = (id) => {
-    this.props.delete(id);
-  };
-
-  SumupAllCart = (cart) => {
-    var sum = 0;
-    var size = cart.length;
-    for (let i = 0; i < size; i++) {
-      sum = sum + cart[i].tempItem.Price * cart[i].tempAmount;
+  getSumOfAllCart = (cart) => {
+    let sum = 0;
+    for (let i = 0; i < cart.length; i++) {
+      sum = sum + cart[i].item.Price * cart[i].amount;
     }
     return sum;
   };
 
-  updateName = (n) => {
-    let name = n.target.value;
-    this.setState({ Name: name });
-  };
-
-  updateNumber = (PN) => {
-    let number = PN.target.value;
-    this.setState({ Number: number });
-  };
-
-  saveOrder = (sum) => {
-    this.refs.btn.setAttribute("disabled", "disabled");
-    let phonenumber = this.state.Number;
-    let stringnum = phonenumber.toString();
-    let cart = this.state.allCart;
-    let name = this.state.Name;
-    let number = this.state.Number;
-    let Order = { Cart: cart, Name: name, Number: number };
+  sendOrder = (sum) => {
+    let phoneNumberString = this.state.Number.toString();
+    let order = { Cart: this.props.cart, Name: this.state.Name, Number: this.state.Number };
     if (sum >= 50) {
       if (
-        stringnum[0] === "0" &&
-        stringnum[1] === "5" &&
-        stringnum.length === 10 &&
+        phoneNumberString[0] === "0" &&
+        phoneNumberString[1] === "5" &&
+        phoneNumberString.length === 10 &&
         this.state.Name !== undefined
       ) {
         this.setState({ progressBar: true }, () => {
-          Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order", Order)
+          Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order", order)
             .then((res) => {
               alert("הזמנה בוצעה בהצלחה");
-              this.props.allOrders([]);
+              this.props.cleanCart();
               this.setState({ progressBar: false });
             })
-            .catch((erroe) => {
+            .catch((error) => {
               alert("משהו השתבש נסה מאוחר יותר ");
               this.setState({ progressBar: false });
             });
@@ -105,8 +81,7 @@ export default class Cart extends Component {
 
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
-
-    let sumup = this.SumupAllCart(this.props.allItemsOnCart);
+    let totalSum = this.getSumOfAllCart(this.props.cart);
 
     return (
       <div>
@@ -127,57 +102,52 @@ export default class Cart extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.allItemsOnCart.map((element, key) => {
-              let total = element.tempAmount * element.tempItem.Price;
-              let amount = parseFloat(element.tempAmount);
+            {this.props.cart.map((element) => {
+              let totalItemPrice = (element.amount * element.item.Price).toFixed(2);
+              let itemAmount = parseFloat(element.amount).toFixed(2);
               return (
-                <TableRow key={element.tempItem.Id}>
+                <TableRow key={element.item.Id}>
                   <TableCell style={{ textAlign: "center" }}>
-                    <DeleteForeverIcon
-                      onClick={() => this.deleteItem(element.tempItem.Id)}
-                    >
-                      DeleteForever
-                    </DeleteForeverIcon>
+                    <DeleteForeverIcon onClick={() => this.props.deleteItemFromCart(element.item.Id) } />
                   </TableCell>
                   <TableCell style={{ textAlign: "center" }}>
-                    {total.toFixed(2)}
+                    {totalItemPrice}
                   </TableCell>
                   <TableCell style={{ textAlign: "center" }}>
-                    {amount.toFixed(2)}
+                    {itemAmount}
                   </TableCell>
                   <TableCell>
                     <span style={{ fontWeight: "bolder" }}>
-                      {element.tempItem.Name}
+                      {element.item.Name}
                     </span>
                   </TableCell>
                 </TableRow>
               );
             })}
-
             <TableRow>
               <TableCell></TableCell>
-
               <TableCell style={{ textAlign: "center" }}>
                 :סה"כ <br />
-                {sumup.toFixed(2)}
+                {totalSum.toFixed(2)}
+                <br />ש"ח
               </TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableBody>
         </Table>
         <div style={{ textAlign: "center" }}>
+          <br />
           <TextField
             style={{ textAlign: "center" }}
-            onChange={this.updateName}
+            onChange={(event) => this.setState({ Name: event.target.value }) }
             type="text"
             id="standard-basic"
             label="שם מלא"
           />
           <br />
-          <br />
           <TextField
             style={{ textAlign: "center" }}
-            onChange={this.updateNumber}
+            onChange={(event) => this.setState({ Number: event.target.value }) }
             type="number"
             id="standard-basic"
             label="מספר טלפון"
@@ -186,11 +156,9 @@ export default class Cart extends Component {
           <p id="error"></p>
           <br />
           <Button
-            ref="btn"
             variant="contained"
             color="primary"
-            onClick={() => this.saveOrder(sumup)}
-          >
+            onClick={() => this.sendOrder(totalSum)} >
             בצע הזמנה
           </Button>
           {this.state.progressBar ? (
