@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Item from "./Item";
 import Toolbar from "./Toolbar";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import Axios from "axios";
 
 export default class StorePage extends Component {
@@ -27,15 +28,17 @@ export default class StorePage extends Component {
     return (
       <div className="storediv">
         <Toolbar />
-        <Grid container spacing={3} style={{paddingLeft: '20px', paddingRight: '20px'}}>
-          {this.state.allItems.map((element) => {
-            return (
-              <Grid className="itemBrake" key={element.Id} item xs={6}>
-                <Item addItemToCart={this.props.addItemToCart} item={element} />
-              </Grid>
-            );
-          })}
-        </Grid>
+        <Container>
+          <Grid container spacing={3}>
+            {this.state.allItems.map((element) => {
+              return (
+                <Grid className="itemBrake" key={element.Id} item xs={6}>
+                  <Item addItemToCart={this.props.addItemToCart} item={element} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Container>
         <div className="footer">
           <img
             className="footerLogoStyle"
