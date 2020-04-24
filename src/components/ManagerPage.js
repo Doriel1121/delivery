@@ -11,6 +11,7 @@ export default class ManagerPage extends Component {
 
     this.state = {
       AllOrders: [],
+      status:false
     };
   }
 
@@ -29,7 +30,9 @@ export default class ManagerPage extends Component {
             order.Id = element.Id;
             allorders.unshift(order);
           }
-          this.setState({ AllOrders: allorders });
+          console.log(allorders);
+          
+            this.setState({ AllOrders: allorders, status:true});
         }
       );
     }
@@ -58,8 +61,9 @@ export default class ManagerPage extends Component {
 
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
-    if (this.state.AllOrders !== "") {
+    if (this.state.status) {
       return (
+        this.state.AllOrders.length > 0 ?
         <div style={{ marginTop: 62 }}>
           <Toolbar
             edit={this.redirectToEditPage}
@@ -73,9 +77,16 @@ export default class ManagerPage extends Component {
                 key={element.Id}
                 order={element}
               />
-            );
+            ); 
           })}
         </div>
+        : <div>
+          <Toolbar
+            edit={this.redirectToEditPage}
+            reOpen={this.addOrderToList}
+            refresh={"refreshButton"}
+          /><h4 style={{marginTop:70, textAlign:"center"}}>אין הזמנות</h4>
+          </div>
       );
     } else {
       return (
@@ -83,8 +94,9 @@ export default class ManagerPage extends Component {
           <div >
             <Toolbar reOpen={this.someFunc} />
           </div>
-          <br />
+          <br /><div></div>
           <div className="waitingSign">
+            {/* אין הזמנות  */}
             <CircularProgress />
           </div>
         </div>

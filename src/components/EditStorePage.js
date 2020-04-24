@@ -18,6 +18,7 @@ export default class EditStorePage extends Component {
       newPrice: "",
       newImage: "",
       newName: "",
+      imgs:""
     };
   }
 
@@ -31,9 +32,11 @@ export default class EditStorePage extends Component {
     this.setState({ newName: name });
   };
 
-  updateImage = (img) => {
-    let image = img.target.value;
-    this.setState({ newImage: image });
+  updateImage = (event) => {
+    // let image = img.target.value;
+    // this.setState({ newImage: image });
+    this.setState({
+      imgs: event.target.files})
   };
 
   sendToServerNewItem = () => {
@@ -92,6 +95,9 @@ export default class EditStorePage extends Component {
 
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
+    {this.state.imgs && [...this.state.imgs].map((file)=>(
+      <img src={URL.createObjectURL(file)} />
+   ))}
     if (!this.state.status) {
       return (
         <div>
@@ -136,9 +142,11 @@ export default class EditStorePage extends Component {
           <br />
           <TextField
             style={{ width: 180 }}
-            type="string"
-            id="standard-basic"
-            label="תמונה"
+            ref="file" 
+            type="file" 
+            name="user[image]" 
+            multiple="true"
+            // onChange={this._onChange}
             onChange={this.updateImage}
           />
           <br />

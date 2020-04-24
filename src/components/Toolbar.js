@@ -41,7 +41,7 @@ export default class Toolbar extends Component {
                 </Link>
               </Grid>
               <Grid className="name" item sm xs={8}>
-                <h4 className="toolbrStyle"> השוק שלי</h4>
+                <h4 className="toolbrStyle"> ההזמנות שלי</h4>
               </Grid>
               <Grid className="toolbarRefresh" item xs={2}>
                 <CachedIcon style={{marginRight:25}}  onClick={() => this.refreshPage()}></CachedIcon>
@@ -65,7 +65,7 @@ export default class Toolbar extends Component {
                 </Link>
               </Grid>
               <Grid className="name" item xs={6}>
-                <h4 className="toolbrStyle"> השוק שלי</h4>
+                <h4 className="toolbrStyle"> כל המוצרים</h4>
               </Grid>
               <Grid className="toolbarRefresh" item xs={3}>
                 <CachedIcon style={{marginRight:8}} onClick={() => this.refreshPage()}></CachedIcon>
@@ -81,7 +81,7 @@ export default class Toolbar extends Component {
             <Grid container spacing={3}>
               <Grid item xs></Grid>
               <Grid className="name" item xs={8}>
-                <h4 className="toolbrStyle"> השוק שלי</h4>
+                <h4 className="toolbrStyle"> מוצר חדש</h4>
               </Grid>
               <Grid className="toolbarRefreshOnAdd" item xs>
                 <CachedIcon onClick={() => this.refreshPage()}></CachedIcon>

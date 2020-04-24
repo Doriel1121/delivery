@@ -26,7 +26,7 @@ export default class Order extends Component {
     var sum = 0;
     var size = orders.length;
     for (let i = 0; i < size; i++) {
-      sum = sum + orders[i].tempItem.Price * orders[i].tempAmount;
+      sum = sum + orders[i].item.Price * orders[i].amount;
     }
     return sum;
   };
@@ -59,19 +59,19 @@ export default class Order extends Component {
               <Table>
                 <TableBody style={{ textAlign: "right" }}>
                   {this.props.order.Cart.map((element, key) => {
-                    var total = element.tempAmount * element.tempItem.Price;
+                    var total = element.amount * element.item.Price;
 
                     return (
-                      <TableRow key={element.tempItem.Id}>
+                      <TableRow key={element.item.Id}>
                         <TableCell style={{ textAlign: "center" }}>
                           {total.toFixed(2)}
                         </TableCell>
                         <TableCell style={{ textAlign: "center" }}>
-                          {element.tempAmount}
+                          {element.amount}
                         </TableCell>
                         <TableCell>
                           <span style={{ fontWeight: "bolder" }}>
-                            {element.tempItem.Name}
+                            {element.item.Name}
                           </span>
                         </TableCell>
                       </TableRow>
