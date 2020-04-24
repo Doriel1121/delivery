@@ -29,13 +29,13 @@ export default class App extends Component {
                 <Route exact path="/">
                   <LoadingPage />
                 </Route>
-                <Client/>
                 <Route exact path ="/manager">
                 <ManagerPage/>
                 </Route>
                 <Route exact path="/edit">
                     <EditStorePage />
                 </Route>
+                <Client/>
               </Switch>
             </Router>
 					</StylesProvider>
