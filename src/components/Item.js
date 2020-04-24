@@ -11,87 +11,80 @@ export default class Item extends Component {
     super(props);
 
     this.state = {
-      status: false,
-      amount: "",
-      item: props.item,
+      focusStatus: false,
+      amount: 0,
     };
   }
 
-  updateAmount = (a) => {
-    var amo = a.target.value;
-    this.setState({ amount: amo });
-  };
-
-  amoutDetect = () => {
+  addItem = () => {
     if (this.state.amount > 0 && this.state.amount <= 100) {
-      this.setState({ status: false });
-      this.props.toCart(this.state.item, this.state.amount);
+      this.props.addItemToCart(this.props.item, this.state.amount);
+      this.setState({ focusStatus: false });
     } else {
       document.getElementById("message").innerHTML = "הכנס כמות בין 0-100";
     }
   };
 
-  changeStatus = () => {
-    if (!this.state.status) {
-      this.setState({ status: true });
+  toggleFocusStatuc = () => {
+    if (!this.state.focusStatus) {
+      this.setState({ focusStatus: true });
     } else {
-      this.setState({ status: false });
+      this.setState({ focusStatus: false });
     }
   };
-  showMe = () => {
-    let cardC = "";
-    let cardA = "";
-    if (!this.state.status) {
-      cardC = (
-        <React.Fragment>
-          מחיר לקילו
-          <br /> {this.props.item.Price}
-          <br /> ש"ח
-        </React.Fragment>
-      );
-      cardA = (
-        <Button size="small" onClick={this.changeStatus} color="primary">
-          הוסף לעגלה
-        </Button>
-      );
-    } else {
-      cardC = (
-        <div>
+
+  getCardContent = () => {
+    return this.state.focusStatus ? (
+      <div style={{'marginBottom': '-10px'}}>
           <span className="edit">כמות</span>
-          <br />
           <TextField
             style={{ paddingTop: 0 }}
             type="number"
             id="standard-basic"
             label="קילו"
-            onChange={this.updateAmount}
+            onChange={(event) => {this.setState({ amount: event.target.value }); }}
           />
-          <br />
           <p id="message"></p>
         </div>
-      );
-      cardA = (
+    ): (
+      <React.Fragment>
+        מחיר לקילו
+        <br /> {this.props.item.Price}
+        <br /> ש"ח
+      </React.Fragment>
+    )
+  };
+
+  getCardActions = () => {
+    return this.state.focusStatus ? (
         <React.Fragment>
-          <Button onClick={this.changeStatus} size="small" color="primary">
+          <Button onClick={this.toggleFocusStatuc} size="small" color="primary">
             חזור
           </Button>
           <Button
             size="small"
-            onClick={() => this.amoutDetect()}
+            onClick={() => this.addItem()}
             color="primary"
           >
             הוסף
           </Button>
         </React.Fragment>
+      ) : (
+        <Button size="small" onClick={this.toggleFocusStatuc} color="primary">
+          הוסף לעגלה
+        </Button>
       );
-    }
+  }
 
-    return (
+  render() {
+    let cardContent = this.getCardContent();
+    let cardActions = this.getCardActions();
+    
+    return <div className="eachItem">
       <Card className="eachItem">
         <CardMedia
           image={this.props.item.Image}
-          style={{ height: "100px" }}
-        ></CardMedia>
+          style={{ height: "100px" }}></CardMedia>
         <CardContent style={{ textAlign: "right" }}>
           <span
             className="itemnamestyle"
@@ -100,14 +93,10 @@ export default class Item extends Component {
             {this.props.item.Name}
           </span>
           <br />
-          {cardC}
+          {cardContent}
         </CardContent>
-        <CardActions>{cardA}</CardActions>
+        <CardActions>{cardActions}</CardActions>
       </Card>
-    );
-  };
-
-  render() {
-    return <div className="eachItem">{this.showMe()}</div>;
+    </div>;
   }
 }

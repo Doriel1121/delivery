@@ -1,77 +1,44 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 import StorePage from "./StorePage.js";
-import Cart from "./Cart.js";
-import LoadingPage from "./LoadingPage.js";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import CartPage from "./CartPage.js";
 
 export default class Client extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      tempItem: "",
-      tempAmount: "",
-      allCart: [],
-      totalPrice: 0,
-      sumOfAllCart: "",
-      ClientsOrders: [],
+      allCart: []
     };
   }
 
-  updateCart = (tempI, tempA) => {
-    let currentItem = { tempItem: tempI, tempAmount: tempA };
-    this.setState({ allCart: [...this.state.allCart, currentItem] });
+  addItemToCart = (item, amount) => {
+    let newItem = { item: item, amount: amount };
+    this.setState({ allCart: [...this.state.allCart, newItem] });
   };
 
-  deleteItem = (id) => {
-    this.state.allCart.map((product) => {
-      let all = this.state.allCart;
-      let newCartItems;
-      if (id === product.tempItem.Id) {
-        return (
-          <div>
-            {
-              (newCartItems = all.filter((item) => {
-                return item !== product;
-              }))
-            }
-            {}
-            {this.setState({ allCart: newCartItems })}
-          </div>
-        );
-      }
-    });
+  deleteItemFromCart = (id) => {
+    let newCart = this.state.allCart.filter((item) => item.item.Id !== id);
+    this.setState({ allCart : newCart });
   };
 
-  updateOrder = (o) => {
-    this.setState({ allCart: o });
+  truncateCart = () => {
+    this.setState({ allCart: [] });
   };
 
   render() {
     return (
-      <div>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <LoadingPage />
-            </Route>
-            <Route exact path="/store">
-              <StorePage oneItemToCart={this.updateCart} />
-            </Route>
-            <Route exact path="/cart">
-              <Cart
-                allOrders={this.updateOrder}
-                sum={this.state.sumOfAllCart}
-                delete={this.deleteItem}
-                allItemsOnCart={this.state.allCart}
-                itemAmount={this.state.tempAmount}
-                addedItem={this.state.tempItem}
-              />
-            </Route>
-           
-          </Switch>
-        </Router>
-      </div>
+      <React.Fragment>
+        <Route exact path="/client/store">
+          <StorePage addItemToCart={this.addItemToCart} />
+        </Route>
+        <Route exact path="/client/cart">
+          <CartPage
+            cleanCart={this.truncateCart}
+            deleteItemFromCart={this.deleteItemFromCart}
+            cart={this.state.allCart} />
+        </Route>
+      </React.Fragment>
     );
   }
 }

@@ -96,14 +96,14 @@ export default class Toolbar extends Component {
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
               <Grid item xs>
-                <Link to="/cart">
+                <Link to="/client/cart">
                   <ShoppingCartIcon className="shoppingCartIcon">
                     ShoppingCart
                   </ShoppingCartIcon>
                 </Link>
               </Grid>
               <Grid className="name" item xs={8}>
-                <Link className="linkintoolbar" to="/store">
+                <Link className="linkintoolbar" to="/client/store">
                   <h4 className="toolbrStyle"> השוק שלי</h4>
                 </Link>
               </Grid>
