@@ -3,7 +3,26 @@ import Item from "./Item";
 import Toolbar from "./Toolbar";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
+
+const styles = {
+  prog: {
+    position: "absolute",
+    top: "0px",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    flexDrection: "column",
+    backgroundColor: "rgb(0,0,0, 0.5)",
+  },
+  circBar: {
+    position: "absolute",
+    top: "400px",
+  },
+};
 
 export default class StorePage extends Component {
   constructor(props) {
@@ -11,13 +30,14 @@ export default class StorePage extends Component {
 
     this.state = {
       allItems: [],
+      progressBar: true
     };
   }
 
   componentDidMount = () => {
     Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
       (res) => {        
-        this.setState({ allItems: res.data });
+        this.setState({ allItems: res.data, progressBar: false });
       }
     );
   };
@@ -46,6 +66,13 @@ export default class StorePage extends Component {
             alt="allRightReserved"
           />
         </div>
+        {this.state.progressBar ? (
+          <div style={styles.prog}>
+            <CircularProgress style={styles.circBar} size={68} />
+          </div>
+        ) : (
+          <br />
+        )}
       </div>
     );
   }
