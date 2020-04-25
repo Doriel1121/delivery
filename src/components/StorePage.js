@@ -39,7 +39,9 @@ export default class StorePage extends Component {
       (res) => {        
         this.setState({ allItems: res.data, progressBar: false });
       }
-    );
+    ) .catch((error) =>{
+      alert("משהו השתבש נסה מאוחר יותר ");
+    })
   };
 
   render() {
