@@ -115,22 +115,48 @@ componentDidMount=()=>{
               let totalItemPrice = (element.amount * element.item.Price).toFixed(2);
               let itemAmount = parseFloat(element.amount).toFixed(2);
               return (
-                <TableRow key={element.item.Id}>
-                  <TableCell style={{ textAlign: "center" }}>
-                    <DeleteForeverIcon onClick={() => this.props.deleteItemFromCart(element.item.Id) } />
-                  </TableCell>
-                  <TableCell style={{ textAlign: "center" }}>
-                    {totalItemPrice}
-                  </TableCell>
-                  <TableCell style={{ textAlign: "center" }}>
-                    {itemAmount}
-                  </TableCell>
-                  <TableCell>
-                    <span style={{ fontWeight: "bolder" }}>
-                      {element.item.Name}
-                    </span>
-                  </TableCell>
-                </TableRow>
+                  this.props.cart.map((product)=>{
+                      if(element.item.Id === product.item.Id){
+                         
+                        return   <TableRow key={element.item.Id}>
+                          <TableCell style={{ textAlign: "center" }}>
+                            <DeleteForeverIcon onClick={() => this.props.deleteItemFromCart(element.item.Id) } />
+                          </TableCell>
+                          <TableCell style={{ textAlign: "center" }}>
+                            {totalItemPrice + product.item.Price*product.amount}
+                          </TableCell>
+                          <TableCell style={{ textAlign: "center" }}>
+                            {itemAmount + parseFloat(product.amount).toFixed(2)}
+                          </TableCell>
+                          <TableCell>
+                            <span style={{ fontWeight: "bolder" }}>
+                              {element.item.Name}
+                            </span>
+                          </TableCell>
+                        </TableRow>
+                      }
+                      else{
+                      return <TableRow>
+                        <TableCell style={{ textAlign: "center" }}>
+                            <DeleteForeverIcon onClick={() => this.props.deleteItemFromCart(element.item.Id) } />
+                          </TableCell>  
+                      <TableCell style={{ textAlign: "center" }}>
+                        {totalItemPrice}
+                      </TableCell>
+                      <TableCell style={{ textAlign: "center" }}>
+                        {itemAmount}
+                      </TableCell>
+                      <TableCell>
+                        <span style={{ fontWeight: "bolder" }}>
+                          {element.item.Name}
+                        </span>
+                      </TableCell>
+                      </TableRow>
+                      
+                      }
+                  })
+                 
+                
               );
             })}
             <TableRow>
