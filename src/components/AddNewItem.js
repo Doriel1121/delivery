@@ -16,6 +16,7 @@ export default class AddNewItem extends Component {
             newPrice: "",
             newImage: "https://clipartstation.com/wp-content/uploads/2017/11/x-clipart-3.png",
             newName: "",
+            direction:false
         }
     }
 
@@ -55,7 +56,7 @@ export default class AddNewItem extends Component {
             newItem
           ).then((res) => {
              if (res.status===200 && res.data==="done") {   
-                return <Redirect to ="/edit"/>    
+                return this.setState({direction:true})   
              } 
           })
           .catch((error) =>{
@@ -66,6 +67,9 @@ export default class AddNewItem extends Component {
 
     
     render() {
+        if (this.state.direction) {
+           return  <Redirect to = "/edit"/>
+        }
         return (
             <div className="AddStyleCard">
           <Toolbar reOpen={this.refreshPage}  addState={"backTo"} />

@@ -3,6 +3,8 @@ import Toolbar from "./Toolbar.js";
 import NewItem from "./NewItem.js";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 
@@ -35,8 +37,28 @@ export default class EditStorePage extends Component {
       updatedPrice: "",
       updatedName: "",
       updatedItem: "",
-      progressBar: true
+      progressBar: true,
+      minimumShow:true,
+      minimumOrder:""
     };
+  }
+
+  updateMinumum=(m)=>{
+    this.setState({minimumOrder:m.target.value})
+  }
+
+  setMinimumOrder=()=>{
+    let minimum = {orderMin:this.state.minimumOrder}
+    Axios.post("https://murmuring-hamlet-58919.herokuapp.com/updateOrderMin", minimum)
+    .then((res) =>{
+      this.setState({minimumShow:true})
+    }).catch((error)=>{
+      alert("משהו השתבש נסה מאוחר יותר ");
+    })
+  }
+
+  setMinimum=()=>{
+    this.setState({minimumShow:false})
   }
 
   componentWillMount=()=>{
@@ -44,7 +66,6 @@ export default class EditStorePage extends Component {
   }
 
   storeItemsOnServer = () => {
-    console.log("hi");
         Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
       (res) => {
         console.log(res.data);
@@ -72,9 +93,6 @@ export default class EditStorePage extends Component {
 
   render() {
     document.body.style.backgroundColor = "white";
-    {this.state.imgs && [...this.state.imgs].map((file)=>(
-      <img src={URL.createObjectURL(file)} />
-   ))}
       return (
         <div>
           <div style={{ zIndex: 1, marginBottom: 62 }}>
@@ -84,6 +102,23 @@ export default class EditStorePage extends Component {
               edit={"editbutton"}
             />
           </div>
+          {this.state.minimumShow ? (
+          <div  style={{textAlign:"right"}}>
+            <Button 
+            style={{color:"blue", fontWeight:"bolder"}} 
+            onClick={()=>this.setMinimum()}>שנה מינימום הזמנה</Button>
+          </div>)
+          :
+          ( 
+          <div  style={{textAlign:"right"}}>
+          <TextField
+              onChange={this.updateMinumum} 
+              style={{width:70}} 
+              
+              />
+            <Button style={{fontWeight:"bolder"}} onClick={()=>this.setMinimumOrder()}>  הגדר </Button>
+          </div>)}
+          
           {this.state.allItems.map((element, key) => {
             return (
               <NewItem

@@ -5,7 +5,6 @@ import AppBar from "@material-ui/core/AppBar";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CachedIcon from "@material-ui/icons/Cached";
 import EditIcon from "@material-ui/icons/Edit";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -28,6 +27,7 @@ export default class Toolbar extends Component {
   };
 
   render() {
+  
     if (this.props.refresh === "refreshButton") {
       return (
         <div className="toolbr">
@@ -59,7 +59,7 @@ export default class Toolbar extends Component {
         <div className="toolbr">
         
       <Fab color="primary" onClick={() => this.activateAddIcon()} aria-label="add" style={{'position': 'fixed', 'bottom': '20px', 'left': '20px'}}>
-        <AddIcon />
+       <Link style={{color:"white"}} to ="/additem"> <AddIcon /></Link>
       </Fab>
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>

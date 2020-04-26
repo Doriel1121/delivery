@@ -37,14 +37,15 @@ export default class CartPage extends Component {
       Name: "",
       Number: "",
       progressBar: false,
+      OrderMinimum:0
     };
   }
-// componentDidMount=()=>{
-//   Axios.get("")
-//   .then((res)=>{
-//     this.setState({OrderMinimum:res})
-//   })
-// }
+componentDidMount=()=>{
+  Axios.get("https:murmuring-hamlet-58919.herokuapp.com/orderMin")
+  .then((res)=>{
+    this.setState({OrderMinimum:res.data})
+  })
+}
 
   getSumOfAllCart = (cart) => {
     let sum = 0;
@@ -57,7 +58,9 @@ export default class CartPage extends Component {
   sendOrder = (sum) => {
     let phoneNumberString = this.state.Number.toString();
     let order = { Cart: this.props.cart, Name: this.state.Name, Number: this.state.Number };
-    if (sum >= 50) {
+    if (sum >= parseInt(this.state.OrderMinimum.Value)) {
+      
+      
       if (
         phoneNumberString[0] === "0" &&
         phoneNumberString[1] === "5" &&
@@ -81,7 +84,7 @@ export default class CartPage extends Component {
           "הכנס מספר בן 10 ספרות המתחיל ב 05 & אל תשאיר שדה ריק ";
       }
     } else {
-      alert("מינימום הזמנה של 50 שח");
+      alert(`מינימום הזמנה של ${this.state.OrderMinimum.Value}`)
     }
   };
 

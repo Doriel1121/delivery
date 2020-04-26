@@ -116,6 +116,7 @@ export default class NewItem extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={3}>
                     <Button
+                      style={{color:"blue"}}
                       onClick={() => this.editItem(this.props.item.Id)}
                       // variant="contained"
                       // color="primary"
@@ -125,6 +126,7 @@ export default class NewItem extends Component {
                   </Grid>
                   <Grid item xs={3}>
                     <Button
+                      style={{color:"blue"}}
                       onClick={() => this.deleteItem()}
                       // variant="contained"
                       // color="primary"
