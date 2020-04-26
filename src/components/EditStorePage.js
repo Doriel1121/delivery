@@ -92,7 +92,6 @@ export default class EditStorePage extends Component {
 
 
   render() {
-    document.body.style.backgroundColor = "white";
       return (
         <div>
           <div style={{ zIndex: 1, marginBottom: 62 }}>

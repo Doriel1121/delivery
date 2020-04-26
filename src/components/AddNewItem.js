@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { ReactTinyLink } from 'react-tiny-link';
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Item from './Item.js';
 import { Link,Redirect } from "react-router-dom";
 import Axios from "axios";
 import Toolbar from "./Toolbar.js";
@@ -97,16 +99,6 @@ export default class AddNewItem extends Component {
             label="תמונה"
             onChange={this.updateImage}
           />
-          {/* <ReactTinyLink
-            cardSize="small"
-            showGraphic={true}
-            maxLine={2}
-            minLine={1}
-            header={this.state.newName}
-            url={this.state.newImage}
-            cardSize="small"
-            onError={()=>this.inCaseImgNotWorking()}
-          /> */}
           <br />
           <br />
           <Button size="small" color="primary">
@@ -119,6 +111,18 @@ export default class AddNewItem extends Component {
           >
             הוסף
           </Button>
+
+          <div style={{marginTop: '50px', textAlign: 'center'}}>
+            <Container>
+              <Grid container spacing={3}>
+                <Grid item xs={3} />
+                <Grid className="itemBrake" item xs={6}>
+                  <Item addItemToCart={() => {}} item={{Id: -1, Name: this.state.newName, Price: this.state.newPrice, Image: this.state.newImage}}/>
+                </Grid>
+                <Grid item xs={3} />
+              </Grid>
+            </Container>
+          </div>
         </div>
         )
     }
