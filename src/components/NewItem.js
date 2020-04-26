@@ -117,8 +117,8 @@ export default class NewItem extends Component {
                   <Grid item xs={3}>
                     <Button
                       onClick={() => this.editItem(this.props.item.Id)}
-                      variant="contained"
-                      color="primary"
+                      // variant="contained"
+                      // color="primary"
                     >
                       ערוך
                     </Button>
@@ -126,8 +126,8 @@ export default class NewItem extends Component {
                   <Grid item xs={3}>
                     <Button
                       onClick={() => this.deleteItem()}
-                      variant="contained"
-                      color="primary"
+                      // variant="contained"
+                      // color="primary"
                     >
                       מחק
                     </Button>
@@ -153,7 +153,7 @@ export default class NewItem extends Component {
                   <Typography>
                     {
                       <TextField
-                        style={{ width: 100, marginRight: 5 }}
+                        style={{ width: 100}}
                         defaultValue={this.props.item.Name}
                         id="standard-basic"
                         onChange={this.updateName}
@@ -162,7 +162,7 @@ export default class NewItem extends Component {
                     }
                     {
                       <TextField
-                        style={{ width: 100 }}
+                        style={{ width: 50, marginLeft:15 }}
                         id="standard-basic"
                         defaultValue={this.props.item.Price}
                         onChange={this.updatePrice}
@@ -171,7 +171,7 @@ export default class NewItem extends Component {
                     }
                     {
                       <TextField
-                        style={{ width: 100 }}
+                        style={{ width: 100 , marginLeft:15 }}
                         id="standard-basic"
                         defaultValue={this.props.item.Image}
                         onChange={this.updateImage}
@@ -186,8 +186,8 @@ export default class NewItem extends Component {
                   <Grid item xs={3}>
                     <Button
                       onClick={() => this.saveChanges()}
-                      variant="contained"
-                      color="primary"
+                      // variant="contained"
+                      // color="primary"
                     >
                       שמור
                     </Button>
@@ -195,8 +195,8 @@ export default class NewItem extends Component {
                   <Grid item xs={3}>
                     <Button
                       onClick={() => this.editItem()}
-                      variant="contained"
-                      color="primary"
+                      // variant="contained"
+                      // color="primary"
                     >
                       חזור
                     </Button>

@@ -39,6 +39,12 @@ export default class CartPage extends Component {
       progressBar: false,
     };
   }
+// componentDidMount=()=>{
+//   Axios.get("")
+//   .then((res)=>{
+//     this.setState({OrderMinimum:res})
+//   })
+// }
 
   getSumOfAllCart = (cart) => {
     let sum = 0;

@@ -23,11 +23,11 @@ export default class Order extends Component {
   };
 
   sumUpEachItemAddedToCart = (orders) => {
+    console.log(orders);
     var sum = 0;
-    var size = orders.length;
-    for (let i = 0; i < size; i++) {
-      sum = sum + orders[i].item.Price * orders[i].amount;
-    }
+    for (let i = 0; i < orders.length; i++) {
+        sum = sum + orders[i].item.Price * orders[i].amount;
+    }    
     return sum;
   };
 

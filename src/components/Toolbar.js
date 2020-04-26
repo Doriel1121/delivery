@@ -10,13 +10,17 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
+
 export default class Toolbar extends Component {
   refreshPage = () => {
     this.props.reOpen();
   };
 
   activateAddIcon = () => {
+    console.log("1");
+    
     this.props.Add();
+     
   };
 
   changeShow = () => {
