@@ -14,6 +14,8 @@ export default class Client extends Component {
 
   addItemToCart = (item, amount) => {
     let newItem = { item: item, amount: amount };
+    console.log(newItem);
+    
     console.log(this.state.allCart);
     let element
     if (this.state.allCart.length <= 0 ) {

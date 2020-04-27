@@ -8,6 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 export default class NewItem extends Component {
   constructor(props) {
@@ -19,6 +23,7 @@ export default class NewItem extends Component {
       updatedName: "",
       updatedItem: "",
       updatedImg: "",
+      units:""
     };
   }
 
@@ -37,6 +42,12 @@ export default class NewItem extends Component {
     this.setState({ updatedName: itemName });
   };
 
+  updateUnits=(u)=>{
+    console.log(u.target.value);
+    
+    this.setState({units:u.target.value})
+  }
+
   deleteItem = () => {
     let id = { Id: this.props.item.Id };
     Axios.post(
@@ -54,6 +65,7 @@ export default class NewItem extends Component {
     let newName = this.state.updatedName;
     let newPrice = this.state.updatedPrice;
     let newImg = this.state.updatedImg;
+    let newUnits = this.state.units
     if (newName !== "") {
       currentList.Name = newName;
     }
@@ -63,6 +75,11 @@ export default class NewItem extends Component {
     if (newImg !== "") {
       currentList.Image = newImg;
     }
+    if (newUnits !=="") {
+      currentList.Units = newUnits
+    }
+    console.log(currentList);
+    
     this.setState({ updatedItem: currentList });
     let itemAndId = {
       Id: this.props.item.Id,
@@ -162,6 +179,7 @@ export default class NewItem extends Component {
                         label="שם מוצר"
                       />
                     }
+                   
                     {
                       <TextField
                         style={{ width: 50, marginLeft:15 }}
@@ -179,6 +197,21 @@ export default class NewItem extends Component {
                         onChange={this.updateImage}
                         label="תמונה"
                       />
+                    }
+                     {
+                         <FormControl >
+                         <InputLabel id="demo-simple-select-label">יחידות </InputLabel>
+                         <Select
+                          style={{ width: 60 }}
+                           labelId="demo-simple-select-label"
+                           id="demo-simple-select"
+                           onChange={this.updateUnits}
+                         >
+                           <MenuItem value={' ק"ג '}>ק"ג</MenuItem>
+                           <MenuItem value={'יחידה'}>יחידות</MenuItem>
+                           <MenuItem value={'גרם'}>גרם</MenuItem>
+                         </Select>
+                       </FormControl>
                     }
                   </Typography>
                 </ExpansionPanelSummary>

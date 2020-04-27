@@ -5,10 +5,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 
 export default class Item extends Component {
   constructor(props) {
@@ -17,12 +13,14 @@ export default class Item extends Component {
     this.state = {
       focusStatus: false,
       amount: 0,
+      units:""
     };
   }
 
   addItem = () => {
     if (this.state.amount > 0 && this.state.amount <= 100) {
-      this.props.addItemToCart(this.props.item, this.state.amount);
+      
+      this.props.addItemToCart(this.props.item, this.state.amount );
       this.setState({ focusStatus: false });
     } else {
       document.getElementById("message").innerHTML = "הכנס כמות בין 0-100";
@@ -37,25 +35,41 @@ export default class Item extends Component {
     }
   };
 
+  updateUnits=(u)=>{
+    this.setState({units:u.target.value})
+  }
+
   getCardContent = () => {
     return this.state.focusStatus ? (
       <div style={{'marginBottom': '-10px'}}>
           <span className="edit">כמות</span>
-          <TextField
-            style={{ paddingTop: 0 , width: 60}}
+         
+          {/* <FormControl >
+        <InputLabel id="demo-simple-select-label">יחידות </InputLabel>
+        <Select
+         style={{ width: 60 }}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          onChange={this.updateUnits}
+        >
+          <MenuItem value={10}>ק"ג</MenuItem>
+          <MenuItem value={20}>יחידות</MenuItem>
+          <MenuItem value={30}>גרם</MenuItem>
+        </Select>
+      </FormControl> */}
+      <TextField
+            style={{ paddingTop: 0}}
             type="number"
             id="standard-basic"
             label="כמות"
             onChange={(event) => {this.setState({ amount: event.target.value }); }}
           />
-          <FormControl >
-      </FormControl>
 
           <p id="message"></p>
         </div>
     ): (
       <React.Fragment>
-        מחיר לקילו
+        מחיר ל {`${this.props.item.Units}`}
         <br /> {this.props.item.Price}
         <br /> ש"ח
       </React.Fragment>
@@ -84,7 +98,7 @@ export default class Item extends Component {
   }
 
   render() {
-    console.log(this.props.item.Units);
+    console.log(this.props.item);
     
     let cardContent = this.getCardContent();
     let cardActions = this.getCardActions();
