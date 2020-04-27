@@ -15,11 +15,8 @@ export default class Toolbar extends Component {
     this.props.reOpen();
   };
 
-  activateAddIcon = () => {
-    console.log("1");
-    
+  activateAddIcon = () => {    
     this.props.Add();
-     
   };
 
   changeShow = () => {

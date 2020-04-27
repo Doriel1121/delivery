@@ -68,7 +68,6 @@ export default class EditStorePage extends Component {
   storeItemsOnServer = () => {
         Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
       (res) => {
-        console.log(res.data);
         this.setState({ allItems: res.data, progressBar: false });
       }
     )
@@ -111,9 +110,10 @@ export default class EditStorePage extends Component {
           ( 
           <div  style={{textAlign:"right"}}>
           <TextField
+              type="number"
               onChange={this.updateMinumum} 
               style={{width:70}} 
-              
+              defaultValue={"הכנס כאן"}
               />
             <Button style={{fontWeight:"bolder"}} onClick={()=>this.setMinimumOrder()}>  הגדר </Button>
           </div>)}

@@ -11,8 +11,26 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 
+const styles = {
+  prog: {
+    position: "absolute",
+    top: "0px",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    flexDrection: "column",
+    backgroundColor: "rgb(0,0,0, 0.5)",
+  },
+  circBar: {
+    position: "absolute",
+    top: "400px",
+  },
+};
 
 export default class AddNewItem extends Component {
 
@@ -24,7 +42,8 @@ export default class AddNewItem extends Component {
             newImage: "https://clipartstation.com/wp-content/uploads/2017/11/x-clipart-3.png",
             newName: "",
             direction:false,
-            units:""
+            units:"",
+            proggressBar:true
         }
     }
 
@@ -64,18 +83,21 @@ export default class AddNewItem extends Component {
           this.state.newName !== "" &&
           this.state.newPrice !== ""
         ) {
-          console.log(newItem);
+          this.setState({proggressBar:false}, ()=>{
+
+          
           Axios.post(
             "https://murmuring-hamlet-58919.herokuapp.com/addItem",
             newItem
           ).then((res) => {
              if (res.status===200 && res.data==="done") {   
-                return this.setState({direction:true})   
+                return this.setState({direction:true, proggressBar:true})   
              } 
           })
           .catch((error) =>{
             alert("משהו השתבש נסה מאוחר יותר ");
           });
+        })
         }
       };
 
@@ -84,6 +106,7 @@ export default class AddNewItem extends Component {
         if (this.state.direction) {
            return  <Redirect to = "/edit"/>
         }
+        if (this.state.proggressBar) {
         return (
             <div className="AddStyleCard">
           <Toolbar reOpen={this.refreshPage}  addState={"backTo"} />
@@ -112,9 +135,9 @@ export default class AddNewItem extends Component {
           id="demo-simple-select"
           onChange={this.updateUnits}
         >
-          <MenuItem value={10}>ק"ג</MenuItem>
-          <MenuItem value={20}>יחידות</MenuItem>
-          <MenuItem value={30}>גרם</MenuItem>
+          <MenuItem value={"קג"}>ק"ג</MenuItem>
+          <MenuItem value={"יחידות"}>יחידות</MenuItem>
+          <MenuItem value={"גרם"}>גרם</MenuItem>
         </Select>
       </FormControl>
           <br />
@@ -151,5 +174,9 @@ export default class AddNewItem extends Component {
           </div>
         </div>
         )
+      }else{
+        return <div style={styles.prog}>
+          <CircularProgress style={styles.circBar} size={68}/></div>
+      }
     }
 }

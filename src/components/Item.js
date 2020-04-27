@@ -44,19 +44,6 @@ export default class Item extends Component {
       <div style={{'marginBottom': '-10px'}}>
           <span className="edit">כמות</span>
          
-          {/* <FormControl >
-        <InputLabel id="demo-simple-select-label">יחידות </InputLabel>
-        <Select
-         style={{ width: 60 }}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          onChange={this.updateUnits}
-        >
-          <MenuItem value={10}>ק"ג</MenuItem>
-          <MenuItem value={20}>יחידות</MenuItem>
-          <MenuItem value={30}>גרם</MenuItem>
-        </Select>
-      </FormControl> */}
       <TextField
             style={{ paddingTop: 0}}
             type="number"
@@ -97,9 +84,7 @@ export default class Item extends Component {
       );
   }
 
-  render() {
-    console.log(this.props.item);
-    
+  render() {    
     let cardContent = this.getCardContent();
     let cardActions = this.getCardActions();
     

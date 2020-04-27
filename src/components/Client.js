@@ -13,10 +13,7 @@ export default class Client extends Component {
   }
 
   addItemToCart = (item, amount) => {
-    let newItem = { item: item, amount: amount };
-    console.log(newItem);
-    
-    console.log(this.state.allCart);
+    let newItem = { item: item, amount: amount };    
     let element
     if (this.state.allCart.length <= 0 ) {
       this.setState({ allCart: [...this.state.allCart, newItem] });
@@ -28,7 +25,6 @@ export default class Client extends Component {
       
         if (element.item.Id === item.Id) {
           element.amount = parseFloat(element.amount) + parseFloat(amount)
-          console.log(element.amount);
           return
         }
       }

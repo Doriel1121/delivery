@@ -56,12 +56,8 @@ componentDidMount=()=>{
   };
 
   sendOrder = (sum) => {
-    console.log(this.props.cart);
-    
     let phoneNumberString = this.state.Number.toString();
     let order = { Cart: this.props.cart, Name: this.state.Name, Number: this.state.Number};
-    console.log(order);
-    
     if (sum >= parseInt(this.state.OrderMinimum.Value)) {
       
       

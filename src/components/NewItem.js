@@ -43,8 +43,6 @@ export default class NewItem extends Component {
   };
 
   updateUnits=(u)=>{
-    console.log(u.target.value);
-    
     this.setState({units:u.target.value})
   }
 
@@ -77,9 +75,7 @@ export default class NewItem extends Component {
     }
     if (newUnits !=="") {
       currentList.Units = newUnits
-    }
-    console.log(currentList);
-    
+    }    
     this.setState({ updatedItem: currentList });
     let itemAndId = {
       Id: this.props.item.Id,
@@ -89,9 +85,7 @@ export default class NewItem extends Component {
     Axios.post(
       "https://murmuring-hamlet-58919.herokuapp.com/updateItem",
       itemAndId
-    ).then((res) => {
-        console.log(res);
-        
+    ).then((res) => {        
         if (res.status === 200) {
             return this.editItem()
         }
@@ -135,8 +129,6 @@ export default class NewItem extends Component {
                     <Button
                       style={{color:"blue"}}
                       onClick={() => this.editItem(this.props.item.Id)}
-                      // variant="contained"
-                      // color="primary"
                     >
                       ערוך
                     </Button>
@@ -145,8 +137,6 @@ export default class NewItem extends Component {
                     <Button
                       style={{color:"blue"}}
                       onClick={() => this.deleteItem()}
-                      // variant="contained"
-                      // color="primary"
                     >
                       מחק
                     </Button>
@@ -207,7 +197,7 @@ export default class NewItem extends Component {
                            id="demo-simple-select"
                            onChange={this.updateUnits}
                          >
-                           <MenuItem value={' ק"ג '}>ק"ג</MenuItem>
+                           <MenuItem value={' קג '}>ק"ג</MenuItem>
                            <MenuItem value={'יחידה'}>יחידות</MenuItem>
                            <MenuItem value={'גרם'}>גרם</MenuItem>
                          </Select>

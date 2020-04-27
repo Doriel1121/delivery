@@ -10,20 +10,50 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import Table from "@material-ui/core/Table";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+
+const styles = {
+  prog: {
+    position: "absolute",
+    top: "0px",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    flexDrection: "column",
+    backgroundColor: "rgb(0,0,0, 0.5)",
+  },
+  circBar: {
+    position: "absolute",
+    top: "400px",
+  },
+};
 
 export default class Order extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       proggresBar:true
+    }
+  }
+  
   closeOrder = (id) => {
     let Idenity = { id: id };
+    this.setState({proggresBar:false} , ()=>{
     Axios.post(
       "https://murmuring-hamlet-58919.herokuapp.com/closeOrder",
       Idenity
     ).then((res) => {
+      this.setState({proggresBar:true})
       return this.props.deletedOrder(id);
     });
+  })
   };
 
   sumUpEachItemAddedToCart = (orders) => {
-    console.log(orders);
     var sum = 0;
     for (let i = 0; i < orders.length; i++) {
         sum = sum + orders[i].item.Price * orders[i].amount;
@@ -33,6 +63,9 @@ export default class Order extends Component {
 
   render() {
     let sumup = this.sumUpEachItemAddedToCart(this.props.order.Cart);
+    if (this.state.proggresBar) {
+      
+    
     return (
       <div>
         <ExpansionPanel>
@@ -101,6 +134,9 @@ export default class Order extends Component {
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
-    );
+    );}else{
+     return <div style={styles.prog}>
+       <CircularProgress  style={styles.circBar}size={68}/></div>
+    }
   }
 }

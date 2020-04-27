@@ -5,13 +5,34 @@ import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+
+const styles = {
+  prog: {
+    position: "absolute",
+    top: "0px",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    flexDrection: "column",
+    backgroundColor: "rgb(0,0,0, 0.5)",
+  },
+  circBar: {
+    position: "absolute",
+    top: "400px",
+  },
+};
+
+
 export default class ManagerPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       AllOrders: [],
-      status:false
+      status:false,
+      progressBar: false,
     };
   }
 
@@ -22,6 +43,7 @@ export default class ManagerPage extends Component {
   addOrderToList = () => {
     let allorders = [];
     {
+      this.setState({status:false} , () =>{
       Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders").then(
         (res) => {
           for (let i = 0; i < res.data.length; i++) {
@@ -34,6 +56,7 @@ export default class ManagerPage extends Component {
             this.setState({ AllOrders: allorders, status:true});
         }
       );
+    })
     }
   };
 
@@ -46,15 +69,11 @@ export default class ManagerPage extends Component {
   };
 
   deleteOrder = (id) => {
-    console.log("OMER")
-    console.log(id)
-    console.log(this.state.AllOrders);
     let alltheorders = this.state.AllOrders;
     let newOrdersArray;
     newOrdersArray=alltheorders.filter((item) => {
      return  item.Id !==id
     })
-    console.log(newOrdersArray);
       this.setState({ AllOrders: newOrdersArray });
   };
 
@@ -94,9 +113,9 @@ export default class ManagerPage extends Component {
             <Toolbar reOpen={this.someFunc} />
           </div>
           <br /><div></div>
-          <div className="waitingSign">
+          <div style={styles.prog}>
             {/* אין הזמנות  */}
-            <CircularProgress />
+            <CircularProgress style={styles.circBar} size={68}/>
           </div>
         </div>
       );
