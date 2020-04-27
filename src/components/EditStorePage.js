@@ -109,13 +109,20 @@ export default class EditStorePage extends Component {
           :
           ( 
           <div  style={{textAlign:"right"}}>
-          <TextField
+             <Button 
+             variant="contained"
+             color="primary"
+             style={{fontWeight:"bolder" , marginRight:80}} 
+             onClick={()=>this.setMinimumOrder()}>
+                 הגדר </Button>
+            <TextField
               type="number"
+              placeholder="כמות"
               onChange={this.updateMinumum} 
-              style={{width:70}} 
+              style={{width:100}} 
               defaultValue={"הכנס כאן"}
               />
-            <Button style={{fontWeight:"bolder"}} onClick={()=>this.setMinimumOrder()}>  הגדר </Button>
+           
           </div>)}
           
           {this.state.allItems.map((element, key) => {

@@ -160,7 +160,13 @@ export default class NewItem extends Component {
                   id="panel1a-header"
                 >
                   <Typography>
-                    {
+                   {this.props.item.Name}
+                  </Typography>
+                </ExpansionPanelSummary>
+              </div>
+              <ExpansionPanelDetails className={"expansionColor"}>
+                <div>
+              {
                       <TextField
                         style={{ width: 100}}
                         defaultValue={this.props.item.Name}
@@ -174,6 +180,7 @@ export default class NewItem extends Component {
                       <TextField
                         style={{ width: 50, marginLeft:15 }}
                         id="standard-basic"
+                        type="number"
                         defaultValue={this.props.item.Price}
                         onChange={this.updatePrice}
                         label="מחיר"
@@ -187,7 +194,7 @@ export default class NewItem extends Component {
                         onChange={this.updateImage}
                         label="תמונה"
                       />
-                    }
+                    }<br/>
                      {
                          <FormControl >
                          <InputLabel id="demo-simple-select-label">יחידות </InputLabel>
@@ -197,37 +204,42 @@ export default class NewItem extends Component {
                            id="demo-simple-select"
                            onChange={this.updateUnits}
                          >
-                           <MenuItem value={' קג '}>ק"ג</MenuItem>
+                           <MenuItem value={' קילו '}>ק"ג</MenuItem>
                            <MenuItem value={'יחידה'}>יחידות</MenuItem>
-                           <MenuItem value={'גרם'}>גרם</MenuItem>
+                           <MenuItem value={'100 גרם'}>גרם</MenuItem>
                          </Select>
                        </FormControl>
                     }
-                  </Typography>
-                </ExpansionPanelSummary>
-              </div>
+                    </div><br/>
+               
+              </ExpansionPanelDetails>
               <ExpansionPanelDetails className={"expansionColor"}>
-                <Grid container spacing={3}>
-                  <Grid item xs={3}>
-                    <Button
-                      onClick={() => this.saveChanges()}
-                      // variant="contained"
-                      // color="primary"
-                    >
-                      שמור
-                    </Button>
-                  </Grid>
-                  <Grid item xs={3}>
-                    <Button
-                      onClick={() => this.editItem()}
-                      // variant="contained"
-                      // color="primary"
-                    >
-                      חזור
-                    </Button>
-                  </Grid>
-                  <Grid item xs={3}></Grid>
-                </Grid>
+              <div>
+                    
+                    <Grid container spacing={3}>
+                      <Grid item xs={3}>
+                        <Button
+                          onClick={() => this.saveChanges()}
+                          style={{color:"blue"}}
+                          // variant="contained"
+                          // color="primary"
+                        >
+                          שמור
+                        </Button>
+                      </Grid>
+                      <Grid item xs={3}>
+                        <Button
+                          onClick={() => this.editItem()}
+                          style={{color:"blue"}}
+                          // variant="contained"
+                          // color="primary"
+                        >
+                          חזור
+                        </Button>
+                      </Grid>
+                      <Grid item xs={3}></Grid>
+                    </Grid>
+                    </div>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </div>

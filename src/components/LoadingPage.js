@@ -23,6 +23,7 @@ export default class LoadingPage extends Component {
         } else {
             return (
                 <div className="Load">
+                    <img className="Beta" src="https://www.logolynx.com/images/logolynx/06/06f2a63b5ea3a79847ed64593476e6c5.png" alt ="pic"/> 
                 <img className="LoadinglogoStyle" src="logo_transparent.png" alt="pic"/>
                 </div>
             )

@@ -130,12 +130,21 @@ cursor: none;
 
 .LoadinglogoStyle{
   width:15rem;
+  align-content: center;
+  transform: translateX(50%);
+  transform: translateY(60%);
 }
 
 .Load{
-  text-align: center;
-  transform: translateY(60%);
-  /* transform: translateX(10%); */
+ text-align: center;
+
+}
+
+.Beta{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:5rem
 }
 
 .waitingSign{

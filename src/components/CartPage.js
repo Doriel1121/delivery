@@ -65,7 +65,8 @@ componentDidMount=()=>{
         phoneNumberString[0] === "0" &&
         phoneNumberString[1] === "5" &&
         phoneNumberString.length === 10 &&
-        this.state.Name !== undefined
+        this.state.Name !== undefined && 
+        this.state.Name.length <= 10
       ) {
         this.setState({ progressBar: true }, () => {
           Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order", order)
@@ -81,7 +82,7 @@ componentDidMount=()=>{
         });
       } else {
         document.getElementById("error").innerHTML =
-          "הכנס מספר בן 10 ספרות המתחיל ב 05 & אל תשאיר שדה ריק ";
+          "הכנס מספר בן 10 ספרות המתחיל ב 05 & אורך מקסימלי לשם הוא 10 תווים ";
       }
     } else {
       alert(`מינימום הזמנה של ${this.state.OrderMinimum.Value}`)
@@ -115,7 +116,7 @@ componentDidMount=()=>{
               let totalItemPrice = (element.amount * element.item.Price).toFixed(2);
               let itemAmount = parseFloat(element.amount).toFixed(2);
             
-            return <TableRow>
+            return <TableRow key={element.item.Id}>
               <TableCell style={{ textAlign: "center" }}>
                   <DeleteForeverIcon onClick={() => this.props.deleteItemFromCart(element.item.Id) } />
                 </TableCell>  
@@ -151,6 +152,8 @@ componentDidMount=()=>{
             type="text"
             id="standard-basic"
             label="שם מלא"
+            maxLength={12}
+            erorText="הכנס רק 10 תווים"
           />
           <br />
           <TextField
