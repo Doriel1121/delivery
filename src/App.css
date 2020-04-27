@@ -130,8 +130,6 @@ cursor: none;
 
 .LoadinglogoStyle{
   width:15rem;
-  align-content: center;
-  transform: translateX(50%);
   transform: translateY(60%);
 }
 
