@@ -27,15 +27,12 @@ export default class Client extends Component {
         if (element.item.Id === item.Id) {
           element.amount = parseFloat(element.amount) + parseFloat(amount)
           console.log(element.amount);
-          
-          break
-        }else{
-          this.setState({ allCart: [...this.state.allCart, newItem] });
+          return
         }
-      break
-        
-    }
       }
+      this.setState({ allCart: [...this.state.allCart, newItem] });
+
+    }
     
   };
 

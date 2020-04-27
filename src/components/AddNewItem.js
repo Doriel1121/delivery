@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import Item from './Item.js';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Item from './Item.js';
 import { Link,Redirect } from "react-router-dom";
 import Axios from "axios";
 import Toolbar from "./Toolbar.js";
@@ -111,9 +111,9 @@ export default class AddNewItem extends Component {
           id="demo-simple-select"
           onChange={this.updateUnits}
         >
-          <MenuItem value={10}>לק"ג</MenuItem>
-          <MenuItem value={20}>ליחידות</MenuItem>
-          <MenuItem value={30}>לגרם</MenuItem>
+          <MenuItem value={10}>ק"ג</MenuItem>
+          <MenuItem value={20}>יחידות</MenuItem>
+          <MenuItem value={30}>גרם</MenuItem>
         </Select>
       </FormControl>
           <br />

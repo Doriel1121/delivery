@@ -5,6 +5,10 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 export default class Item extends Component {
   constructor(props) {
@@ -38,12 +42,27 @@ export default class Item extends Component {
       <div style={{'marginBottom': '-10px'}}>
           <span className="edit">כמות</span>
           <TextField
-            style={{ paddingTop: 0 }}
+            style={{ paddingTop: 0 , width: 60}}
             type="number"
             id="standard-basic"
-            label="קילו"
+            label="כמות"
             onChange={(event) => {this.setState({ amount: event.target.value }); }}
           />
+          <FormControl >
+        <InputLabel id="demo-simple-select-label">יחידת מידה</InputLabel>
+        <Select
+         style={{ width: 30 }}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          onChange={this.updateUnits}
+        >
+          
+             <MenuItem value={10}>{this.props.item.Units}</MenuItem>
+          })}
+          
+        </Select>
+      </FormControl>
+
           <p id="message"></p>
         </div>
     ): (
@@ -77,6 +96,8 @@ export default class Item extends Component {
   }
 
   render() {
+    console.log(this.props.item.Units);
+    
     let cardContent = this.getCardContent();
     let cardActions = this.getCardActions();
     
