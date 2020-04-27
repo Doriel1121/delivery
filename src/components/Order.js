@@ -101,7 +101,6 @@ export default class Order extends Component {
                         </TableCell>
                         <TableCell style={{ textAlign: "center" }}>
                           {parseFloat(element.amount).toFixed(2)}
-                          {console.log(parseFloat(element.amount).toFixed(2))
                           }
                         </TableCell>
                         <TableCell>

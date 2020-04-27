@@ -101,6 +101,7 @@ transform: translateY(50%);
   background-color: rgb(241, 238, 238);
   text-align: center;
   display: block;
+  text-align: right;
 }
 
 #message{
