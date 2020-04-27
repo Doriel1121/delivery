@@ -49,18 +49,6 @@ export default class Item extends Component {
             onChange={(event) => {this.setState({ amount: event.target.value }); }}
           />
           <FormControl >
-        <InputLabel id="demo-simple-select-label">יחידת מידה</InputLabel>
-        <Select
-         style={{ width: 30 }}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          onChange={this.updateUnits}
-        >
-          
-             <MenuItem value={10}>{this.props.item.Units}</MenuItem>
-          })}
-          
-        </Select>
       </FormControl>
 
           <p id="message"></p>

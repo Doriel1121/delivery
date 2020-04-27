@@ -58,12 +58,13 @@ export default class AddNewItem extends Component {
         let newname = this.state.newName;
         let newprice = this.state.newPrice;
         let newimage = this.state.newImage;
-        let units= this.state.units
+        let units= this.state.units;
         let newItem = { Name: newname, Price: newprice, Image: newimage , Units: units};
         if (
           this.state.newName !== "" &&
           this.state.newPrice !== ""
         ) {
+          console.log(newItem);
           Axios.post(
             "https://murmuring-hamlet-58919.herokuapp.com/addItem",
             newItem
@@ -142,7 +143,7 @@ export default class AddNewItem extends Component {
               <Grid container spacing={3}>
                 <Grid item xs={3} />
                 <Grid className="itemBrake" item xs={6}>
-                  <Item addItemToCart={() => {}} item={{Id: -1, Name: this.state.newName, Price: this.state.newPrice, Image: this.state.newImage}}/>
+                  <Item addItemToCart={() => {}} item={{Id: -1, Name: this.state.newName, Price: this.state.newPrice, Image: this.state.newImage, Units: this.state.units}}/>
                 </Grid>
                 <Grid item xs={3} />
               </Grid>
