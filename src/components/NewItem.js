@@ -151,7 +151,7 @@ export default class NewItem extends Component {
     } else {
       return (
         <div>
-          <div style={{ marginTop: 55 }}>
+          <div >
             <ExpansionPanel key={this.props.item.Id}>
               <div className="PanelStyle">
                 <ExpansionPanelSummary

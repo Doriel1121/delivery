@@ -100,7 +100,9 @@ export default class Order extends Component {
                           {total.toFixed(2)}
                         </TableCell>
                         <TableCell style={{ textAlign: "center" }}>
-                          {element.amount.toFixed(2)}
+                          {parseFloat(element.amount).toFixed(2)}
+                          {console.log(parseFloat(element.amount).toFixed(2))
+                          }
                         </TableCell>
                         <TableCell>
                           <span style={{ fontWeight: "bolder" }}>
