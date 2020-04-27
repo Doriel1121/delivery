@@ -7,6 +7,11 @@ import Item from './Item.js';
 import { Link,Redirect } from "react-router-dom";
 import Axios from "axios";
 import Toolbar from "./Toolbar.js";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 
 export default class AddNewItem extends Component {
@@ -18,8 +23,13 @@ export default class AddNewItem extends Component {
             newPrice: "",
             newImage: "https://clipartstation.com/wp-content/uploads/2017/11/x-clipart-3.png",
             newName: "",
-            direction:false
+            direction:false,
+            units:""
         }
+    }
+
+    updateUnits=(u)=>{
+      this.setState({units:u.target.value})
     }
 
     refreshPage=()=>{
@@ -48,7 +58,8 @@ export default class AddNewItem extends Component {
         let newname = this.state.newName;
         let newprice = this.state.newPrice;
         let newimage = this.state.newImage;
-        let newItem = { Name: newname, Price: newprice, Image: newimage };
+        let units= this.state.units
+        let newItem = { Name: newname, Price: newprice, Image: newimage , Units: units};
         if (
           this.state.newName !== "" &&
           this.state.newPrice !== ""
@@ -88,9 +99,23 @@ export default class AddNewItem extends Component {
             style={{ width: 180 }}
             type="number"
             id="standard-basic"
-            label="מחיר לקילו"
+            label="מחיר "
             onChange={this.updatePrice}
           />
+          <br />
+          <FormControl >
+        <InputLabel id="demo-simple-select-label">יחידת מידה</InputLabel>
+        <Select
+         style={{ width: 180 }}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          onChange={this.updateUnits}
+        >
+          <MenuItem value={10}>לק"ג</MenuItem>
+          <MenuItem value={20}>ליחידות</MenuItem>
+          <MenuItem value={30}>לגרם</MenuItem>
+        </Select>
+      </FormControl>
           <br />
           <TextField
             style={{ width: 180 }}

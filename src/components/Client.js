@@ -14,7 +14,29 @@ export default class Client extends Component {
 
   addItemToCart = (item, amount) => {
     let newItem = { item: item, amount: amount };
-    this.setState({ allCart: [...this.state.allCart, newItem] });
+    console.log(this.state.allCart);
+    let element
+    if (this.state.allCart.length <= 0 ) {
+      this.setState({ allCart: [...this.state.allCart, newItem] });
+
+    }else{
+      for (let i = 0; i < this.state.allCart.length; i++) {
+        element = this.state.allCart[i];
+        console.log(element.item.Price);
+      
+        if (element.item.Id === item.Id) {
+          element.amount = parseFloat(element.amount) + parseFloat(amount)
+          console.log(element.amount);
+          
+          break
+        }else{
+          this.setState({ allCart: [...this.state.allCart, newItem] });
+        }
+      break
+        
+    }
+      }
+    
   };
 
   deleteItemFromCart = (id) => {

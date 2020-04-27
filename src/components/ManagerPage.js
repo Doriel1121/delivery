@@ -31,7 +31,6 @@ export default class ManagerPage extends Component {
             allorders.unshift(order);
           }
           console.log(allorders);
-          
             this.setState({ AllOrders: allorders, status:true});
         }
       );
