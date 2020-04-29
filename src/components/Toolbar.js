@@ -91,16 +91,19 @@ export default class Toolbar extends Component {
           </AppBar>
         </div>
       );
-    } else {
+    } else if (this.props.currentPage=== "cart") {
       return (
         <div className="toolbr">
+          {/* <Fab color="primary"  aria-label="add" style={{'position': 'fixed', 'bottom': '20px', 'right': '20px'}}>
+       <Link style={{color:"white"}} to ="/client/cart"><ShoppingCartIcon/></Link>
+      </Fab> */}
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
               <Grid item xs>
-                <Link to="/client/cart">
-                  <ShoppingCartIcon className="shoppingCartIcon">
-                    ShoppingCart
-                  </ShoppingCartIcon>
+                <Link to="/client/store">
+                <ArrowBackIcon className="backIcon">
+                  ArrowBack
+                  </ArrowBackIcon>
                 </Link>
               </Grid>
               <Grid className="name" item xs={8}>
@@ -113,6 +116,27 @@ export default class Toolbar extends Component {
           </AppBar>
         </div>
       );
+    }else{
+      return (
+        <div className="toolbr">
+        <Fab color="primary"  aria-label="add" style={{'position': 'fixed', 'bottom': '20px', 'right': '20px'}}>
+     <Link style={{color:"white"}} to ="/client/cart"><ShoppingCartIcon/></Link>
+    </Fab>
+        <AppBar style={{ color: "white", height: 60 }}>
+          <Grid container spacing={3}>
+            <Grid item xs>
+             
+            </Grid>
+            <Grid className="name" item xs={8}>
+              <Link className="linkintoolbar" to="/client/store">
+                <h4 className="toolbrStyle"> השוק שלי</h4>
+              </Link>
+            </Grid>
+            <Grid className="toolbarRefresh" item xs></Grid>
+          </Grid>
+        </AppBar>
+      </div>
+      )
     }
   }
 }

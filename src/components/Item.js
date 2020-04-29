@@ -5,6 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 export default class Item extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ export default class Item extends Component {
     this.state = {
       focusStatus: false,
       amount: 0,
-      units:""
+      units:"",
+      inCartSign:false
     };
   }
 
@@ -21,7 +23,7 @@ export default class Item extends Component {
     if (this.state.amount > 0 && this.state.amount <= 100) {
       
       this.props.addItemToCart(this.props.item, this.state.amount );
-      this.setState({ focusStatus: false });
+      this.setState({ focusStatus: false , inCartSign:true });
     } else {
       document.getElementById("message").innerHTML = "הכנס כמות בין 0-100";
     }
@@ -78,9 +80,23 @@ export default class Item extends Component {
           </Button>
         </React.Fragment>
       ) : (
-        <Button size="small" onClick={this.toggleFocusStatuc} color="primary">
+        !this.state.inCartSign ? (
+        <React.Fragment>
+        <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
           הוסף לעגלה
         </Button>
+        </React.Fragment>
+        )
+        : (
+          <React.Fragment>
+          <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
+            הוסף לעגלה<FiberManualRecordIcon
+              style={{color:"red", width:8, height:8}}>
+              FiberManualRecord
+              </FiberManualRecordIcon>
+          </Button>
+          </React.Fragment>
+        )
       );
   }
 

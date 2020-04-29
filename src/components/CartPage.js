@@ -9,6 +9,9 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import Axios from "axios";
 
 const styles = {
@@ -29,6 +32,8 @@ const styles = {
   },
 };
 
+
+
 export default class CartPage extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +42,7 @@ export default class CartPage extends Component {
       Name: "",
       Number: "",
       progressBar: false,
-      OrderMinimum:0
+      OrderMinimum:0,
     };
   }
 componentDidMount=()=>{
@@ -46,6 +51,7 @@ componentDidMount=()=>{
     this.setState({OrderMinimum:res.data})
   })
 }
+
 
   getSumOfAllCart = (cart) => {
     let sum = 0;
@@ -92,10 +98,9 @@ componentDidMount=()=>{
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     let totalSum = this.getSumOfAllCart(this.props.cart);
-
     return (
       <div>
-        <Toolbar />
+        <Toolbar currentPage="cart" />
         <Table className="cartDiv">
           <TableHead>
             <TableRow>
@@ -125,6 +130,7 @@ componentDidMount=()=>{
             </TableCell>
             <TableCell style={{ textAlign: "center" }}>
               {itemAmount}
+
             </TableCell>
             <TableCell>
               <span style={{ fontWeight: "bolder" }}>
