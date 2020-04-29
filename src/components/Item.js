@@ -59,8 +59,8 @@ export default class Item extends Component {
     ): (
       <React.Fragment>
         מחיר ל{`${this.props.item.Units}`}
-        <br /> {this.props.item.Price}
-        <br /> ש"ח
+        <br /> 
+        ₪ {this.props.item.Price}
       </React.Fragment>
     )
   };
