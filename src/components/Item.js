@@ -6,6 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import CheckIcon from '@material-ui/icons/Check';
+
 
 export default class Item extends Component {
   constructor(props) {
@@ -90,10 +92,10 @@ export default class Item extends Component {
         : (
           <React.Fragment>
           <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
-            הוסף לעגלה<FiberManualRecordIcon
-              style={{color:"red", width:8, height:8}}>
-              FiberManualRecord
-              </FiberManualRecordIcon>
+            הוסף לעגלה<CheckIcon
+              style={{color:"green", width:18, height:15}} >
+              Check
+              </CheckIcon>
           </Button>
           </React.Fragment>
         )

@@ -45,6 +45,16 @@ export default class CartPage extends Component {
       OrderMinimum:0,
     };
   }
+
+  increaseAmount=(element)=>{
+     for (let i = 0; i < this.props.cart.length; i++) {
+       let cart = this.props.cart[i];
+       if (cart.item.Id === element.item.Id) {
+         cart.amount= element.amount+1
+       }
+       
+     }
+  }
 componentDidMount=()=>{
   Axios.get("https:murmuring-hamlet-58919.herokuapp.com/orderMin")
   .then((res)=>{
@@ -129,7 +139,18 @@ componentDidMount=()=>{
               {totalItemPrice}
             </TableCell>
             <TableCell style={{ textAlign: "center" }}>
-              {itemAmount}
+              <span >{itemAmount}</span>
+              {/* <ButtonGroup
+              style={{ width:20}}
+              size="small"
+              orientation="vertical"
+              color="primary"
+              aria-label="vertical outlined primary button group"
+            >
+              <Button onClick={() => {this.increaseAmount(element)}}>+</Button>
+              <Button>-</Button>
+            </ButtonGroup> */}
+     
 
             </TableCell>
             <TableCell>

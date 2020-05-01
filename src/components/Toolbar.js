@@ -61,7 +61,7 @@ export default class Toolbar extends Component {
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
               <Grid item xs={3}>
-                <Link to="/manager">
+                <Link to="/manager/homepage">
                   <ArrowBackIcon className="backIcon">ArrowBack</ArrowBackIcon>
                 </Link>
               </Grid>
@@ -69,7 +69,7 @@ export default class Toolbar extends Component {
                 <h4 className="toolbrStyle"> כל המוצרים</h4>
               </Grid>
               <Grid className="toolbarRefresh" item xs={3}>
-                <CachedIcon style={{marginRight:8}} onClick={() => this.refreshPage()}></CachedIcon>
+                {/* <CachedIcon style={{marginRight:8}} onClick={() => this.refreshPage()}></CachedIcon> */}
               </Grid>
             </Grid>
           </AppBar>
@@ -109,6 +109,31 @@ export default class Toolbar extends Component {
               <Grid className="name" item xs={8}>
                 <Link className="linkintoolbar" to="/client/store">
                   <h4 className="toolbrStyle"> השוק שלי</h4>
+                </Link>
+              </Grid>
+              <Grid className="toolbarRefresh" item xs></Grid>
+            </Grid>
+          </AppBar>
+        </div>
+      );
+    }else if (this.props.summery === "summeryPage") {
+      return (
+        <div className="toolbr">
+          {/* <Fab color="primary"  aria-label="add" style={{'position': 'fixed', 'bottom': '20px', 'right': '20px'}}>
+       <Link style={{color:"white"}} to ="/client/cart"><ShoppingCartIcon/></Link>
+      </Fab> */}
+          <AppBar style={{ color: "white", height: 60 }}>
+            <Grid container spacing={3}>
+              <Grid item xs>
+                <Link to="/manager/homepage">
+                <ArrowBackIcon className="backIcon">
+                  ArrowBack
+                  </ArrowBackIcon>
+                </Link>
+              </Grid>
+              <Grid className="name" item xs={8}>
+                <Link className="linkintoolbar" to="/client/store">
+                  <h4 className="toolbrStyle">  סיכום כמויות</h4>
                 </Link>
               </Grid>
               <Grid className="toolbarRefresh" item xs></Grid>

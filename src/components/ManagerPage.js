@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import Order from "./Order.js";
 import Toolbar from "./Toolbar.js";
 import Axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Link , Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
+
 
 
 const styles = {
@@ -20,7 +22,7 @@ const styles = {
   },
   circBar: {
     position: "absolute",
-    top: "400px",
+    top: "300px",
   },
 };
 
@@ -30,95 +32,83 @@ export default class ManagerPage extends Component {
     super(props);
 
     this.state = {
-      AllOrders: [],
-      status:false,
-      progressBar: false,
+      allOrders: [],
+      progressBar:false,
     };
   }
 
-  refreshPage = () => {
-    this.setState({ state: this.state });
-  };
-
-  addOrderToList = () => {
-    let allorders = [];
-    {
-      this.setState({status:false} , () =>{
+  GetOrderFromServer = () => {
+      this.setState({progressBar:true} , () =>{
       Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders").then(
         (res) => {
+          let allorders = [];
           for (let i = 0; i < res.data.length; i++) {
             let element = res.data[i];
             let order = JSON.parse(element.OrderData);
             order.Id = element.Id;
             allorders.unshift(order);
           }
-          console.log(allorders);
-            this.setState({ AllOrders: allorders, status:true});
-        }
-      );
+          this.props.allOrders(allorders)
+            this.setState({ allOrders: allorders, progressBar:false});
+          }
+      ).catch((error) =>{
+        console.log(error);
+        alert("משהו השתבש נסה שוב מאוחר יותר")
+      })
     })
-    }
+    
   };
 
   componentDidMount = () => {      
-    this.addOrderToList();
+    this.GetOrderFromServer();
   };
 
   redirectToEditPage = () => {
     return <Redirect to="/edit" />;
   };
 
+
+
   deleteOrder = (id) => {
-    let alltheorders = this.state.AllOrders;
-    let newOrdersArray;
-    newOrdersArray=alltheorders.filter((item) => {
+    console.log(id);
+    
+    let newOrdersArray=this.state.allOrders.filter((item) => {
      return  item.Id !==id
     })
-      this.setState({ AllOrders: newOrdersArray });
+    console.log(newOrdersArray);
+    
+      this.setState({ allOrders: newOrdersArray });
   };
 
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
-    if (this.state.status) {
-      return (
-        this.state.AllOrders.length > 0 ?
-        <div style={{ marginTop: 62 }}>
-          <Toolbar
-            edit={this.redirectToEditPage}
-            reOpen={this.addOrderToList}
-            refresh={"refreshButton"}
-          />
-          {this.state.AllOrders.map((element) => {
-            return (
-              <Order
-                deletedOrder={this.deleteOrder}
-                key={element.Id}
-                order={element}
-              />
-            ); 
-          })}
-        </div>
-        : <div>
-          <Toolbar
-            edit={this.redirectToEditPage}
-            reOpen={this.addOrderToList}
-            refresh={"refreshButton"}
-          /><h4 style={{marginTop:70, textAlign:"center"}}>אין הזמנות</h4>
-          </div>
-      );
-    } else {
-      return (
-        <div>
-          <div >
-            <Toolbar reOpen={this.someFunc} />
-          </div>
-          <br /><div></div>
-          <div style={styles.prog}>
-            {/* אין הזמנות  */}
-            <CircularProgress style={styles.circBar} size={68}/>
-          </div>
-        </div>
-      );
+    let pageBody
+    if (this.state.progressBar) {
+      pageBody = <div style={styles.prog}>
+      <CircularProgress style={styles.circBar} size={68}/>
+    </div>
     }
-  }
+    else{
+      pageBody = this.state.allOrders.length == 0 ? 
+        <h4 style={{marginTop:70, textAlign:"center"}}>אין הזמנות</h4>
+      :
+      <div  style={{ marginTop: 62 }}>
+        <div style={{textAlign:"right"}} ><Link to ="/manager/summery"><Button style={{color:"blue"}}>הצג סיכום כמויות מוצרים</Button></Link></div>
+         {this.state.allOrders.map((element) => {
+        return ( <div>
+          <Order
+            deletedOrder={this.deleteOrder}
+            key={element.Id}
+            order={element}
+          />
+        </div>); 
+      })}
+    </div>
+    }
+    return( <React.Fragment><Toolbar
+              edit={this.redirectToEditPage}
+              reOpen={this.GetOrderFromServer}
+              refresh={"refreshButton"}/>
+              {pageBody}</React.Fragment>)
+     }
 }

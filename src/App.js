@@ -11,6 +11,7 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+import SummeryPage from './components/SummeryPage';
 
 const theme = createMuiTheme({
 	direction: 'rtl'
@@ -24,7 +25,7 @@ export default class App extends Component {
     super(props)
   
     this.state = {
-       all:[]
+      allOrders:""
     }
   }
 
@@ -40,6 +41,12 @@ export default class App extends Component {
   activatestoreItemsOnServer=()=>{
     
   }
+
+  updateAllOrders=(all)=>{
+    console.log(all);
+    
+    this.setState({allOrders:all})
+  }
   
   render() {
     return (
@@ -52,14 +59,17 @@ export default class App extends Component {
                 <Route exact path="/">
                   <LoadingPage />
                 </Route>
-                <Route exact path ="/manager">
-                <ManagerPage/>
+                <Route exact path ="/manager/homepage">
+                <ManagerPage allOrders={this.updateAllOrders}/>
                 </Route>
                 <Route exact path="/edit">
-                    <EditStorePage allItems={this.state.all} />
+                    <EditStorePage />
                 </Route>
                 <Route exact path ="/additem">
                   <AddNewItem activatestoreItemsOnServer={this.activatestoreItemsOnServer} updateState ={this.updateStateWithList}allItems={this.updateAllItemsList} />
+                </Route>
+                <Route exact path ="/manager/summery">
+                  <SummeryPage orders={this.state.allOrders}/>
                 </Route>
                 <Client/>
               </Switch>

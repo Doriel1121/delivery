@@ -47,28 +47,8 @@ export default class AddNewItem extends Component {
         }
     }
 
-    updateUnits=(u)=>{
-      this.setState({units:u.target.value})
-    }
 
-    refreshPage=()=>{
 
-    }
-
-    updatePrice = (p) => {
-        let price = p.target.value;
-        this.setState({ newPrice: price });
-      };
-    
-      updateName = (n) => {
-        let name = n.target.value;
-        this.setState({ newName: name });
-      };
-    
-      updateImage = (img) => {
-        let image = img.target.value;
-        this.setState({ newImage: image });
-      };
       inCaseImgNotWorking=(ev)=>{
         ev.target.src = 'https://clipartstation.com/wp-content/uploads/2017/11/x-clipart-3.png'  
       }
@@ -114,7 +94,7 @@ export default class AddNewItem extends Component {
             <TextField
               style={{ width: 180 }}
               id="standard-basic"
-              onChange={this.updateName}
+              onChange={(n) =>{this.setState({ newName: n.target.value})}}
               label="שם"
             />
           }
@@ -124,7 +104,7 @@ export default class AddNewItem extends Component {
             type="number"
             id="standard-basic"
             label="מחיר "
-            onChange={this.updatePrice}
+            onChange={(p) =>{this.setState({ newPrice: p.target.value})}}
           />
           <br />
           <FormControl >
@@ -133,7 +113,7 @@ export default class AddNewItem extends Component {
          style={{ width: 180 }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          onChange={this.updateUnits}
+          onChange={(u) => {this.setState({units:u.target.value})}}
         >
           <MenuItem value={"קג"}>ק"ג</MenuItem>
           <MenuItem value={"יחידות"}>יחידות</MenuItem>
@@ -146,7 +126,7 @@ export default class AddNewItem extends Component {
             type="string"
             id="standard-basic"
             label="תמונה"
-            onChange={this.updateImage}
+            onChange={(i) =>{this.setState({newImage:i.target.value})}}
           />
           <br />
           <br />

@@ -34,35 +34,38 @@ export default class EditStorePage extends Component {
 
     this.state = {
       allItems: [],
-      updatedPrice: "",
-      updatedName: "",
-      updatedItem: "",
       progressBar: true,
-      minimumShow:true,
-      minimumOrder:""
+      minimumShow:false,
+      minimumOrder:0
     };
   }
 
-  updateMinumum=(m)=>{
-    this.setState({minimumOrder:m.target.value})
+  setMinimumValue=()=>{
+    Axios.get("https://murmuring-hamlet-58919.herokuapp.com/orderMin").then(
+      (res)=>{
+        this.setState({minimumOrder:res.data.Value})
+      }
+    )
   }
 
   setMinimumOrder=()=>{
     let minimum = {orderMin:this.state.minimumOrder}
     Axios.post("https://murmuring-hamlet-58919.herokuapp.com/updateOrderMin", minimum)
-    .then((res) =>{
-      this.setState({minimumShow:true})
+    .then(() =>{
+      this.setState({minimumShow:false})
     }).catch((error)=>{
+      console.log(error);
       alert("משהו השתבש נסה מאוחר יותר ");
     })
   }
 
-  setMinimum=()=>{
-    this.setState({minimumShow:false})
+  showMinimum=()=>{
+    this.setState({minimumShow:true})
   }
 
-  componentWillMount=()=>{
+  componentDidMount=()=>{
     this.storeItemsOnServer()
+    this.setMinimumValue()
   }
 
   storeItemsOnServer = () => {
@@ -72,6 +75,8 @@ export default class EditStorePage extends Component {
       }
     )
     .catch((error) =>{
+      console.log(error);
+      
       alert("משהו השתבש נסה מאוחר יותר ");
     })
   };
@@ -81,9 +86,7 @@ export default class EditStorePage extends Component {
   };
 
   deleteItemFromList = (id) => {
-    let ItemsList = this.state.allItems;
-    let newList;
-    newList= ItemsList.filter((item) => {
+    let newList= this.state.allItems.filter((item) => {
       return item.Id!==id
     })
         this.setState({ allItems: newList });
@@ -100,11 +103,11 @@ export default class EditStorePage extends Component {
               edit={"editbutton"}
             />
           </div>
-          {this.state.minimumShow ? (
+          {!this.state.minimumShow ? (
           <div  style={{textAlign:"right"}}>
             <Button 
             style={{color:"blue", fontWeight:"bolder"}} 
-            onClick={()=>this.setMinimum()}>שנה מינימום הזמנה</Button>
+            onClick={()=>this.showMinimum()}>שנה מינימום הזמנה</Button>
           </div>)
           :
           ( 
@@ -117,10 +120,9 @@ export default class EditStorePage extends Component {
                  הגדר </Button>
             <TextField
               type="number"
-              placeholder="כמות"
-              onChange={this.updateMinumum} 
+              defaultValue={this.state.minimumOrder}
+              onChange={(m) =>{this.setState({minimumOrder:m.target.value})            }} 
               style={{width:100}} 
-              defaultValue={"הכנס כאן"}
               />
            
           </div>)}

@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import StorePage from "./StorePage.js";
 import CartPage from "./CartPage.js";
 
+
 export default class Client extends Component {
   constructor(props) {
     super(props);
@@ -55,6 +56,7 @@ export default class Client extends Component {
             deleteItemFromCart={this.deleteItemFromCart}
             cart={this.state.allCart} />
         </Route>
+       
       </React.Fragment>
     );
   }

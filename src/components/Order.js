@@ -36,20 +36,24 @@ export default class Order extends Component {
     super(props)
   
     this.state = {
-       proggresBar:true
+       proggresBar:false
     }
   }
   
   closeOrder = (id) => {
-    let Idenity = { id: id };
-    this.setState({proggresBar:false} , ()=>{
+    let Identity = { id: id };
+    this.setState({proggresBar:true} , ()=>{
     Axios.post(
       "https://murmuring-hamlet-58919.herokuapp.com/closeOrder",
-      Idenity
-    ).then((res) => {
-      this.setState({proggresBar:true})
+      Identity
+    ).then(() => {
+      this.setState({proggresBar:false})
       return this.props.deletedOrder(id);
-    });
+    }).catch((error)=>{
+      console.log(error);
+      alert("משהו השתבש נסה שוב מאוחר יותר ")
+      
+    })
   })
   };
 
@@ -63,9 +67,10 @@ export default class Order extends Component {
 
   render() {
     let sumup = this.sumUpEachItemAddedToCart(this.props.order.Cart);
-    if (this.state.proggresBar) {
-      
-    
+    if (this.state.proggresBar) {  
+      return <div style={styles.prog}>
+      <CircularProgress  style={styles.circBar}size={68}/></div>;
+    }
     return (
       <div>
         <ExpansionPanel>
@@ -91,7 +96,7 @@ export default class Order extends Component {
             <div>
               <Table>
                 <TableBody style={{ textAlign: "right" }}>
-                  {this.props.order.Cart.map((element, key) => {
+                  {this.props.order.Cart.map((element) => {
                     var total = element.amount * element.item.Price;
 
                     return (
@@ -101,7 +106,6 @@ export default class Order extends Component {
                         </TableCell>
                         <TableCell style={{ textAlign: "center" }}>
                           {parseFloat(element.amount).toFixed(2)}
-                          }
                         </TableCell>
                         <TableCell>
                           <span style={{ fontWeight: "bolder" }}>
@@ -135,9 +139,6 @@ export default class Order extends Component {
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
-    );}else{
-     return <div style={styles.prog}>
-       <CircularProgress  style={styles.circBar}size={68}/></div>
-    }
+    );
   }
 }
