@@ -13,6 +13,22 @@ export default class Client extends Component {
     };
   }
 
+  itemAmountUpdate=(itemWithNewAmount)=>{
+    console.log(typeof itemWithNewAmount.amount);
+    let element
+    for (let i = 0; i < this.state.allCart.length; i++) {
+       element = this.state.allCart[i];
+      if (element.item.Id === itemWithNewAmount.item.Id ) {
+        element.amount = itemWithNewAmount.amount + 1
+        return
+      }
+      
+    }
+    console.log(element);
+    
+    this.setState({allCart:element})
+  }
+
   addItemToCart = (item, amount) => {
     let newItem = { item: item, amount: amount };    
     let element
@@ -48,13 +64,14 @@ export default class Client extends Component {
     return (
       <React.Fragment>
         <Route exact path="/client/store">
-          <StorePage addItemToCart={this.addItemToCart} />
+          <StorePage allCart={this.state.allCart} addItemToCart={this.addItemToCart} />
         </Route>
         <Route exact path="/client/cart">
           <CartPage
             cleanCart={this.truncateCart}
             deleteItemFromCart={this.deleteItemFromCart}
-            cart={this.state.allCart} />
+            cart={this.state.allCart}
+            itemAmountUpdate={this.itemAmountUpdate} />
         </Route>
        
       </React.Fragment>

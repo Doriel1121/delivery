@@ -34,6 +34,7 @@ export default class ManagerPage extends Component {
     this.state = {
       allOrders: [],
       progressBar:false,
+      finishedOrders:[]
     };
   }
 
@@ -76,9 +77,16 @@ export default class ManagerPage extends Component {
      return  item.Id !==id
     })
     console.log(newOrdersArray);
-    
       this.setState({ allOrders: newOrdersArray });
   };
+
+  funcToReorgenizeOrders = (order) => {
+    let newList = this.state.allOrders.filter((item) => {
+      return item.Id !== order.Id
+    })
+    // newList.push(order)
+    this.setState({finishedOrders:[...this.state.finishedOrders,order]})
+  }
 
   render() {
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
@@ -97,12 +105,24 @@ export default class ManagerPage extends Component {
          {this.state.allOrders.map((element) => {
         return ( <div>
           <Order
+            size={this.state.allOrders.length}
+            funcToReorgenizeOrders={this.funcToReorgenizeOrders}
             deletedOrder={this.deleteOrder}
             key={element.Id}
             order={element}
           />
+          {this.state.finishedOrders.map((pro) => {
+        return <Order order={pro}
+        size={this.state.allOrders.length}
+            funcToReorgenizeOrders={this.funcToReorgenizeOrders}
+            deletedOrder={this.deleteOrder}
+            key={pro.Id}
+            order={pro}
+            />
+      })}
         </div>); 
       })}
+      
     </div>
     }
     return( <React.Fragment><Toolbar

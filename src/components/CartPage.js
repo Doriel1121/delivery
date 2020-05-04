@@ -43,17 +43,27 @@ export default class CartPage extends Component {
       Number: "",
       progressBar: false,
       OrderMinimum:0,
+      amount:0
     };
   }
 
   increaseAmount=(element)=>{
+    console.log(element);
+    let cart
      for (let i = 0; i < this.props.cart.length; i++) {
-       let cart = this.props.cart[i];
+      cart = this.props.cart[i];
        if (cart.item.Id === element.item.Id) {
-         cart.amount= element.amount+1
+         console.log("in");
+         
+         cart.amount= parseInt(element.amount)+1
+         console.log(cart);
+         this.props.itemAmountUpdate(cart)
+         return
+        //  console.log(cart.amount);
        }
        
      }
+
   }
 componentDidMount=()=>{
   Axios.get("https:murmuring-hamlet-58919.herokuapp.com/orderMin")
@@ -138,8 +148,38 @@ componentDidMount=()=>{
             <TableCell style={{ textAlign: "center" }}>
               {totalItemPrice}
             </TableCell>
+            {/* {this.state.amount !== 0 ?  */}
             <TableCell style={{ textAlign: "center" }}>
               <span >{itemAmount}</span>
+              <ButtonGroup
+              style={{ width:20}}
+              size="small"
+              orientation="vertical"
+              color="primary"
+              aria-label="vertical outlined primary button group"
+            >
+              <Button onClick={() => {this.increaseAmount(element)}}>+</Button>
+              <Button>-</Button>
+            </ButtonGroup>
+              </TableCell>
+              {/* : */}
+              {/* <TableCell>
+                <span>{this.state.amount}
+                <ButtonGroup
+              style={{ width:20}}
+              size="small"
+              orientation="vertical"
+              color="primary"
+              aria-label="vertical outlined primary button group"
+            >
+              <Button onClick={() => {this.increaseAmount(element)}}>+</Button>
+              <Button>-</Button>
+            </ButtonGroup>
+                </span>
+              </TableCell>
+              } */}
+              
+            
               {/* <ButtonGroup
               style={{ width:20}}
               size="small"
@@ -152,7 +192,7 @@ componentDidMount=()=>{
             </ButtonGroup> */}
      
 
-            </TableCell>
+            
             <TableCell>
               <span style={{ fontWeight: "bolder" }}>
                 {element.item.Name}

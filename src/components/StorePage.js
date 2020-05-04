@@ -55,7 +55,7 @@ export default class StorePage extends Component {
             {this.state.allItems.map((element) => {
               return (
                 <Grid className="itemBrake" key={element.Id} item xs={6}>
-                  <Item addItemToCart={this.props.addItemToCart} item={element} />
+                  <Item allCart={this.props.allCart} addItemToCart={this.props.addItemToCart} item={element} />
                 </Grid>
               );
             })}

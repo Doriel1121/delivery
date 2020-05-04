@@ -11,6 +11,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import Table from "@material-ui/core/Table";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+
 
 
 const styles = {
@@ -65,12 +67,21 @@ export default class Order extends Component {
     return sum;
   };
 
+  finishedOrder= (order) =>{
+    this.props.funcToReorgenizeOrders(order)
+  }
+
   render() {
+console.log(this.props.Order);
+
     let sumup = this.sumUpEachItemAddedToCart(this.props.order.Cart);
     if (this.state.proggresBar) {  
       return <div style={styles.prog}>
       <CircularProgress  style={styles.circBar}size={68}/></div>;
     }
+    let counter = 0
+    if (this.props.size !== counter) {
+      counter= counter +1 ; 
     return (
       <div>
         <ExpansionPanel>
@@ -82,12 +93,14 @@ export default class Order extends Component {
             >
               <Typography>
                 <span style={{ fontWeight: "bolder" }}>
-                  {this.props.order.Name}
+                <FiberManualRecordIcon style={{color:"green", width:13}}></FiberManualRecordIcon>
+                {this.props.order.Name}
                 </span>
                 <br />{" "}
                 <span className="numberStyleofOrder">
                   {" "}
                   {this.props.order.Number}
+                  
                 </span>
               </Typography>
             </ExpansionPanelSummary>
@@ -128,11 +141,12 @@ export default class Order extends Component {
 
               <div style={{ textAlign: "left" }}>
                 <Button
-                  onClick={() => this.closeOrder(this.props.order.Id)}
+                onClick={() => this.finishedOrder(this.props.order)}
+                  // onClick={() => this.closeOrder(this.props.order.Id)}
                   variant="contained"
                   color="primary"
                 >
-                  סגור הזמנה
+                 הכנתי הזמנה
                 </Button>
               </div>
             </div>
@@ -140,5 +154,79 @@ export default class Order extends Component {
         </ExpansionPanel>
       </div>
     );
+  }else{
+    return (
+      <div>
+        <ExpansionPanel>
+          <div className="PanelStyle">
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>
+                <span style={{ fontWeight: "bolder" }}>
+                <FiberManualRecordIcon style={{color:"red", width:13}}></FiberManualRecordIcon>
+                {this.props.order.Name}
+                </span>
+                <br />{" "}
+                <span className="numberStyleofOrder">
+                  {" "}
+                  {this.props.order.Number}
+                  
+                </span>
+              </Typography>
+            </ExpansionPanelSummary>
+          </div>
+          <ExpansionPanelDetails className={"expansionColor"} style={{'display': 'block', 'textAlign': 'center'}}>
+            <div>
+              <Table>
+                <TableBody style={{ textAlign: "right" }}>
+                  {this.props.order.Cart.map((element) => {
+                    var total = element.amount * element.item.Price;
+
+                    return (
+                      <TableRow key={element.item.Id}>
+                        <TableCell style={{ textAlign: "center" }}>
+                          {total.toFixed(2)}
+                        </TableCell>
+                        <TableCell style={{ textAlign: "center" }}>
+                          {parseFloat(element.amount).toFixed(2)}
+                        </TableCell>
+                        <TableCell>
+                          <span style={{ fontWeight: "bolder" }}>
+                            {element.item.Name}
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                  <TableRow>
+                    <TableCell></TableCell>
+
+                    <TableCell style={{ textAlign: "left" }}>
+                      {sumup.toFixed(2)} :סה"כ
+                    </TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+
+              <div style={{ textAlign: "left" }}>
+                <Button
+                // onClick={() => this.finishedOrder(this.props.order)}
+                  onClick={() => this.closeOrder(this.props.order.Id)}
+                  variant="contained"
+                  color="primary"
+                >
+                 סגור הזמנה
+                </Button>
+              </div>
+            </div>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </div>
+    )
+  }
   }
 }

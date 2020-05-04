@@ -54,6 +54,9 @@ export default class SummeryPage extends Component {
                     <Table>
                         <TableHead >
                             <TableRow>
+                                <TableCell>
+                                    <span style={{fontWeight:"bold"}}> יחידה</span>
+                                </TableCell>
                             <TableCell>
                                 <span style={{fontWeight:"bold"}}>כמות</span>
                                 </TableCell>
@@ -66,7 +69,7 @@ export default class SummeryPage extends Component {
                         <TableBody>
                     {this.state.itemsArray.map((element, key) => {
                         return <TableRow key={key}>
-                            
+                            <TableCell>{element.item.Units}</TableCell>
                             <TableCell>{element.amount}</TableCell>
                            <TableCell> <span style={{fontWeight:500}}>{element.item.Name}</span></TableCell>
                             <TableCell style={{fontWeight:"bold"}}>{key+1}</TableCell>

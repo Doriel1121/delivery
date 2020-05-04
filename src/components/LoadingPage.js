@@ -23,7 +23,6 @@ export default class LoadingPage extends Component {
         } else {
             return (
                 <div className="Load">
-                    <img className="Beta" src="beta.png" alt ="pic"/> 
                 <img className="LoadinglogoStyle" src="logo_transparent.png" alt="pic"/>
                 </div>
             )

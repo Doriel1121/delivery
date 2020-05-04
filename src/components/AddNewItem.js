@@ -28,7 +28,7 @@ const styles = {
   },
   circBar: {
     position: "absolute",
-    top: "400px",
+    top: "300px",
   },
 };
 
