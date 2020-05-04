@@ -84,11 +84,14 @@ export default class ManagerPage extends Component {
     let newList = this.state.allOrders.filter((item) => {
       return item.Id !== order.Id
     })
-    // newList.push(order)
-    this.setState({finishedOrders:[...this.state.finishedOrders,order]})
+    console.log(newList);
+    
+    this.setState({finishedOrders:[...this.state.finishedOrders,order] , allOrders:newList})
   }
 
   render() {
+    console.log(this.state.finishedOrders);
+    
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     let pageBody
     if (this.state.progressBar) {
@@ -105,22 +108,26 @@ export default class ManagerPage extends Component {
          {this.state.allOrders.map((element) => {
         return ( <div>
           <Order
+          status={"all"}
             size={this.state.allOrders.length}
             funcToReorgenizeOrders={this.funcToReorgenizeOrders}
-            deletedOrder={this.deleteOrder}
             key={element.Id}
             order={element}
           />
-          {this.state.finishedOrders.map((pro) => {
-        return <Order order={pro}
-        size={this.state.allOrders.length}
-            funcToReorgenizeOrders={this.funcToReorgenizeOrders}
-            deletedOrder={this.deleteOrder}
-            key={pro.Id}
-            order={pro}
-            />
-      })}
         </div>); 
+      })}
+      {this.state.finishedOrders.map((pro) => {
+        console.log(pro)
+        return (
+          <Order 
+          status= {"finished"}
+          // order={pro}
+          finishedorder={pro}
+          key={pro.Id}
+          deletedOrder={this.deleteOrder}
+
+          />
+        )
       })}
       
     </div>

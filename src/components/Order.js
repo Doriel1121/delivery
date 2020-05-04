@@ -71,17 +71,8 @@ export default class Order extends Component {
     this.props.funcToReorgenizeOrders(order)
   }
 
-  render() {
-console.log(this.props.Order);
-
+  showAllOrders =()=> {
     let sumup = this.sumUpEachItemAddedToCart(this.props.order.Cart);
-    if (this.state.proggresBar) {  
-      return <div style={styles.prog}>
-      <CircularProgress  style={styles.circBar}size={68}/></div>;
-    }
-    let counter = 0
-    if (this.props.size !== counter) {
-      counter= counter +1 ; 
     return (
       <div>
         <ExpansionPanel>
@@ -154,7 +145,11 @@ console.log(this.props.Order);
         </ExpansionPanel>
       </div>
     );
-  }else{
+  }
+
+  showFinishedOedres = () =>{
+    let sumup = this.sumUpEachItemAddedToCart(this.props.finishedorder.Cart);
+
     return (
       <div>
         <ExpansionPanel>
@@ -167,12 +162,12 @@ console.log(this.props.Order);
               <Typography>
                 <span style={{ fontWeight: "bolder" }}>
                 <FiberManualRecordIcon style={{color:"red", width:13}}></FiberManualRecordIcon>
-                {this.props.order.Name}
+                {this.props.finishedorder.Name}
                 </span>
                 <br />{" "}
                 <span className="numberStyleofOrder">
                   {" "}
-                  {this.props.order.Number}
+                  {this.props.finishedorder.Number}
                   
                 </span>
               </Typography>
@@ -182,7 +177,7 @@ console.log(this.props.Order);
             <div>
               <Table>
                 <TableBody style={{ textAlign: "right" }}>
-                  {this.props.order.Cart.map((element) => {
+                  {this.props.finishedorder.Cart.map((element) => {
                     var total = element.amount * element.item.Price;
 
                     return (
@@ -228,5 +223,28 @@ console.log(this.props.Order);
       </div>
     )
   }
+
+  render() {  
+    let finishedOrdres
+    let orders
+    if (this.props.status === "all") {
+      orders = this.showAllOrders()
+    }  
+    if (this.props.status === "finished" ) {
+       finishedOrdres = this.showFinishedOedres()
+    }
+
+    if (this.state.proggresBar) {  
+      return <div style={styles.prog}>
+      <CircularProgress  style={styles.circBar}size={68}/></div>;
+    }
+      return(
+        <div>
+          {orders}
+        {finishedOrdres}
+        </div>
+      )
+    
+  
   }
 }
