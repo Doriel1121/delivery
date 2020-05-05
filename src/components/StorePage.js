@@ -30,7 +30,8 @@ export default class StorePage extends Component {
 
     this.state = {
       allItems: [],
-      progressBar: true
+      progressBar: true,
+      include:""
     };
   }
 
@@ -44,7 +45,43 @@ export default class StorePage extends Component {
     })
   };
 
-  render() {
+    itemIncluded = (item) => {    
+      console.log(typeof item.Id);
+
+      if( this.props.allCart.length !== 0) { 
+        console.log("more");
+        this.props.allCart.map((element) => {
+          
+        
+        // for (let i = 0; i < this.props.allCart.length; i++) {
+        //   let element = this.props.allCart[i];
+          console.log(typeof element.item.Id);
+          
+          if(item.Id === element.item.Id ) {
+            console.log("yes");
+            this.setState({include:"yes"})
+       } else{
+         console.log("no");
+         
+          // return 
+          // <React.Fragment>
+          //   {console.log("else3")
+          //   }
+          // <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
+          //   הוסף לעגלה
+          // </Button>
+          // </React.Fragment>
+        }    
+      // }  
+    })
+    }else{
+      
+      this.setState({include:"no"})
+    }
+    }  
+
+  render() {    
+    
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     
     return (
@@ -55,7 +92,7 @@ export default class StorePage extends Component {
             {this.state.allItems.map((element) => {
               return (
                 <Grid className="itemBrake" key={element.Id} item xs={6}>
-                  <Item allCart={this.props.allCart} addItemToCart={this.props.addItemToCart} item={element} />
+                  <Item allCart= {this.props.allCart} is={this.state.include} itemIncluded={this.itemIncluded} addItemToCart={this.props.addItemToCart} item={element} />
                 </Grid>
               );
             })}

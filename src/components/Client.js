@@ -9,7 +9,7 @@ export default class Client extends Component {
     super(props);
 
     this.state = {
-      allCart: []
+      allCart: [],
     };
   }
 
@@ -60,14 +60,18 @@ export default class Client extends Component {
     this.setState({ allCart: [] });
   };
 
+
+
   render() {
     return (
       <React.Fragment>
         <Route exact path="/client/store">
-          <StorePage allCart={this.state.allCart} addItemToCart={this.addItemToCart} />
+          <StorePage  allCart={this.state.allCart} addItemToCart={this.addItemToCart} />
         </Route>
         <Route exact path="/client/cart">
           <CartPage
+            // answerToCertianItem={this.answerToCertianItem}
+            // certainItem={this.state.certainItem}
             cleanCart={this.truncateCart}
             deleteItemFromCart={this.deleteItemFromCart}
             cart={this.state.allCart}
