@@ -32,7 +32,7 @@ export default class Item extends Component {
   };
 
   toggleFocusStatuc = () => {    
-    this.props.itemIncluded(this.props.item)
+    // this.props.itemIncluded(this.props.item)
 
     if (!this.state.focusStatus) {
       this.setState({ focusStatus: true });
@@ -69,41 +69,6 @@ export default class Item extends Component {
     )
   };
 
-  // withBadge = () => {
-  //   console.log("run");
-  //   this.props.allCart.map((product) => {      
-  //     if(this.props.item.Id === product.item.Id ) {
-  //       return <React.Fragment>
-  //       {console.log("option1")}
-        
-  //     <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
-  //       הוסף לעגלה<CheckIcon
-  //         style={{color:"green", width:18, height:15}} >
-  //         Check
-  //         </CheckIcon>
-  //     </Button>
-  //     </React.Fragment>
-        
-  //     }
-  //   })
-  // }
-
-  // noBadge = () => {
-  //   this.props.allCart.map((product) => {
-  // console.log("hwllo world");
-  
-  //     if(this.props.item.Id !== product.item.Id ) {
-  //       return  <React.Fragment>
-  //       {console.log("else2")
-  //       }
-  //     <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
-  //       הוסף לעגלה
-  //     </Button>
-  //     </React.Fragment>
-  //       }
-  //     })
-  // }
-
   getCardActions = () => { 
     
      if (this.state.focusStatus) {
@@ -120,37 +85,18 @@ export default class Item extends Component {
           </Button>
         </React.Fragment>
    }else {
+     let a = this.props.allCart.filter((element) => element.item.Id === this.props.item.Id)
+     console.log(a);
      
-      if(this.props.allCart.length !== 0){     
-        if (this.props.is === "yes") { 
-        return (
-          <React.Fragment>
-                {console.log("option1")}
-              
-                <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
-                הוסף לעגלה<CheckIcon
-                style={{color:"green", width:18, height:15}} >
-                Check
-                </CheckIcon>
-            </Button>
-            </React.Fragment>
-        )
-      } else{
-        return <React.Fragment>
-        <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
-          הוסף לעגלה
-        </Button>
-        </React.Fragment>
-      }
-      }
-       else{
-
-        return <React.Fragment>
-        <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
-          הוסף לעגלה
-        </Button>
-        </React.Fragment>
-      } 
+     return <React.Fragment>
+     <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
+     הוסף לעגלה { 
+     this.props.allCart.filter((element) =>  element.item.Id === this.props.item.Id).length !== 0 ? 
+     <CheckIcon style={{color:"green", width:18, height:15}} >
+     Check
+     </CheckIcon> : <br />}
+ </Button>
+</React.Fragment>
     }
   }
 
@@ -175,7 +121,9 @@ export default class Item extends Component {
           {cardContent}
 
         </CardContent>
-        <CardActions>{cardActions}</CardActions>
+        <CardActions>{cardActions}
+        
+        </CardActions>
       </Card>
     </div>;
   }

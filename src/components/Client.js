@@ -19,14 +19,14 @@ export default class Client extends Component {
     for (let i = 0; i < this.state.allCart.length; i++) {
        element = this.state.allCart[i];
       if (element.item.Id === itemWithNewAmount.item.Id ) {
-        element.amount = itemWithNewAmount.amount + 1
+        element.amount = itemWithNewAmount.amount 
         return
       }
       
     }
     console.log(element);
     
-    this.setState({allCart:element})
+    this.setState({allCart:[this.state.allCart, element]})
   }
 
   addItemToCart = (item, amount) => {

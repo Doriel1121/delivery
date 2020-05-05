@@ -31,7 +31,6 @@ export default class StorePage extends Component {
     this.state = {
       allItems: [],
       progressBar: true,
-      include:""
     };
   }
 
@@ -45,42 +44,8 @@ export default class StorePage extends Component {
     })
   };
 
-    itemIncluded = (item) => {    
-      console.log(typeof item.Id);
-
-      if( this.props.allCart.length !== 0) { 
-        console.log("more");
-        this.props.allCart.map((element) => {
-          
-        
-        // for (let i = 0; i < this.props.allCart.length; i++) {
-        //   let element = this.props.allCart[i];
-          console.log(typeof element.item.Id);
-          
-          if(item.Id === element.item.Id ) {
-            console.log("yes");
-            this.setState({include:"yes"})
-       } else{
-         console.log("no");
-         
-          // return 
-          // <React.Fragment>
-          //   {console.log("else3")
-          //   }
-          // <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
-          //   הוסף לעגלה
-          // </Button>
-          // </React.Fragment>
-        }    
-      // }  
-    })
-    }else{
-      
-      this.setState({include:"no"})
-    }
-    }  
-
   render() {    
+    console.log(this.props.allCart);
     
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     

@@ -48,18 +48,15 @@ export default class CartPage extends Component {
   }
 
   increaseAmount=(element)=>{
-    console.log(element);
-    let cart
      for (let i = 0; i < this.props.cart.length; i++) {
-      cart = this.props.cart[i];
+      let cart = this.props.cart[i];
        if (cart.item.Id === element.item.Id) {
-         console.log("in");
          
          cart.amount= parseInt(element.amount)+1
-         console.log(cart);
          this.props.itemAmountUpdate(cart)
-         return
-        //  console.log(cart.amount);
+         
+       }else{
+         cart.amount = cart.amount
        }
        
      }
@@ -148,50 +145,18 @@ componentDidMount=()=>{
             <TableCell style={{ textAlign: "center" }}>
               {totalItemPrice}
             </TableCell>
-            {/* {this.state.amount !== 0 ?  */}
             <TableCell style={{ textAlign: "center" }}>
-              <span >{itemAmount}</span>
-              <ButtonGroup
-              style={{ width:20}}
-              size="small"
-              orientation="vertical"
-              color="primary"
-              aria-label="vertical outlined primary button group"
-            >
-              <Button onClick={() => {this.increaseAmount(element)}}>+</Button>
-              <Button>-</Button>
-            </ButtonGroup>
-              </TableCell>
-              {/* : */}
-              {/* <TableCell>
-                <span>{this.state.amount}
-                <ButtonGroup
-              style={{ width:20}}
-              size="small"
-              orientation="vertical"
-              color="primary"
-              aria-label="vertical outlined primary button group"
-            >
-              <Button onClick={() => {this.increaseAmount(element)}}>+</Button>
-              <Button>-</Button>
-            </ButtonGroup>
-                </span>
-              </TableCell>
-              } */}
-              
-            
-              {/* <ButtonGroup
-              style={{ width:20}}
-              size="small"
-              orientation="vertical"
-              color="primary"
-              aria-label="vertical outlined primary button group"
-            >
-              <Button onClick={() => {this.increaseAmount(element)}}>+</Button>
-              <Button>-</Button>
-            </ButtonGroup> */}
-     
+              <span style={{marginRight:10}} >{itemAmount}</span>
+             <button
+             style={{backgroundColor:"transparent", borderTop:"none"}} 
+             onClick={() => this.increaseAmount(element)}
+             >+</button>
 
+             <button
+             style={{backgroundColor:"transparent"}}>
+               -
+             </button>
+              </TableCell>
             
             <TableCell>
               <span style={{ fontWeight: "bolder" }}>
