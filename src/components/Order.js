@@ -68,7 +68,17 @@ export default class Order extends Component {
   };
 
   finishedOrder= (order) =>{
-    this.props.funcToReorgenizeOrders(order)
+    console.log(order);
+    let postId = {id:order.Id}
+    Axios.post("https://murmuring-hamlet-58919.herokuapp.com/prepareOrder", postId)
+    .then((res) =>{
+      console.log(res);
+      if (res.status === 200 && res.statusText === "OK") {
+        this.props.funcToReorgenizeOrders(order)
+
+      }
+      
+    })
   }
 
   showAllOrders =()=> {
@@ -225,12 +235,14 @@ export default class Order extends Component {
   }
 
   render() {  
+    console.log(this.props.order);
+    
     let finishedOrdres
     let orders
-    if (this.props.status === "all") {
+    if (this.props.order.status === 1) {
       orders = this.showAllOrders()
     }  
-    if (this.props.status === "finished" ) {
+    if (this.props.order.Status === 2 ) {
        finishedOrdres = this.showFinishedOedres()
     }
 

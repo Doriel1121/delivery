@@ -47,6 +47,7 @@ export default class ManagerPage extends Component {
             let element = res.data[i];
             let order = JSON.parse(element.OrderData);
             order.Id = element.Id;
+            order.Status = element.Status
             allorders.unshift(order);
           }
           this.props.allOrders(allorders)
@@ -108,7 +109,7 @@ export default class ManagerPage extends Component {
          {this.state.allOrders.map((element) => {
         return ( <div>
           <Order
-          status={"all"}
+          // status={"all"}
             size={this.state.allOrders.length}
             funcToReorgenizeOrders={this.funcToReorgenizeOrders}
             key={element.Id}
@@ -120,7 +121,7 @@ export default class ManagerPage extends Component {
         console.log(pro)
         return (
           <Order 
-          status= {"finished"}
+          // status= {"finished"}
           // order={pro}
           finishedorder={pro}
           key={pro.Id}

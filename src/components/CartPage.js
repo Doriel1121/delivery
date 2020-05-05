@@ -57,11 +57,26 @@ export default class CartPage extends Component {
          
        }else{
          cart.amount = cart.amount
-       }
-       
+       } 
      }
-
   }
+
+  decreaseAmount = (element) => {
+    console.log(element);
+
+    for (let i = 0; i < this.props.cart.length; i++) {
+      let cart = this.props.cart[i];
+       if (cart.item.Id === element.item.Id && element.amount > 1) {
+         
+         cart.amount= parseInt(element.amount)-1
+         this.props.itemAmountUpdate(cart)
+         
+       }else{
+         cart.amount = cart.amount
+       } 
+     }
+  }
+
 componentDidMount=()=>{
   Axios.get("https:murmuring-hamlet-58919.herokuapp.com/orderMin")
   .then((res)=>{
@@ -146,16 +161,19 @@ componentDidMount=()=>{
               {totalItemPrice}
             </TableCell>
             <TableCell style={{ textAlign: "center" }}>
-              <span style={{marginRight:10}} >{itemAmount}</span>
+            <button
+            onClick={() =>this.decreaseAmount(element)}
+             className="incDecBtn"
+             style={{width:20}}>
+               -
+             </button>
+              <span style={{marginRight:6, marginLeft:6}} >{itemAmount}</span>
              <button
-             style={{backgroundColor:"transparent", borderTop:"none"}} 
+             className="incDecBtn" 
              onClick={() => this.increaseAmount(element)}
              >+</button>
 
-             <button
-             style={{backgroundColor:"transparent"}}>
-               -
-             </button>
+             
               </TableCell>
             
             <TableCell>

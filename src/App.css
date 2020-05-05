@@ -191,3 +191,12 @@ cursor: none;
   height: 30px;
   vertical-align: middle;
 }
+
+.incDecBtn{
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  background-color: rgb(240, 230, 230);
+  opacity: 0.8;
+}
