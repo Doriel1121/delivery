@@ -235,14 +235,14 @@ export default class Order extends Component {
   }
 
   render() {  
-    console.log(this.props.order);
+    // console.log(this.props.order.Status);
     
     let finishedOrdres
     let orders
-    if (this.props.order.status === 1) {
+    if (this.props.order.Status === 1) {
       orders = this.showAllOrders()
     }  
-    if (this.props.order.Status === 2 ) {
+    if (this.props.finishedorder.Status === 2 ) {
        finishedOrdres = this.showFinishedOedres()
     }
 

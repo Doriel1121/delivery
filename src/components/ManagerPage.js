@@ -43,15 +43,23 @@ export default class ManagerPage extends Component {
       Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders").then(
         (res) => {
           let allorders = [];
+          let finishedOrderList = [];
           for (let i = 0; i < res.data.length; i++) {
-            let element = res.data[i];
+            let element = res.data[i];            
             let order = JSON.parse(element.OrderData);
             order.Id = element.Id;
             order.Status = element.Status
-            allorders.unshift(order);
+            console.log(typeof order.Status);
+            
+            if (order.Status === 1) {  
+              allorders.unshift(order);
+            }else if (order.Status === 2) {
+              finishedOrderList.unshift(order);
+            }
+            
           }
           this.props.allOrders(allorders)
-            this.setState({ allOrders: allorders, progressBar:false});
+            this.setState({ allOrders: allorders, progressBar:false, finishedOrders:finishedOrderList});
           }
       ).catch((error) =>{
         console.log(error);
@@ -92,6 +100,8 @@ export default class ManagerPage extends Component {
 
   render() {
     console.log(this.state.finishedOrders);
+    console.log(this.state.allOrders);
+    
     
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     let pageBody
@@ -109,7 +119,7 @@ export default class ManagerPage extends Component {
          {this.state.allOrders.map((element) => {
         return ( <div>
           <Order
-          // status={"all"}
+            // status={"all"}
             size={this.state.allOrders.length}
             funcToReorgenizeOrders={this.funcToReorgenizeOrders}
             key={element.Id}
