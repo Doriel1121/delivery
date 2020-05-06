@@ -5,7 +5,7 @@ import Axios from "axios";
 import { Link , Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
-
+import config from "../config"
 
 
 const styles = {
@@ -32,15 +32,15 @@ export default class ManagerPage extends Component {
     super(props);
 
     this.state = {
-      allOrders: [],
+      unreadyOrders: [],
       progressBar:false,
-      finishedOrders:[]
+      readyOrders:[]
     };
   }
 
   GetOrderFromServer = () => {
       this.setState({progressBar:true} , () =>{
-      Axios.get("https://murmuring-hamlet-58919.herokuapp.com/openOrders").then(
+      Axios.get(`${config.server}/openOrders`).then(
         (res) => {
           let allorders = [];
           let finishedOrderList = [];
@@ -59,7 +59,7 @@ export default class ManagerPage extends Component {
             
           }
           this.props.allOrders(allorders)
-            this.setState({ allOrders: allorders, progressBar:false, finishedOrders:finishedOrderList});
+            this.setState({ unreadyOrders: allorders, progressBar:false, readyOrders:finishedOrderList});
           }
       ).catch((error) =>{
         console.log(error);
@@ -82,22 +82,22 @@ export default class ManagerPage extends Component {
   deleteOrder = (id) => {
     console.log(id);
     
-    let newOrdersArray=this.state.finishedOrders.filter((item) => {
+    let newOrdersArray=this.state.readyOrders.filter((item) => {
      return  item.Id !==id
     })
     console.log(newOrdersArray);
-      this.setState({ finishedOrders: newOrdersArray });
+      this.setState({ readyOrders: newOrdersArray });
   };
 
   funcToReorgenizeOrders = (order) => {
-    let finished = this.state.finishedOrders
-    let newList = this.state.allOrders.filter((item) => {
+    let finished = this.state.readyOrders
+    let newList = this.state.unreadyOrders.filter((item) => {
       return  item.Id !== order.Id}
     )
     order.Status = 2
     finished.unshift(order)
     console.log(finished);
-    this.setState({finishedOrders:finished , allOrders:newList})
+    this.setState({readyOrders:finished , unreadyOrders:newList})
   }
 
   render() {
@@ -109,26 +109,29 @@ export default class ManagerPage extends Component {
     </div>
     }
     else{
-      pageBody = this.state.allOrders.length == 0 ? 
+      console.log(this.state.unreadyOrders);
+      console.log(this.state.readyOrders);
+      
+      pageBody = (this.state.unreadyOrders.length === 0 && this.state.readyOrders.length === 0) ? 
         <h4 style={{marginTop:70, textAlign:"center"}}>אין הזמנות</h4>
       :
       <div  style={{ marginTop: 62 }}>
         <div style={{textAlign:"right"}} ><Link to ="/manager/summery"><Button style={{color:"blue"}}>הצג סיכום כמויות מוצרים</Button></Link></div>
-         {this.state.allOrders.map((element) => {
+         {this.state.unreadyOrders.map((element) => {
         return ( 
           <Order
-            size={this.state.allOrders.length}
+            size={this.state.unreadyOrders.length}
             funcToReorgenizeOrders={this.funcToReorgenizeOrders}
             key={element.Id}
             order={element}
           />
         ); 
       })}
-      {this.state.finishedOrders.map((pro) => {
+      {this.state.readyOrders.map((pro) => {
         console.log(pro)
         return (
           <Order 
-          finishedorder={pro}
+          order={pro}
           key={pro.Id}
           deletedOrder={this.deleteOrder}
           />

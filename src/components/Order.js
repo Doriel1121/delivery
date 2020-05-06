@@ -43,15 +43,18 @@ export default class Order extends Component {
     }
   }
   
-  closeOrder = (id) => {
+  closeOrder = (id , address , callback ) => {
     let Identity = { id: id };
-    this.setState({proggresBar:true} , ()=>{
-    Axios.post(
-      "https://murmuring-hamlet-58919.herokuapp.com/closeOrder",
+    this.setState({proggresBar:true} , ()=>{   
+      Axios.post(
+      address,
       Identity
     ).then(() => {
       this.setState({proggresBar:false})
-       this.props.deletedOrder(id);
+      console.log(address);
+      console.log(Identity);
+      
+      callback()
     }).catch((error)=>{
       console.log(error);
       alert("משהו השתבש נסה שוב מאוחר יותר ")
@@ -67,25 +70,32 @@ export default class Order extends Component {
     return sum;
   };
 
-  finishedOrder= (order) =>{
-    console.log(order);
-    let postId = {id:order.Id}
-    Axios.post("https://murmuring-hamlet-58919.herokuapp.com/prepareOrder", postId)
-    .then((res) =>{
-      console.log(res);
-      if (res.status === 200 && res.statusText === "OK") {
-        this.props.funcToReorgenizeOrders(order)
-
-      }
-      
-    }).catch((error) =>{
-      console.log(error);
-      alert("משהו השתבש נסה שוב מאוחר יותר")
-    })
-  }
-
-  showAllOrders =()=> {
+  showAllOrders =(status)=> {
     let sumup = this.sumUpEachItemAddedToCart(this.props.order.Cart);
+    let dotColor = status == 2 ? "red" : "green"
+    let actionButton = status == 2 ? <Button
+    // onClick={() => this.finishedOrder(this.props.order)}
+      onClick={() => this.closeOrder(this.props.order.Id,
+         "https://murmuring-hamlet-58919.herokuapp.com/closeOrder" ,
+          () => {this.props.deletedOrder(this.props.order.Id)})}
+      variant="contained"
+      color="primary"
+    >
+  סגור הזמנה
+
+   </Button>  : 
+   <Button
+   onClick={() => this.closeOrder(this.props.order.Id ,
+      "https://murmuring-hamlet-58919.herokuapp.com/prepareOrder" ,
+       ()=> {this.props.funcToReorgenizeOrders(this.props.order)})}
+     // onClick={() => this.closeOrder(this.props.order.Id)}
+     variant="contained"
+     color="primary"
+   >
+         הכנתי הזמנה      
+
+   </Button>
+     
     return (
       <div>
         <ExpansionPanel>
@@ -97,7 +107,7 @@ export default class Order extends Component {
             >
               <Typography>
                 <span style={{ fontWeight: "bolder" }}>
-                <FiberManualRecordIcon style={{color:"green", width:13}}></FiberManualRecordIcon>
+                <FiberManualRecordIcon style={{color:dotColor, width:13}}></FiberManualRecordIcon>
                 {this.props.order.Name}
                 </span>
                 <br />{" "}
@@ -144,14 +154,7 @@ export default class Order extends Component {
               </Table>
 
               <div style={{ textAlign: "left" }}>
-                <Button
-                onClick={() => this.finishedOrder(this.props.order)}
-                  // onClick={() => this.closeOrder(this.props.order.Id)}
-                  variant="contained"
-                  color="primary"
-                >
-                 הכנתי הזמנה
-                </Button>
+                {actionButton}
               </div>
             </div>
           </ExpansionPanelDetails>
@@ -160,108 +163,16 @@ export default class Order extends Component {
     );
   }
 
-  showFinishedOedres = () =>{
-    let sumup = this.sumUpEachItemAddedToCart(this.props.finishedorder.Cart);
-
-    return (
-      <div>
-        <ExpansionPanel>
-          <div className="PanelStyle">
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>
-                <span style={{ fontWeight: "bolder" }}>
-                <FiberManualRecordIcon style={{color:"red", width:13}}></FiberManualRecordIcon>
-                {this.props.finishedorder.Name}
-                </span>
-                <br />{" "}
-                <span className="numberStyleofOrder">
-                  {" "}
-                  {this.props.finishedorder.Number}
-                  
-                </span>
-              </Typography>
-            </ExpansionPanelSummary>
-          </div>
-          <ExpansionPanelDetails className={"expansionColor"} style={{'display': 'block', 'textAlign': 'center'}}>
-            <div>
-              <Table>
-                <TableBody style={{ textAlign: "right" }}>
-                  {this.props.finishedorder.Cart.map((element) => {
-                    var total = element.amount * element.item.Price;
-
-                    return (
-                      <TableRow key={element.item.Id}>
-                        <TableCell style={{ textAlign: "center" }}>
-                          {total.toFixed(2)}
-                        </TableCell>
-                        <TableCell style={{ textAlign: "center" }}>
-                          {parseFloat(element.amount).toFixed(2)}
-                        </TableCell>
-                        <TableCell>
-                          <span style={{ fontWeight: "bolder" }}>
-                            {element.item.Name}
-                          </span>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                  <TableRow>
-                    <TableCell></TableCell>
-
-                    <TableCell style={{ textAlign: "left" }}>
-                      {sumup.toFixed(2)} :סה"כ
-                    </TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-
-              <div style={{ textAlign: "left" }}>
-                <Button
-                // onClick={() => this.finishedOrder(this.props.order)}
-                  onClick={() => this.closeOrder(this.props.finishedorder.Id)}
-                  variant="contained"
-                  color="primary"
-                >
-                 סגור הזמנה
-                </Button>
-              </div>
-            </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      </div>
-    )
-  }
+ 
 
   render() {  
-    // console.log(this.props.finishedorder.Status);
-    
-    let finishedOrdres
-    let orders
-    if (this.props.order !== undefined) {
-      if (this.props.order.Status === 1) {
-        orders = this.showAllOrders()
-      } 
-    }
-    if (this.props.finishedorder !== undefined) {
-      if (this.props.finishedorder.Status === 2 ) {
-        finishedOrdres = this.showFinishedOedres()
-     }
-    }
-    
-
     if (this.state.proggresBar) {  
       return <div style={styles.prog}>
       <CircularProgress  style={styles.circBar}size={68}/></div>;
     }
       return(
         <div>
-          {orders}
-        {finishedOrdres}
+          {this.showAllOrders(this.props.order.Status)}
         </div>
       )
     
