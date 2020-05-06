@@ -82,27 +82,25 @@ export default class ManagerPage extends Component {
   deleteOrder = (id) => {
     console.log(id);
     
-    let newOrdersArray=this.state.allOrders.filter((item) => {
+    let newOrdersArray=this.state.finishedOrders.filter((item) => {
      return  item.Id !==id
     })
     console.log(newOrdersArray);
-      this.setState({ allOrders: newOrdersArray });
+      this.setState({ finishedOrders: newOrdersArray });
   };
 
   funcToReorgenizeOrders = (order) => {
+    let finished = this.state.finishedOrders
     let newList = this.state.allOrders.filter((item) => {
-      return item.Id !== order.Id
-    })
-    console.log(newList);
-    
-    this.setState({finishedOrders:[...this.state.finishedOrders,order] , allOrders:newList})
+      return  item.Id !== order.Id}
+    )
+    order.Status = 2
+    finished.unshift(order)
+    console.log(finished);
+    this.setState({finishedOrders:finished , allOrders:newList})
   }
 
   render() {
-    console.log(this.state.finishedOrders);
-    console.log(this.state.allOrders);
-    
-    
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     let pageBody
     if (this.state.progressBar) {
@@ -117,26 +115,22 @@ export default class ManagerPage extends Component {
       <div  style={{ marginTop: 62 }}>
         <div style={{textAlign:"right"}} ><Link to ="/manager/summery"><Button style={{color:"blue"}}>הצג סיכום כמויות מוצרים</Button></Link></div>
          {this.state.allOrders.map((element) => {
-        return ( <div>
+        return ( 
           <Order
-            // status={"all"}
             size={this.state.allOrders.length}
             funcToReorgenizeOrders={this.funcToReorgenizeOrders}
             key={element.Id}
             order={element}
           />
-        </div>); 
+        ); 
       })}
       {this.state.finishedOrders.map((pro) => {
         console.log(pro)
         return (
           <Order 
-          // status= {"finished"}
-          // order={pro}
           finishedorder={pro}
           key={pro.Id}
           deletedOrder={this.deleteOrder}
-
           />
         )
       })}

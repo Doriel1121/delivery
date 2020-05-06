@@ -17,6 +17,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const styles = {
   prog: {
+    zIndex:3,
     position: "absolute",
     top: "0px",
     height: "100%",
@@ -50,11 +51,10 @@ export default class Order extends Component {
       Identity
     ).then(() => {
       this.setState({proggresBar:false})
-      return this.props.deletedOrder(id);
+       this.props.deletedOrder(id);
     }).catch((error)=>{
       console.log(error);
       alert("משהו השתבש נסה שוב מאוחר יותר ")
-      
     })
   })
   };
@@ -78,6 +78,9 @@ export default class Order extends Component {
 
       }
       
+    }).catch((error) =>{
+      console.log(error);
+      alert("משהו השתבש נסה שוב מאוחר יותר")
     })
   }
 
@@ -220,7 +223,7 @@ export default class Order extends Component {
               <div style={{ textAlign: "left" }}>
                 <Button
                 // onClick={() => this.finishedOrder(this.props.order)}
-                  onClick={() => this.closeOrder(this.props.order.Id)}
+                  onClick={() => this.closeOrder(this.props.finishedorder.Id)}
                   variant="contained"
                   color="primary"
                 >
@@ -235,16 +238,21 @@ export default class Order extends Component {
   }
 
   render() {  
-    // console.log(this.props.order.Status);
+    // console.log(this.props.finishedorder.Status);
     
     let finishedOrdres
     let orders
-    if (this.props.order.Status === 1) {
-      orders = this.showAllOrders()
-    }  
-    if (this.props.finishedorder.Status === 2 ) {
-       finishedOrdres = this.showFinishedOedres()
+    if (this.props.order !== undefined) {
+      if (this.props.order.Status === 1) {
+        orders = this.showAllOrders()
+      } 
     }
+    if (this.props.finishedorder !== undefined) {
+      if (this.props.finishedorder.Status === 2 ) {
+        finishedOrdres = this.showFinishedOedres()
+     }
+    }
+    
 
     if (this.state.proggresBar) {  
       return <div style={styles.prog}>
