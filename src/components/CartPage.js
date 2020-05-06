@@ -9,9 +9,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+import config from "../config";
 import Axios from "axios";
 
 const styles = {
@@ -47,6 +45,15 @@ export default class CartPage extends Component {
     };
   }
 
+  componentDidMount=()=>{
+    Axios.get(`${config.server}/orderMin`)
+    .then((res)=>{
+      this.setState({OrderMinimum:res.data})
+    }).catch((error)=>{
+      alert("משהו השתבש נסה שוב מאוחר יותר ")
+    })
+  }
+
   increaseAmount=(element)=>{
      for (let i = 0; i < this.props.cart.length; i++) {
       let cart = this.props.cart[i];
@@ -77,13 +84,6 @@ export default class CartPage extends Component {
      }
   }
 
-componentDidMount=()=>{
-  Axios.get("https:murmuring-hamlet-58919.herokuapp.com/orderMin")
-  .then((res)=>{
-    this.setState({OrderMinimum:res.data})
-  })
-}
-
 
   getSumOfAllCart = (cart) => {
     let sum = 0;
@@ -104,10 +104,10 @@ componentDidMount=()=>{
         phoneNumberString[1] === "5" &&
         phoneNumberString.length === 10 &&
         this.state.Name !== undefined && 
-        this.state.Name.length <= 10
+        this.state.Name.length <= 15
       ) {
         this.setState({ progressBar: true }, () => {
-          Axios.post("https:murmuring-hamlet-58919.herokuapp.com/order", order)
+          Axios.post(`${config.server}/order`, order)
             .then((res) => {
               alert("הזמנה בוצעה בהצלחה");
               this.props.cleanCart();
@@ -120,7 +120,7 @@ componentDidMount=()=>{
         });
       } else {
         document.getElementById("error").innerHTML =
-          "הכנס מספר בן 10 ספרות המתחיל ב 05 & אורך מקסימלי לשם הוא 10 תווים ";
+          "הכנס מספר בן 10 ספרות המתחיל ב 05 & אורך מקסימלי לשם הוא 15 תווים ";
       }
     } else {
       alert(`מינימום הזמנה של ${this.state.OrderMinimum.Value}`)

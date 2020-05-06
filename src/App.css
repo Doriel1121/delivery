@@ -29,7 +29,7 @@ text-decoration: none;
 }
 
 .toolbarRefresh{
-  transform: translateY(25%);
+  transform: translateY(20%);
   cursor: pointer;
   text-align: right;
   margin-right: 5px;
@@ -55,7 +55,7 @@ transform: translateY(50%);
 
 .name{
   text-align:center;
-  transform: translateY(20%);
+  transform: translateY(13%);
 }
 
 .imgsize{

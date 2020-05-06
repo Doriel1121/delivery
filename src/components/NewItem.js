@@ -12,6 +12,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import config from "../config"
+
 
 export default class NewItem extends Component {
   constructor(props) {
@@ -49,13 +51,15 @@ export default class NewItem extends Component {
   deleteItem = () => {
     let id = { Id: this.props.item.Id };
     Axios.post(
-      "https://murmuring-hamlet-58919.herokuapp.com/deleteItem",
+      `${config.server}/deleteItem`,
       id
     ).then((res) => {      
       if (res.status === 200 && res.data === "done") {        
         this.props.delete(this.props.item.Id);
       }
-    });
+    }).catch((error) => {
+      alert("משהו השתבש נסה שוב מאוחר יותר ")
+    })
   };
 
   saveChanges = () => {
@@ -83,13 +87,15 @@ export default class NewItem extends Component {
       Img: this.state.updatedImg,
     };
     Axios.post(
-      "https://murmuring-hamlet-58919.herokuapp.com/updateItem",
+      `${config.server}/updateItem`,
       itemAndId
     ).then((res) => {        
         if (res.status === 200) {
             return this.editItem()
         }
-    });
+    }).catch((error) => {
+      alert("משהו השתבש נסה שוב מאוחר יותר ")
+    })
   };
 
   editItem = () => {

@@ -32,8 +32,6 @@ export default class Item extends Component {
   };
 
   toggleFocusStatuc = () => {    
-    // this.props.itemIncluded(this.props.item)
-
     if (!this.state.focusStatus) {
       this.setState({ focusStatus: true });
     } else {
@@ -85,8 +83,9 @@ export default class Item extends Component {
           </Button>
         </React.Fragment>
    }else {
+    console.log(this.props.allCart);
+
      let a = this.props.allCart.filter((element) => element.item.Id === this.props.item.Id)
-     console.log(a);
      
      return <React.Fragment>
      <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">

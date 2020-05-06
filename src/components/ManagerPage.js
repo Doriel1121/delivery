@@ -38,6 +38,10 @@ export default class ManagerPage extends Component {
     };
   }
 
+  componentDidMount = () => {      
+    this.GetOrderFromServer();
+  };
+
   GetOrderFromServer = () => {
       this.setState({progressBar:true} , () =>{
       Axios.get(`${config.server}/openOrders`).then(
@@ -69,9 +73,6 @@ export default class ManagerPage extends Component {
     
   };
 
-  componentDidMount = () => {      
-    this.GetOrderFromServer();
-  };
 
   redirectToEditPage = () => {
     return <Redirect to="/edit" />;
@@ -89,7 +90,7 @@ export default class ManagerPage extends Component {
       this.setState({ readyOrders: newOrdersArray });
   };
 
-  funcToReorgenizeOrders = (order) => {
+  moveOrderToReady = (order) => {
     let finished = this.state.readyOrders
     let newList = this.state.unreadyOrders.filter((item) => {
       return  item.Id !== order.Id}
@@ -116,12 +117,12 @@ export default class ManagerPage extends Component {
         <h4 style={{marginTop:70, textAlign:"center"}}>אין הזמנות</h4>
       :
       <div  style={{ marginTop: 62 }}>
-        <div style={{textAlign:"right"}} ><Link to ="/manager/summery"><Button style={{color:"blue"}}>הצג סיכום כמויות מוצרים</Button></Link></div>
+        <div style={{textAlign:"right"}} ><Link style={{textDecoration:"none"}} to ="/manager/summery"><Button style={{color:"blue" }}>הצג סיכום כמויות מוצרים</Button></Link></div>
          {this.state.unreadyOrders.map((element) => {
         return ( 
           <Order
             size={this.state.unreadyOrders.length}
-            funcToReorgenizeOrders={this.funcToReorgenizeOrders}
+            funcToReorgenizeOrders={this.moveOrderToReady}
             key={element.Id}
             order={element}
           />

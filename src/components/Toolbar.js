@@ -30,7 +30,7 @@ export default class Toolbar extends Component {
         <div className="toolbr">
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
-              <Grid item xs={2}>
+              <Grid style={{transform:"translateY(4%)"}} item xs={2}>
                 <Link to="/edit">
                   <EditIcon
                     style={{marginLeft:20}}
@@ -60,7 +60,7 @@ export default class Toolbar extends Component {
       </Fab>
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
-              <Grid item xs={3}>
+              <Grid  style={{transform:"translateY(4%)"}} item xs={3}>
                 <Link to="/manager/homepage">
                   <ArrowBackIcon className="backIcon">ArrowBack</ArrowBackIcon>
                 </Link>
@@ -69,7 +69,6 @@ export default class Toolbar extends Component {
                 <h4 className="toolbrStyle"> כל המוצרים</h4>
               </Grid>
               <Grid className="toolbarRefresh" item xs={3}>
-                {/* <CachedIcon style={{marginRight:8}} onClick={() => this.refreshPage()}></CachedIcon> */}
               </Grid>
             </Grid>
           </AppBar>
@@ -98,8 +97,8 @@ export default class Toolbar extends Component {
        <Link style={{color:"white"}} to ="/client/cart"><ShoppingCartIcon/></Link>
       </Fab> */}
           <AppBar style={{ color: "white", height: 60 }}>
-            <Grid container spacing={3}>
-              <Grid item xs>
+            <Grid  container spacing={3}>
+              <Grid style={{transform:"translateY(3%)"}} item xs>
                 <Link to="/client/store">
                 <ArrowBackIcon className="backIcon">
                   ArrowBack
@@ -145,7 +144,7 @@ export default class Toolbar extends Component {
       return (
         <div className="toolbr">
         <Fab color="primary"  aria-label="add" style={{'position': 'fixed', 'bottom': '20px', 'right': '20px'}}>
-     <Link style={{color:"white"}} to ="/client/cart"><ShoppingCartIcon/></Link>
+     <Link style={{color:"white", transform:"translateY(10%)"}} to ="/client/cart"><ShoppingCartIcon/></Link>
     </Fab>
         <AppBar style={{ color: "white", height: 60 }}>
           <Grid container spacing={3}>

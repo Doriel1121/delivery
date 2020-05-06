@@ -12,6 +12,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import config from "../config";
+
 
 
 const styles = {
@@ -49,9 +51,9 @@ export default class AddNewItem extends Component {
 
 
 
-      inCaseImgNotWorking=(ev)=>{
-        ev.target.src = 'https://clipartstation.com/wp-content/uploads/2017/11/x-clipart-3.png'  
-      }
+      // inCaseImgNotWorking=(ev)=>{
+      //   ev.target.src = 'https://clipartstation.com/wp-content/uploads/2017/11/x-clipart-3.png'  
+      // }
 
       sendToServerNewItem = () => {
         let newname = this.state.newName;
@@ -67,7 +69,7 @@ export default class AddNewItem extends Component {
 
           
           Axios.post(
-            "https://murmuring-hamlet-58919.herokuapp.com/addItem",
+            `${config.server}/addItem`,
             newItem
           ).then((res) => {
              if (res.status===200 && res.data==="done") {   

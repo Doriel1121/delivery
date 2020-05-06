@@ -13,7 +13,7 @@ export default class Client extends Component {
     };
   }
 
-  itemAmountUpdate=(itemWithNewAmount)=>{
+  updateItemAmount=(itemWithNewAmount)=>{
     console.log(typeof itemWithNewAmount.amount);
     let element
     for (let i = 0; i < this.state.allCart.length; i++) {
@@ -73,7 +73,7 @@ export default class Client extends Component {
             cleanCart={this.truncateCart}
             deleteItemFromCart={this.deleteItemFromCart}
             cart={this.state.allCart}
-            itemAmountUpdate={this.itemAmountUpdate} />
+            itemAmountUpdate={this.updateItemAmount} />
         </Route>
        
       </React.Fragment>

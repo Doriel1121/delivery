@@ -6,6 +6,8 @@ import { Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import config from "../config";
+
 
 
 const styles = {
@@ -40,8 +42,13 @@ export default class EditStorePage extends Component {
     };
   }
 
-  setMinimumValue=()=>{
-    Axios.get("https://murmuring-hamlet-58919.herokuapp.com/orderMin").then(
+  componentDidMount=()=>{
+    this.storeItemsOnServer()
+    this.getMinimumFromServer()
+  }
+  
+  getMinimumFromServer=()=>{
+    Axios.get(`${config.server}/orderMin`).then(
       (res)=>{
         this.setState({minimumOrder:res.data.Value})
       }
@@ -50,7 +57,7 @@ export default class EditStorePage extends Component {
 
   setMinimumOrder=()=>{
     let minimum = {orderMin:this.state.minimumOrder}
-    Axios.post("https://murmuring-hamlet-58919.herokuapp.com/updateOrderMin", minimum)
+    Axios.post(`${config.server}/updateOrderMin`, minimum)
     .then(() =>{
       this.setState({minimumShow:false})
     }).catch((error)=>{
@@ -62,14 +69,10 @@ export default class EditStorePage extends Component {
   showMinimum=()=>{
     this.setState({minimumShow:true})
   }
-
-  componentDidMount=()=>{
-    this.storeItemsOnServer()
-    this.setMinimumValue()
-  }
+  
 
   storeItemsOnServer = () => {
-        Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
+        Axios.get(`${config.server}/allitems`).then(
       (res) => {
         this.setState({ allItems: res.data, progressBar: false });
       }

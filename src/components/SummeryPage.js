@@ -14,6 +14,10 @@ export default class SummeryPage extends Component {
             itemsArray:[]
         }
     }
+
+    componentDidMount=()=>{
+        this.getOrderSummery(this.props.orders)
+    }
     
     
     getOrderSummery=(orders)=>{
@@ -36,10 +40,6 @@ export default class SummeryPage extends Component {
         }
         console.log(itemsArray);
         this.setState({itemsArray:itemsArray})
-        // return itemsArray;
-    }
-    componentDidMount=()=>{
-        this.getOrderSummery(this.props.orders)
     }
 
     render() {

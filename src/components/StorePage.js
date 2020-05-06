@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
+import config from "../config";
+
 
 const styles = {
   prog: {
@@ -35,7 +37,7 @@ export default class StorePage extends Component {
   }
 
   componentDidMount = () => {
-    Axios.get("https://murmuring-hamlet-58919.herokuapp.com/allitems").then(
+    Axios.get(`${config.server}/allitems`).then(
       (res) => {        
         this.setState({ allItems: res.data, progressBar: false });
       }

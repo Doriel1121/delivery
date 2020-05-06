@@ -4,14 +4,14 @@ import EditStorePage from "./components/EditStorePage";
 import ManagerPage from './components/ManagerPage';
 import Client from './components/Client';
 import LoadingPage from "./components/LoadingPage";
-import AddNewItem from './components/AddNewItem';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import AddNewItemPage from './components/AddNewItemPage';
+import SummeryPage from './components/SummeryPage';
 import {HashRouter as Router , Route , Switch} from 'react-router-dom';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
-import SummeryPage from './components/SummeryPage';
+
 
 const theme = createMuiTheme({
 	direction: 'rtl'
@@ -66,7 +66,7 @@ export default class App extends Component {
                     <EditStorePage />
                 </Route>
                 <Route exact path ="/additem">
-                  <AddNewItem activatestoreItemsOnServer={this.activatestoreItemsOnServer} updateState ={this.updateStateWithList}allItems={this.updateAllItemsList} />
+                  <AddNewItemPage activatestoreItemsOnServer={this.activatestoreItemsOnServer} updateState ={this.updateStateWithList}allItems={this.updateAllItemsList} />
                 </Route>
                 <Route exact path ="/manager/summery">
                   <SummeryPage orders={this.state.allOrders}/>
