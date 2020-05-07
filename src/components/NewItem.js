@@ -173,16 +173,15 @@ export default class NewItem extends Component {
               <ExpansionPanelDetails className={"expansionColor"}>
                 <div>
               {
+                <React.Fragment>
                       <TextField
-                        style={{ width: 100}}
+                        style={{ width: 300}}
                         defaultValue={this.props.item.Name}
                         id="standard-basic"
                         onChange={this.updateName}
                         label="שם מוצר"
                       />
-                    }
-                   
-                    {
+                      <br/>
                       <TextField
                         style={{ width: 50, marginLeft:15 }}
                         id="standard-basic"
@@ -191,17 +190,15 @@ export default class NewItem extends Component {
                         onChange={this.updatePrice}
                         label="מחיר"
                       />
-                    }
-                    {
+                      <br/>
                       <TextField
-                        style={{ width: 100 , marginLeft:15 }}
+                        style={{ width: 300 , marginLeft:15 }}
                         id="standard-basic"
                         defaultValue={this.props.item.Image}
                         onChange={this.updateImage}
                         label="תמונה"
                       />
-                    }<br/>
-                     {
+                      <br/>
                          <FormControl >
                          <InputLabel id="demo-simple-select-label">יחידות </InputLabel>
                          <Select
@@ -215,6 +212,7 @@ export default class NewItem extends Component {
                            <MenuItem value={'100 גרם'}>גרם</MenuItem>
                          </Select>
                        </FormControl>
+                       </React.Fragment>
                     }
                     </div><br/>
                

@@ -12,7 +12,7 @@ import TableCell from "@material-ui/core/TableCell";
 import Table from "@material-ui/core/Table";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-
+import config from "../config"
 
 
 const styles = {
@@ -72,11 +72,11 @@ export default class Order extends Component {
 
   showAllOrders =(status)=> {
     let sumup = this.sumUpEachItemAddedToCart(this.props.order.Cart);
-    let dotColor = status == 2 ? "red" : "green"
-    let actionButton = status == 2 ? <Button
+    let dotColor = status === 2 ? "red" : "green"
+    let actionButton = status === 2 ? <Button
     // onClick={() => this.finishedOrder(this.props.order)}
       onClick={() => this.closeOrder(this.props.order.Id,
-         "https://murmuring-hamlet-58919.herokuapp.com/closeOrder" ,
+         `${config.server}/closeOrder` ,
           () => {this.props.deletedOrder(this.props.order.Id)})}
       variant="contained"
       color="primary"
@@ -86,7 +86,7 @@ export default class Order extends Component {
    </Button>  : 
    <Button
    onClick={() => this.closeOrder(this.props.order.Id ,
-      "https://murmuring-hamlet-58919.herokuapp.com/prepareOrder" ,
+    `${config.server}/prepareOrder` ,
        ()=> {this.props.funcToReorgenizeOrders(this.props.order)})}
      // onClick={() => this.closeOrder(this.props.order.Id)}
      variant="contained"

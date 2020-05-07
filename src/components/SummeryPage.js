@@ -26,7 +26,6 @@ export default class SummeryPage extends Component {
             let element = orders[i];
             for (let j = 0; j < element.Cart.length; j++) {
                 let item = element.Cart[j];
-                console.log(item)
                 let maybeItemArr = itemsArray.filter((prod) => {
                     return prod.item.Id === item.item.Id;
                 })
@@ -38,13 +37,10 @@ export default class SummeryPage extends Component {
                 }
             }
         }
-        console.log(itemsArray);
         this.setState({itemsArray:itemsArray})
     }
 
     render() {
-        console.log(this.state.itemsArray);
-        
         return (
             <div>
                 <Toolbar 

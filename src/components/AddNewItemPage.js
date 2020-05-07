@@ -49,12 +49,6 @@ export default class AddNewItem extends Component {
         }
     }
 
-
-
-      // inCaseImgNotWorking=(ev)=>{
-      //   ev.target.src = 'https://clipartstation.com/wp-content/uploads/2017/11/x-clipart-3.png'  
-      // }
-
       sendToServerNewItem = () => {
         let newname = this.state.newName;
         let newprice = this.state.newPrice;
@@ -69,7 +63,7 @@ export default class AddNewItem extends Component {
 
           
           Axios.post(
-            `${config.server}/addItem`,
+            `${config.server}/addItem/${config.clientId}`,
             newItem
           ).then((res) => {
              if (res.status===200 && res.data==="done") {   
@@ -86,7 +80,7 @@ export default class AddNewItem extends Component {
     
     render() {
         if (this.state.direction) {
-           return  <Redirect to = "/edit"/>
+           return  <Redirect to = "/manager/edit"/>
         }
         if (this.state.proggressBar) {
         return (

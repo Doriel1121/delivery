@@ -37,11 +37,11 @@ export default class StorePage extends Component {
   }
 
   componentDidMount = () => {
-    Axios.get(`${config.server}/allitems`).then(
+    Axios.get(`${config.server}/allitems/${config.clientId}`).then(
       (res) => {        
         this.setState({ allItems: res.data, progressBar: false });
       }
-    ) .catch((error) =>{
+    ).catch((error) =>{
       console.log(error);
       alert("משהו השתבש נסה מאוחר יותר ");
     })

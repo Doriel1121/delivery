@@ -48,7 +48,7 @@ export default class EditStorePage extends Component {
   }
   
   getMinimumFromServer=()=>{
-    Axios.get(`${config.server}/orderMin`).then(
+    Axios.get(`${config.server}/orderMin/${config.clientId}`).then(
       (res)=>{
         this.setState({minimumOrder:res.data.Value})
       }
@@ -57,7 +57,7 @@ export default class EditStorePage extends Component {
 
   setMinimumOrder=()=>{
     let minimum = {orderMin:this.state.minimumOrder}
-    Axios.post(`${config.server}/updateOrderMin`, minimum)
+    Axios.post(`${config.server}/updateOrderMin/${config.clientId}`, minimum)
     .then(() =>{
       this.setState({minimumShow:false})
     }).catch((error)=>{
@@ -72,7 +72,7 @@ export default class EditStorePage extends Component {
   
 
   storeItemsOnServer = () => {
-        Axios.get(`${config.server}/allitems`).then(
+        Axios.get(`${config.server}/allitems/${config.clientId}`).then(
       (res) => {
         this.setState({ allItems: res.data, progressBar: false });
       }
@@ -85,7 +85,7 @@ export default class EditStorePage extends Component {
   };
 
   directIntoNewRoute = () => {
-     return <Redirect to ="/additem"/>
+     return <Redirect to ="/manager/additem"/>
   };
 
   deleteItemFromList = (id) => {

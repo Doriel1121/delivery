@@ -58,10 +58,10 @@ export default class App extends Component {
                 <Route exact path ="/manager/homepage">
                 <ManagerPage allOrders={this.updateAllOrders}/>
                 </Route>
-                <Route exact path="/edit">
+                <Route exact path="/manager/edit">
                     <EditStorePage />
                 </Route>
-                <Route exact path ="/additem">
+                <Route exact path ="/manager/additem">
                   <AddNewItemPage activatestoreItemsOnServer={this.activatestoreItemsOnServer} updateState ={this.updateStateWithList}allItems={this.updateAllItemsList} />
                 </Route>
                 <Route exact path ="/manager/summery">

@@ -31,7 +31,7 @@ export default class Toolbar extends Component {
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
               <Grid item xs={2}>
-                <Link to="/edit">
+                <Link to="/manager/edit">
                   <EditIcon
                     style={{marginLeft:20}}
                     onClick={() => this.changeShow()}
@@ -56,7 +56,7 @@ export default class Toolbar extends Component {
         <div className="toolbr">
         
       <Fab color="primary" onClick={() => this.activateAddIcon()} aria-label="add" style={{'position': 'fixed', 'bottom': '20px', 'left': '20px'}}>
-       <Link style={{color:"white"}} to ="/additem"> <AddIcon /></Link>
+       <Link style={{color:"white"}} to ="/manager/additem"> <AddIcon /></Link>
       </Fab>
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
@@ -84,7 +84,6 @@ export default class Toolbar extends Component {
                 <h4 className="toolbrStyle"> מוצר חדש</h4>
               </Grid>
               <Grid className="toolbarRefreshOnAdd" item xs>
-                <CachedIcon onClick={() => this.refreshPage()}></CachedIcon>
               </Grid>
             </Grid>
           </AppBar>

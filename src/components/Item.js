@@ -82,8 +82,6 @@ export default class Item extends Component {
           </Button>
         </React.Fragment>
    }else {
-     let a = this.props.allCart.filter((element) => element.item.Id === this.props.item.Id)
-     
      return <React.Fragment>
      <Button  size="small" onClick={this.toggleFocusStatuc} color="primary">
      הוסף לעגלה { 

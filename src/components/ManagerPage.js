@@ -44,7 +44,7 @@ export default class ManagerPage extends Component {
 
   GetOrderFromServer = () => {
       this.setState({progressBar:true} , () =>{
-      Axios.get(`${config.server}/openOrders`).then(
+      Axios.get(`${config.server}/openOrders/${config.clientId}`).then(
         (res) => {
           let allorders = [];
           let finishedOrderList = [];
@@ -74,7 +74,7 @@ export default class ManagerPage extends Component {
 
 
   redirectToEditPage = () => {
-    return <Redirect to="/edit" />;
+    return <Redirect to="/manager/edit" />;
   };
 
 

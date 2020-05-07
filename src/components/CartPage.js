@@ -46,7 +46,7 @@ export default class CartPage extends Component {
   }
 
   componentDidMount=()=>{
-    Axios.get(`${config.server}/orderMin`)
+    Axios.get(`${config.server}/orderMin/${config.clientId}`)
     .then((res)=>{
       this.setState({OrderMinimum:res.data})
     }).catch((error)=>{
@@ -64,9 +64,7 @@ export default class CartPage extends Component {
          cart.amount= parseInt(element.amount)+1
          this.props.itemAmountUpdate(cart)
          
-       }else{
-         cart.amount = cart.amount
-       } 
+       }
      }
   }
 
@@ -77,10 +75,7 @@ export default class CartPage extends Component {
          
          cart.amount= parseInt(element.amount)-1
          this.props.itemAmountUpdate(cart)
-         
-       }else{
-         cart.amount = cart.amount
-       } 
+       }
      }
   }
 
@@ -107,7 +102,7 @@ export default class CartPage extends Component {
         this.state.Name.length <= 15
       ) {
         this.setState({ progressBar: true }, () => {
-          Axios.post(`${config.server}/order`, order)
+          Axios.post(`${config.server}/order/${config.clientId}`, order)
             .then((res) => {
               alert("הזמנה בוצעה בהצלחה");
               this.props.cleanCart();
