@@ -30,7 +30,7 @@ export default class Toolbar extends Component {
         <div className="toolbr">
           <AppBar style={{ color: "white", height: 60 }}>
             <Grid container spacing={3}>
-              <Grid style={{transform:"translateY(4%)"}} item xs={2}>
+              <Grid item xs={2}>
                 <Link to="/edit">
                   <EditIcon
                     style={{marginLeft:20}}

@@ -42,13 +42,12 @@ export default class StorePage extends Component {
         this.setState({ allItems: res.data, progressBar: false });
       }
     ) .catch((error) =>{
+      console.log(error);
       alert("משהו השתבש נסה מאוחר יותר ");
     })
   };
 
-  render() {    
-    console.log(this.props.allCart);
-    
+  render() {     
     document.body.style.backgroundColor = "rgb(211, 207, 207)";
     
     return (

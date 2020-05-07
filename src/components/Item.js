@@ -5,7 +5,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import CheckIcon from '@material-ui/icons/Check';
 
 
@@ -83,8 +82,6 @@ export default class Item extends Component {
           </Button>
         </React.Fragment>
    }else {
-    console.log(this.props.allCart);
-
      let a = this.props.allCart.filter((element) => element.item.Id === this.props.item.Id)
      
      return <React.Fragment>

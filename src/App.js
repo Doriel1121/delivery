@@ -29,9 +29,7 @@ export default class App extends Component {
     }
   }
 
-  updateAllItemsList=(a)=>{
-    console.log(a);
-    
+  updateAllItemsList=(a)=>{    
     this.setState({all:a})
   }
 
@@ -43,8 +41,6 @@ export default class App extends Component {
   }
 
   updateAllOrders=(all)=>{
-    console.log(all);
-    
     this.setState({allOrders:all})
   }
   

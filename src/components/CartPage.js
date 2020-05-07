@@ -50,6 +50,8 @@ export default class CartPage extends Component {
     .then((res)=>{
       this.setState({OrderMinimum:res.data})
     }).catch((error)=>{
+      console.log(error);
+      
       alert("משהו השתבש נסה שוב מאוחר יותר ")
     })
   }
@@ -69,8 +71,6 @@ export default class CartPage extends Component {
   }
 
   decreaseAmount = (element) => {
-    console.log(element);
-
     for (let i = 0; i < this.props.cart.length; i++) {
       let cart = this.props.cart[i];
        if (cart.item.Id === element.item.Id && element.amount > 1) {
@@ -114,6 +114,7 @@ export default class CartPage extends Component {
               this.setState({ progressBar: false });
             })
             .catch((error) => {
+              console.log(error);
               alert("משהו השתבש נסה מאוחר יותר ");
               this.setState({ progressBar: false });
             });

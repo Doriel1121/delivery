@@ -148,7 +148,7 @@ export default class AddNewItem extends Component {
               <Grid container spacing={3}>
                 <Grid item xs={3} />
                 <Grid className="itemBrake" item xs={6}>
-                  <Item addItemToCart={() => {}} item={{Id: -1, Name: this.state.newName, Price: this.state.newPrice, Image: this.state.newImage, Units: this.state.units}}/>
+                  <Item addItemToCart={() => {}} allCart={[]} item={{Id: -1, Name: this.state.newName, Price: this.state.newPrice, Image: this.state.newImage, Units: this.state.units}}/>
                 </Grid>
                 <Grid item xs={3} />
               </Grid>

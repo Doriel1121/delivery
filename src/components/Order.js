@@ -107,7 +107,7 @@ export default class Order extends Component {
             >
               <Typography>
                 <span style={{ fontWeight: "bolder" }}>
-                <FiberManualRecordIcon style={{color:dotColor, width:13}}></FiberManualRecordIcon>
+                <FiberManualRecordIcon style={{color:dotColor, width:13, marginRight: '10px', top: '8px', position: 'relative'}}></FiberManualRecordIcon>
                 {this.props.order.Name}
                 </span>
                 <br />{" "}

@@ -53,7 +53,6 @@ export default class ManagerPage extends Component {
             let order = JSON.parse(element.OrderData);
             order.Id = element.Id;
             order.Status = element.Status
-            console.log(typeof order.Status);
             
             if (order.Status === 1) {  
               allorders.unshift(order);
@@ -81,12 +80,9 @@ export default class ManagerPage extends Component {
 
 
   deleteOrder = (id) => {
-    console.log(id);
-    
     let newOrdersArray=this.state.readyOrders.filter((item) => {
      return  item.Id !==id
     })
-    console.log(newOrdersArray);
       this.setState({ readyOrders: newOrdersArray });
   };
 
@@ -97,7 +93,6 @@ export default class ManagerPage extends Component {
     )
     order.Status = 2
     finished.unshift(order)
-    console.log(finished);
     this.setState({readyOrders:finished , unreadyOrders:newList})
   }
 
@@ -109,10 +104,7 @@ export default class ManagerPage extends Component {
       <CircularProgress style={styles.circBar} size={68}/>
     </div>
     }
-    else{
-      console.log(this.state.unreadyOrders);
-      console.log(this.state.readyOrders);
-      
+    else{      
       pageBody = (this.state.unreadyOrders.length === 0 && this.state.readyOrders.length === 0) ? 
         <h4 style={{marginTop:70, textAlign:"center"}}>אין הזמנות</h4>
       :
@@ -129,7 +121,6 @@ export default class ManagerPage extends Component {
         ); 
       })}
       {this.state.readyOrders.map((pro) => {
-        console.log(pro)
         return (
           <Order 
           order={pro}

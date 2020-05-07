@@ -14,7 +14,6 @@ export default class Client extends Component {
   }
 
   updateItemAmount=(itemWithNewAmount)=>{
-    console.log(typeof itemWithNewAmount.amount);
     let element
     for (let i = 0; i < this.state.allCart.length; i++) {
        element = this.state.allCart[i];
@@ -22,7 +21,6 @@ export default class Client extends Component {
         element.amount = itemWithNewAmount.amount 
       }
     }
-    console.log(element);
     
     this.setState({allCart:this.state.allCart})
   }
@@ -35,9 +33,7 @@ export default class Client extends Component {
 
     }else{
       for (let i = 0; i < this.state.allCart.length; i++) {
-        element = this.state.allCart[i];
-        console.log(element.item.Price);
-      
+        element = this.state.allCart[i];      
         if (element.item.Id === item.Id) {
           element.amount = parseFloat(element.amount) + parseFloat(amount)
           return
@@ -68,8 +64,6 @@ export default class Client extends Component {
         </Route>
         <Route exact path="/client/cart">
           <CartPage
-            // answerToCertianItem={this.answerToCertianItem}
-            // certainItem={this.state.certainItem}
             cleanCart={this.truncateCart}
             deleteItemFromCart={this.deleteItemFromCart}
             cart={this.state.allCart}
