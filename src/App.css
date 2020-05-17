@@ -1,38 +1,202 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.AllApp{
+/* background-color: rgb(211, 207, 207); */
+background-size: 100%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.toolbrStyle{
+  margin:0;
+  opacity:0.8;
+  letter-spacing: 0px;
+  font-size: 25px;
+text-decoration: none;
+  /* border-radius: 10px ; */
+  font-weight: bolder;
   color: white;
+  /* transform: translateY(30%); */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
+.linkintoolbar{
+  text-decoration: none;
+}
+.toolbr{
+  position: fixed;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  z-index: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.toolbarRefresh{
+  transform: translateY(20%);
+  cursor: pointer;
+  text-align: right;
+  margin-right: 5px;
+}
+.toolbarRefreshOnAdd{
+  transform: translateY(25%);
+  cursor: pointer;
+  text-align: center;
+}
+
+.editIcon{
+cursor: pointer;
+color: white;
+margin-left: 10px;
+transform: translateY(50%);
+}
+
+.imgstyle{
+  width: 1.5rem;
+  margin-left: 10px;
+  transform: translateY(30%);
+}
+
+.name{
+  text-align:center;
+  transform: translateY(13%);
+}
+
+.imgsize{
+  width: 80px;
+  height: 60px;
+  border-radius: 10px;
+}
+.storediv{
+  margin-top: 75px;
+}
+.eachItem{
+  text-align: center;
+  padding-bottom: 5px;
+  /* margin-top: 30px; */
+}
+.title{
+  letter-spacing: -2px;
+  text-align: center;
+}
+.itemnamestyle{
+  font-weight: 800;
+}
+.edit{
+  font-weight: 600;
+}
+
+.cartDiv{
+  margin-top: 50px;
+  text-align: center;
+}
+#standard-basic{
+  padding-top: 0px;
+}
+
+
+.shoppingCartIcon{
+  color: white;
+  transform: translateY(60%);
+  margin-left: 10px;
+}
+
+.expansionColor{
+  background-color: rgb(241, 238, 238);
+  text-align: center;
+  display: block;
+  text-align: right;
+}
+
+#message{
+  color:red;
+  font-size: 10px;
+}
+
+#error{
+  color:red;
+  font-size: 10px;
+}
+
+.footer{
+  opacity: 0.8;
+  text-align: center;
+  padding-top: 40px;
+  /* padding-bottom: 10px; */
+}
+
+.PanelStyle{
+  border-bottom: 1px dotted grey;
+}
+
+.btn:disabled{ 
+cursor: none;
+}
+
+.LoadinglogoStyle{
+  width:15rem;
+  transform: translateY(60%);
+}
+
+.Load{
+ text-align: center;
+
+}
+
+.Beta{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:5rem
+}
+
+.waitingSign{
+  z-index: 2;
+  transform: translateY(100%);
+  text-align: center;
+}
+
+.addIcon{
+  transform: translateY(60%);
+}
+
+.AddStyleCard{
+  text-align: center;
+  margin-top: 62px;
+  background-color: white;
+}
+
+.numberStyleofOrder{
+  font-size: 12px;
+  color: grey;
+  opacity: 0.9;
+}
+
+.footerLogoStyle{
+  width:120px;
+}
+
+.backIcon{
+  color: white;
+  transform: translateY(60%);
+  padding-left:0px;
+  margin-left: 5px;
+  margin-right: 8px;
+
+}
+
+.btnitemStyle{
+  color: blue;
+}
+
+.upandReduceBtn{
+  min-width: 5px;
+  width: 10px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.incDecBtn{
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  background-color: rgb(240, 230, 230);
+  opacity: 0.8;
 }
