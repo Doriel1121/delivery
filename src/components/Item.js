@@ -20,7 +20,7 @@ export default class Item extends Component {
     };
   }
 
-  addItem = () => {
+  addItem = () => {    
     if (this.state.amount > 0 && this.state.amount <= 100) {
       
       this.props.addItemToCart(this.props.item, this.state.amount );

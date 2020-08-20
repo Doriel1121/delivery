@@ -1,2 +1,5 @@
-const config = {server:"https://murmuring-hamlet-58919.herokuapp.com", clientId: "1"};
-export default config 
+const config = {
+    server: "http://3.22.120.85:5000",
+    clientId: "1"
+};
+export default config

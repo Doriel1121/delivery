@@ -30,8 +30,6 @@ const styles = {
   },
 };
 
-
-
 export default class CartPage extends Component {
   constructor(props) {
     super(props);
@@ -40,45 +38,42 @@ export default class CartPage extends Component {
       Name: "",
       Number: "",
       progressBar: false,
-      OrderMinimum:0,
-      amount:0
+      OrderMinimum: 0,
+      amount: 0,
     };
   }
 
-  componentDidMount=()=>{
+  componentDidMount = () => {
     Axios.get(`${config.server}/orderMin/${config.clientId}`)
-    .then((res)=>{
-      this.setState({OrderMinimum:res.data})
-    }).catch((error)=>{
-      console.log(error);
-      
-      alert("משהו השתבש נסה שוב מאוחר יותר ")
-    })
-  }
+      .then((res) => {
+        this.setState({ OrderMinimum: res.data });
+      })
+      .catch((error) => {
+        console.log(error);
 
-  increaseAmount=(element)=>{
-     for (let i = 0; i < this.props.cart.length; i++) {
+        alert("משהו השתבש נסה שוב מאוחר יותר ");
+      });
+  };
+
+  increaseAmount = (element) => {
+    for (let i = 0; i < this.props.cart.length; i++) {
       let cart = this.props.cart[i];
-       if (cart.item.Id === element.item.Id) {
-         
-         cart.amount= parseInt(element.amount)+1
-         this.props.itemAmountUpdate(cart)
-         
-       }
-     }
-  }
+      if (cart.item.Id === element.item.Id) {
+        cart.amount = parseInt(element.amount) + 1;
+        this.props.itemAmountUpdate(cart);
+      }
+    }
+  };
 
   decreaseAmount = (element) => {
     for (let i = 0; i < this.props.cart.length; i++) {
       let cart = this.props.cart[i];
-       if (cart.item.Id === element.item.Id && element.amount > 1) {
-         
-         cart.amount= parseInt(element.amount)-1
-         this.props.itemAmountUpdate(cart)
-       }
-     }
-  }
-
+      if (cart.item.Id === element.item.Id && element.amount > 1) {
+        cart.amount = parseInt(element.amount) - 1;
+        this.props.itemAmountUpdate(cart);
+      }
+    }
+  };
 
   getSumOfAllCart = (cart) => {
     let sum = 0;
@@ -90,15 +85,18 @@ export default class CartPage extends Component {
 
   sendOrder = (sum) => {
     let phoneNumberString = this.state.Number.toString();
-    let order = { Cart: this.props.cart, Name: this.state.Name, Number: this.state.Number};
+    let order = {
+      Cart: this.props.cart,
+      Name: this.state.Name,
+      Number: this.state.Number,
+      ClientId: config.ClientId,
+    };
     if (sum >= parseInt(this.state.OrderMinimum.Value)) {
-      
-      
       if (
         phoneNumberString[0] === "0" &&
         phoneNumberString[1] === "5" &&
         phoneNumberString.length === 10 &&
-        this.state.Name !== undefined && 
+        this.state.Name !== undefined &&
         this.state.Name.length <= 15
       ) {
         this.setState({ progressBar: true }, () => {
@@ -119,7 +117,7 @@ export default class CartPage extends Component {
           "הכנס מספר בן 10 ספרות המתחיל ב 05 & אורך מקסימלי לשם הוא 15 תווים ";
       }
     } else {
-      alert(`מינימום הזמנה של ${this.state.OrderMinimum.Value}`)
+      alert(`מינימום הזמנה של ${this.state.OrderMinimum.Value}`);
     }
   };
 
@@ -146,45 +144,57 @@ export default class CartPage extends Component {
           </TableHead>
           <TableBody>
             {this.props.cart.map((element) => {
-              let totalItemPrice = (element.amount * element.item.Price).toFixed(2);
+              let totalItemPrice = (
+                element.amount * element.item.Price
+              ).toFixed(2);
               let itemAmount = parseFloat(element.amount).toFixed(2);
-            
-            return <TableRow key={element.item.Id}>
-              <TableCell style={{ textAlign: "center" }}>
-                  <DeleteForeverIcon onClick={() => this.props.deleteItemFromCart(element.item.Id) } />
-                </TableCell>  
-            <TableCell style={{ textAlign: "center" }}>
-              {totalItemPrice}
-            </TableCell>
-            <TableCell style={{ textAlign: "center" }}>
-            <button
-            onClick={() =>this.decreaseAmount(element)}
-             className="incDecBtn"
-             style={{width:20}}>
-               -
-             </button>
-              <span style={{marginRight:6, marginLeft:6}} >{itemAmount}</span>
-             <button
-             className="incDecBtn" 
-             onClick={() => this.increaseAmount(element)}
-             >+</button>
 
-             
-              </TableCell>
-            
-            <TableCell>
-              <span style={{ fontWeight: "bolder" }}>
-                {element.item.Name}
-              </span>
-            </TableCell>
-            </TableRow>
+              return (
+                <TableRow key={element.item.Id}>
+                  <TableCell style={{ textAlign: "center" }}>
+                    <DeleteForeverIcon
+                      onClick={() =>
+                        this.props.deleteItemFromCart(element.item.Id)
+                      }
+                    />
+                  </TableCell>
+                  <TableCell style={{ textAlign: "center" }}>
+                    {totalItemPrice}
+                  </TableCell>
+                  <TableCell style={{ textAlign: "center" }}>
+                    <button
+                      onClick={() => this.decreaseAmount(element)}
+                      className="incDecBtn"
+                      style={{ width: 20 }}
+                    >
+                      -
+                    </button>
+                    <span style={{ marginRight: 6, marginLeft: 6 }}>
+                      {itemAmount}
+                    </span>
+                    <button
+                      className="incDecBtn"
+                      onClick={() => this.increaseAmount(element)}
+                    >
+                      +
+                    </button>
+                  </TableCell>
+
+                  <TableCell>
+                    <span style={{ fontWeight: "bolder" }}>
+                      {element.item.Name}
+                    </span>
+                  </TableCell>
+                </TableRow>
+              );
             })}
             <TableRow>
               <TableCell></TableCell>
               <TableCell style={{ textAlign: "center" }}>
                 :סה"כ <br />
                 {totalSum.toFixed(2)}
-                <br />ש"ח
+                <br />
+                ש"ח
               </TableCell>
               <TableCell></TableCell>
             </TableRow>
@@ -194,7 +204,7 @@ export default class CartPage extends Component {
           <br />
           <TextField
             style={{ textAlign: "center" }}
-            onChange={(event) => this.setState({ Name: event.target.value }) }
+            onChange={(event) => this.setState({ Name: event.target.value })}
             type="text"
             id="standard-basic"
             label="שם מלא"
@@ -204,7 +214,7 @@ export default class CartPage extends Component {
           <br />
           <TextField
             style={{ textAlign: "center" }}
-            onChange={(event) => this.setState({ Number: event.target.value }) }
+            onChange={(event) => this.setState({ Number: event.target.value })}
             type="number"
             id="standard-basic"
             label="מספר טלפון"
@@ -215,7 +225,8 @@ export default class CartPage extends Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => this.sendOrder(totalSum)} >
+            onClick={() => this.sendOrder(totalSum)}
+          >
             בצע הזמנה
           </Button>
           {this.state.progressBar ? (

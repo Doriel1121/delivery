@@ -49,7 +49,7 @@ export default class EditStorePage extends Component {
   
   getMinimumFromServer=()=>{
     Axios.get(`${config.server}/orderMin/${config.clientId}`).then(
-      (res)=>{
+      (res)=>{        
         this.setState({minimumOrder:res.data.Value})
       }
     )
